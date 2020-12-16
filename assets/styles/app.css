@@ -1,0 +1,65 @@
+.ham {
+  position: absolute;
+  z-index: 1000;
+  right: 30px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  background-image: url("https://ljc-dev.github.io/testing0/ham.svg");
+  background-size: cover /*100%*/;
+}
+.ham:focus {
+  outline: none;
+}
+
+.show-close {
+  background-image: url("https://ljc-dev.github.io/testing0/ham-close.svg");
+}
+
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgb(255, 255, 255);
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  color: white;
+  transform: translateY(-100%);
+  transition: transform 0.2s ease;
+}
+
+.show-nav {
+  transform: translateY(0);
+}
+
+header {
+  background-color: rgb(238, 238, 238);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 50px;
+  padding: 0 2rem 0 2rem;
+}
+
+a {
+  color: black;
+}
+
+.log-status {
+  position: absolute;
+  right: 90px;
+}
+.log-status a:first-of-type {
+  text-decoration: none;
+}
+.log-status a:last-of-type {
+  padding-left: 1rem;
+}
+
+main {
+  width: 100%;
+  padding: 0 2rem 0 2rem 0;
+}
