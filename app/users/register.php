@@ -6,13 +6,6 @@ require __DIR__ . '/../autoload.php';
 
 // In this file we register a new user.
 
-
-
-//password_verify($passphrase, $hash);
-/*
-$email    = "";
-$errors = [];*/
-
 // Check if both email and password exists in the POST request.
 if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'], $_POST['new-password-2'])) {
 
@@ -21,14 +14,16 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
     $passphrase1 = $_POST['new-password-1'];
     $passphrase2 = $_POST['new-password-2'];
 
-    /*if (empty($email)) {
-        //$errors[] = ["Email is required"];
+    if (empty($email)) {
+        $_SESSION['error'] = 'Email is required';
+        redirect('/login.php');
     }
     if (empty($passphrase1)) {
-        //$errors[] = ["Password is required"];
-    }*/
+        $_SESSION['error'] = 'Password is required';
+        redirect('/login.php');
+    }
     if ($passphrase1 != $passphrase2) {
-        //$error = "The two passwords do not match";
+        $_SESSION['error'] = 'The two passwords do not match';
         redirect('/login.php');
     }
 
@@ -45,12 +40,15 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
     // Fetch the user as an associative array.
     $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-    if ($user) { // if user exists
-        //$errors[] = ["email already exists"];
+    if ($user['email']) { // if user exists
+        $_SESSION['error'] = 'Email already exists';
+        redirect('/login.php');
+    } else if ($user['username']) {
+        $_SESSION['error'] = 'Username already exists';
         redirect('/login.php');
     }
 
-    if (!$user)/*(count($errors) == 0)*/ {
+    if (!$user) {
 
         $hash = password_hash($passphrase1, PASSWORD_DEFAULT);
 
@@ -87,12 +85,4 @@ redirect('/');
 /*unset($user['password']);
 $_SESSION['user'] = $user;*/
 
- 
-/*CREATE TABLE `users` (
-`id` INT(11) NOT NULL AUTO_INCREMENT,
-`first_name` VARCHAR(255) NULL DEFAULT NULL,
-`last_name` VARCHAR(255) NULL DEFAULT NULL,
-`email` VARCHAR(255) NULL DEFAULT NULL,
-`phone` VARCHAR(255) NOT NULL,
-`password` VARCHAR(255) NULL DEFAULT NULL,
-`created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,*/
+//`created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,*/
