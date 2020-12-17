@@ -8,6 +8,10 @@
         echo $_SESSION['error'];
         unset($_SESSION['error']);
     } ?>
+    <?php if (isset($_SESSION['message'])) {
+        echo $_SESSION['message'];
+        unset($_SESSION['message']);
+    } ?>
 
 
     <article class="log">

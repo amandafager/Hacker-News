@@ -27,7 +27,7 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
         redirect('/login.php');
     }
 
-    $userCheckQuery = 'SELECT * FROM users WHERE email = :email LIMIT 1';
+    $userCheckQuery = 'SELECT * FROM users WHERE email = :email OR username = :name LIMIT 1';
 
     $statement = $database->prepare($userCheckQuery);
 
@@ -35,18 +35,23 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
         die(var_dump($database->errorInfo()));
     }
     $statement->bindParam(':email', $email, PDO::PARAM_STR);
+    $statement->bindParam(':name', $name, PDO::PARAM_STR);
     $statement->execute();
 
     // Fetch the user as an associative array.
     $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-    if ($user['email']) { // if user exists
-        $_SESSION['error'] = 'Email already exists';
-        redirect('/login.php');
-    } else if ($user['username']) {
-        $_SESSION['error'] = 'Username already exists';
-        redirect('/login.php');
+    if ($user) { // if user exists
+        if ($user['email'] === $email) {
+            $_SESSION['error'] = 'Email already exists';
+            redirect('/login.php');
+        }
+        if ($user['username'] === $name) {
+            $_SESSION['error'] = 'Username already exists';
+            redirect('/login.php');
+        }
     }
+
 
     if (!$user) {
 
@@ -68,6 +73,7 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
 
 
         unset($_SESSION['user']);
+        $_SESSION['message'] = 'You have succcssfully created an account. Please log in!';
         redirect('/login.php');
 
 
