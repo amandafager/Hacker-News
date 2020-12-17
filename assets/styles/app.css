@@ -1,7 +1,7 @@
 .ham {
   position: absolute;
   z-index: 1000;
-  right: 30px;
+  right: 15px;
   width: 36px;
   height: 36px;
   border: none;
@@ -41,7 +41,7 @@ header {
   flex-direction: row;
   align-items: center;
   height: 50px;
-  padding: 0 2rem 0 2rem;
+  padding: 0 1rem 0 1rem;
 }
 
 a {
@@ -50,7 +50,7 @@ a {
 
 .log-status {
   position: absolute;
-  right: 90px;
+  right: 65px;
 }
 .log-status a:first-of-type {
   text-decoration: none;
@@ -59,7 +59,28 @@ a {
   padding-left: 1rem;
 }
 
-main {
+/*login*/
+
+form {
   width: 100%;
-  padding: 0 2rem 0 2rem 0;
+  max-width: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+form:first-of-type {
+  padding-bottom: 1rem;
+}
+
+.form-group {
+  width: 100%;
+  max-width: 280px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.3rem 0rem 0.3rem 0rem;
+}
+
+.btn {
+  margin-top: 1rem;
 }

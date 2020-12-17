@@ -29,7 +29,7 @@
 
     <?php else : ?>
         <section class="log-status">
-            <a id="me" href="user?id=amandaF"><?= $_SESSION['user']['username'] ?></a>
+            <a id="me" href="profile.php?id=<?php $user['id'] ?>"><?= $_SESSION['user']['username'] ?></a>
             <a class="logout-link" href="/app/users/logout.php">Logout</a>
         </section>
     <?php endif; ?>

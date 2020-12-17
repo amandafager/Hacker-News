@@ -6,6 +6,11 @@ require __DIR__ . '/../autoload.php';
 
 // In this file we logout users.
 
+
 unset($_SESSION['user']);
 
 redirect('/');
+
+/*if (!$_SESSION['success']) {
+    $_SESSION['success'] = "You are now logged out";
+}*/
