@@ -13,6 +13,7 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
     $email = filter_var($_POST['new-email'], FILTER_SANITIZE_EMAIL);
     $passphrase1 = $_POST['new-password-1'];
     $passphrase2 = $_POST['new-password-2'];
+    $created = date('ymd');
 
     if (empty($email)) {
         $_SESSION['error'] = 'Email is required';
@@ -38,8 +39,10 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
     $statement->bindParam(':name', $name, PDO::PARAM_STR);
     $statement->execute();
 
+
     // Fetch the user as an associative array.
     $user = $statement->fetch(PDO::FETCH_ASSOC);
+    unset($user['password']);
 
     if ($user) { // if user exists
         if ($user['email'] === $email) {
@@ -56,9 +59,9 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
     if (!$user) {
 
         $hash = password_hash($passphrase1, PASSWORD_DEFAULT);
+        $imgSrc = "profile.jpeg";
 
-        $query = 'INSERT INTO users (id, username, email, password) VALUES (:id, :name, :email, :password)';
-
+        $query = 'INSERT INTO users (id, username, email, password, created_at, img_src) VALUES (:id, :name, :email, :password, :created, :imgSrc)';
         $statement = $database->prepare($query);
 
         if (!$statement) {
@@ -69,26 +72,35 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
         $statement->bindParam(':name', $name, PDO::PARAM_STR);
         $statement->bindParam(':email', $email, PDO::PARAM_STR);
         $statement->bindParam(':password', $hash, PDO::PARAM_STR);
+        $statement->bindParam(':created', $created, PDO::PARAM_STR);
+        $statement->bindParam(':imgSrc', $imgSrc, PDO::PARAM_STR);
         $statement->execute();
 
+        $statement = $database->prepare('SELECT * FROM users WHERE email = :email');
+        $statement->bindParam(':email', $email, PDO::PARAM_STR);
+        $statement->execute();
+
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+        unset($user['password']);
+
+        $userId = $user['id'];
+        $status = 1;
+
+        $queryInsertImgData = 'INSERT INTO profileimg (user_id, status) VALUES (:userId, :status)';
+
+        $statement = $database->prepare($queryInsertImgData);
+
+        if (!$statement) {
+            die(var_dump($database->errorInfo()));
+        }
+
+        $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $statement->bindParam(':status', $status, PDO::PARAM_INT);
+        $statement->execute();
 
         unset($_SESSION['user']);
-        $_SESSION['message'] = 'You have succcssfully created an account. Please log in!';
+        $_SESSION['message'] = 'You have succcssfully created an account. Please login!';
         redirect('/login.php');
-
-
-
-
-        //
-
-        /*$_SESSION['user'] = $user;
-        $_SESSION['success'] = "You are now logged in";*/
     }
 }
 redirect('/');
-
-
-/*unset($user['password']);
-$_SESSION['user'] = $user;*/
-
-//`created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,*/

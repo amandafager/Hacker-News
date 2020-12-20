@@ -5,12 +5,11 @@ declare(strict_types=1);
 require __DIR__ . '/../autoload.php';
 
 // In this file we logout users.
+$confirm = true;
 
-
-unset($_SESSION['user']);
+if ($confirm) {
+    unset($_SESSION['user']);
+} else {
+}
 
 redirect('/');
-
-/*if (!$_SESSION['success']) {
-    $_SESSION['success'] = "You are now logged out";
-}*/

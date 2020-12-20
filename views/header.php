@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/assets/styles/app.css">
 </head>
 
-<body>
+<body class="loading">
     <?php require __DIR__ . '/navigation.php'; ?>
 
     <div class="container py-5">

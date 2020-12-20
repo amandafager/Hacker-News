@@ -1,6 +1,6 @@
 <header>
     <a class="navbar-brand" href="/index.php"><?php echo $config['title']; ?></a>
-    <button class="ham"></button>
+    <button class="ham" type="menu"></button>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -29,7 +29,7 @@
 
     <?php else : ?>
         <section class="log-status">
-            <a id="me" href="profile.php?id=<?php $user['id'] ?>"><?= $_SESSION['user']['username'] ?></a>
+            <a id="me" href="profile.php"><?= $_SESSION['user']['username']; ?> Profile</a>
             <a class="logout-link" href="/app/users/logout.php">Logout</a>
         </section>
     <?php endif; ?>

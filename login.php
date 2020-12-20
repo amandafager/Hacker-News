@@ -20,7 +20,7 @@
         <form action="app/users/login.php" method="post">
             <div class="form-group">
                 <label for="current-email">Email</label>
-                <input class="form-control" type="current-email" name="current-email" id="current-email" placeholder="Email" value="" required>
+                <input class="form-control save" type="current-email" name="current-email" id="current-email" placeholder="Email" value="" required>
                 <!--<small class="form-text text-muted">Please provide your email address.</small>-->
             </div><!-- /form-group -->
 
@@ -30,7 +30,7 @@
                 <!--<small class="form-text text-muted">Please provide the your password (passphrase).</small>-->
             </div><!-- /form-group -->
 
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" name="submit" class="btn btn-primary">Login</button>
         </form>
         <a href="#">Forgot your password?</a>
     </article>
@@ -42,18 +42,18 @@
         <form action="app/users/register.php" method="post">
             <div class="form-group">
                 <label for="new-username">Username</label>
-                <input class="form-control" type="new-username" name="new-username" id="new-username" placeholder="Username" required>
+                <input class="form-control save" type="new-username" name="new-username" id="new-username" placeholder="Username" value="" required>
                 <!--<small class="form-text text-muted">Please provide your email address.</small>-->
             </div><!-- /form-group -->
             <div class="form-group">
                 <label for="new-email">Email</label>
-                <input class="form-control" type="new-email" name="new-email" id="new-email" placeholder="Email" required>
+                <input class="form-control save" type="new-email" name="new-email" id="new-email" placeholder="Email" value="" required>
                 <!--<small class="form-text text-muted">Please provide your email address.</small>-->
             </div><!-- /form-group -->
 
             <div class="form-group">
                 <label for="new-password-1">Password</label>
-                <input class="form-control" type="password" name="new-password-1" id="new-password-1" value="" placeholder="Password" required>
+                <input class="form-control" type="password" name="new-password-1" id="new-password-1" placeholder="Password" required>
                 <!--<small class="form-text text-muted">Please provide a password (passphrase).</small>-->
             </div><!-- /form-group -->
 
@@ -63,7 +63,7 @@
                 <!--<small class="form-text text-muted">Please provide a password (passphrase).</small>-->
             </div><!-- /form-group -->
 
-            <button type="submit" class="btn btn-primary">Create Account</button>
+            <button type="submit" name="submit" class="btn btn-primary">Create Account</button>
         </form>
     </article>
 </main>
