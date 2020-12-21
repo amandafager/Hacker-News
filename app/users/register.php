@@ -60,8 +60,8 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
 
         $hash = password_hash($passphrase1, PASSWORD_DEFAULT);
         $imgSrc = "profile.jpeg";
-
-        $query = 'INSERT INTO users (id, username, email, password, created_at, img_src) VALUES (:id, :name, :email, :password, :created, :imgSrc)';
+        $biography = "";
+        $query = 'INSERT INTO users (id, username, email, password, created_at, img_src, biography) VALUES (:id, :name, :email, :password, :created, :imgSrc, :biography)';
         $statement = $database->prepare($query);
 
         if (!$statement) {
@@ -74,6 +74,7 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
         $statement->bindParam(':password', $hash, PDO::PARAM_STR);
         $statement->bindParam(':created', $created, PDO::PARAM_STR);
         $statement->bindParam(':imgSrc', $imgSrc, PDO::PARAM_STR);
+        $statement->bindParam(':biography', $biography, PDO::PARAM_STR);
         $statement->execute();
 
         $statement = $database->prepare('SELECT * FROM users WHERE email = :email');

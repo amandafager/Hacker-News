@@ -42,13 +42,15 @@ if (isset($_FILES['profile-img'])) {
                 $statement->bindParam(':imgSrc', $imgSrc, PDO::PARAM_STR);
                 $statement->execute();
 
+
                 $statement = $database->prepare('SELECT * FROM users WHERE id = :id');
                 $statement->bindParam(':id', $id, PDO::PARAM_INT);
                 $statement->execute();
                 $user = $statement->fetch(PDO::FETCH_ASSOC);
-
                 unset($user['password']);
                 $_SESSION['user'] = $user;
+                redirect('/profile.php');
+
 
                 redirect('/profile.php');
             } else {
@@ -64,3 +66,33 @@ if (isset($_FILES['profile-img'])) {
         redirect('/profile.php');
     }
 }
+
+if (isset($_POST['update-email'], $_POST['biography'])) {
+
+    $newEmail = filter_var($_POST['update-email'], FILTER_SANITIZE_EMAIL);
+    $biography = filter_var($_POST['biography'], FILTER_SANITIZE_STRING);
+
+    if ($newEmail) {
+        $updateUserEmail = 'UPDATE users SET email = :email WHERE id = :id';
+        $statement = $database->prepare($updateUserEmail);
+        $statement->bindParam(':email', $newEmail, PDO::PARAM_STR);
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        $statement->execute();
+    }
+
+    if ($biography) {
+        $updateUserBio = 'UPDATE users SET biography = :biography WHERE id = :id';
+        $statement = $database->prepare($updateUserBio);
+        $statement->bindParam(':biography', $biography, PDO::PARAM_STR);
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        $statement->execute();
+    }
+}
+
+$statement = $database->prepare('SELECT * FROM users WHERE id = :id');
+$statement->bindParam(':id', $id, PDO::PARAM_INT);
+$statement->execute();
+$user = $statement->fetch(PDO::FETCH_ASSOC);
+unset($user['password']);
+$_SESSION['user'] = $user;
+redirect('/profile.php');

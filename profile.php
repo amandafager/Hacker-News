@@ -23,26 +23,27 @@
                 <img src="/app/users/uploads/<?php echo $_SESSION['user']['img_src']; ?>" alt="profile image">
             </div>
 
-            <!--<img src="app/uploads/profile.jpeg">-->
 
             <form action="app/users/updateProfile.php" method="post" enctype="multipart/form-data">
                 <div class="">
                     <label class="pro-img" for="profile-img">Choose your profile image to upload:</label>
                     <input type="file" accept=".jpg, .jpeg, .png" name="profile-img" id="profile-img" required>
-                    <!-- MAX_FILE_SIZE must precede the file input field -->
-                    <!--<input type="hidden" name="MAX_FILE_SIZE" value="30000" />-->
                 </div>
-                <button type="submit" name="sumbit" value="Submit">Update image</button>
-            </form>
-            <form action="app/users/updateProfile.php" method="post" enctype="multipart/form-data">
-                <div class="">
-                    <label for="about-text">Biography:</label>
-                    <textarea id="about-text"></textarea>
-                </div>
-                <button type="submit" name="sumbit" value="Submit">Update about</button>
+                <button type="submit" name="sumbit" value="Submit">Update Profile Image</button>
             </form>
 
-            <a href="#">Change password</a>
+            <form action="app/users/updateProfile.php" method="post">
+                <div class="">
+                    <label for="biography">Biography:</label>
+                    <textarea id="biography" name="biography"><?php echo $_SESSION['user']['biography'] ?></textarea>
+                </div>
+                <div class="">
+                    <label for="update-email">Email:</label>
+                    <input type="email" id="update-email" name="update-email" value="<?php echo $_SESSION['user']['email'] ?>"></input>
+                </div>
+                <a href="#">Change password</a>
+                <button type="submit" name="sumbit" value="Submit">Update</button>
+            </form>
 
         </section>
     <?php endif; ?>
