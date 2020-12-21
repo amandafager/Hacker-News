@@ -22,24 +22,6 @@ if (isset($_POST['current-email'], $_POST['current-password'])) {
         unset($user['password']);
         $_SESSION['user'] = $user;
         $_SESSION['success'] = "You are now logged in";
-
-        $id = $_SESSION['user']['id'];
-
-        $sqlImg = 'SELECT * FROM profileimg WHERE user_id = :id';
-        $statement = $database->prepare($sqlImg);
-        $statement->bindParam(':id', $id, PDO::PARAM_INT);
-        $statement->execute();
-        $image = $statement->fetch(PDO::FETCH_ASSOC);
-
-        $_SESSION['image'] = $image;
-
-        /*
-        if ($image['status'] === 0) {
-            $_SESSION['src'] = "<img src='app/uploads/profile" . $id . "jpeg'>";
-        } else {
-            $_SESSION['src'] =  "<img src='app/uploads/profile.jpeg'>";
-        }
-        */
     } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
         $_SESSION['error'] = 'The email address is not a valid email address!';

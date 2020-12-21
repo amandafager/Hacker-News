@@ -11,19 +11,20 @@
         unset($_SESSION['message']);
     } ?>
 
-    <?php if (isset($_SESSION['user'], $_SESSION['image'])) : ?>
+
+    <?php if (isset($_SESSION['user'])) : ?>
         <section>
             <h1>Profile</h1>
             <p>User: <?php echo $_SESSION['user']['username']; ?> </p>
             <p>Created: <?php echo $_SESSION['user']['created_at']; ?></p>
+
+
             <div class="pro-img-container">
-
-
-                <img src="app/users/uploads/<?php echo $_SESSION['user']['img_src'] ?>">
-
-
-                <!--<img src="app/uploads/profile.jpeg">-->
+                <img src="/app/users/uploads/<?php echo $_SESSION['user']['img_src']; ?>" alt="profile image">
             </div>
+
+            <!--<img src="app/uploads/profile.jpeg">-->
+
             <form action="app/users/updateProfile.php" method="post" enctype="multipart/form-data">
                 <div class="">
                     <label class="pro-img" for="profile-img">Choose your profile image to upload:</label>

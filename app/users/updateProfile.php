@@ -7,7 +7,7 @@ require __DIR__ . '/../autoload.php';
 $id = $_SESSION['user']['id'];
 
 if (isset($_FILES['profile-img'])) {
-    $file = $_FILES['profile-img'];
+    $file = filter_var($_FILES['profile-img'], FILTER_SANITIZE_STRING);
     $fileName = $_FILES['profile-img']['name'];
     $fileTmpName = $_FILES['profile-img']['tmp_name'];
     $fileSize = $_FILES['profile-img']['size'];
@@ -25,24 +25,30 @@ if (isset($_FILES['profile-img'])) {
                 $fileNameNew = "profile" . $id . "." . $fileActualExt;
                 //$destination = __DIR__ . '/uploads/' . date('ymd') . '-' . $fileNameNew;
                 $fileDestination = __DIR__ . '/uploads/' . $fileNameNew;
-                move_uploaded_file($fileTmpName, $fileDestination);
-                $status = 0;
-                $queryUpdateProfileImg = 'UPDATE profileimg SET status = :status WHERE id = :id';
-                $statement = $database->prepare($queryUpdateProfileImg);
 
-                if (!$statement) {
-                    die(var_dump($database->errorInfo()));
+                $currentImg = $_SESSION['user']['img_src'];
+
+                if (file_exists(__DIR__ . '/uploads/' . $currentImg)) {
+                    if ($currentImg !== 'profile.jpeg')
+                        unlink(__DIR__ . '/uploads/' . $currentImg);
                 }
-                $statement->bindParam(':status', $status, PDO::PARAM_INT);
-                $statement->bindParam(':id', $id, PDO::PARAM_INT);
-                $statement->execute();
 
-                $src = $fileNameNew;
-                $updateImgSrc = 'UPDATE users SET img_src = :src WHERE id = :id';
+                move_uploaded_file($fileTmpName, $fileDestination);
+
+                $imgSrc = $fileNameNew;
+                $updateImgSrc = 'UPDATE users SET img_src = :imgSrc WHERE id = :id';
                 $statement = $database->prepare($updateImgSrc);
                 $statement->bindParam(':id', $id, PDO::PARAM_INT);
-                $statement->bindParam(':src', $src, PDO::PARAM_STR);
+                $statement->bindParam(':imgSrc', $imgSrc, PDO::PARAM_STR);
                 $statement->execute();
+
+                $statement = $database->prepare('SELECT * FROM users WHERE id = :id');
+                $statement->bindParam(':id', $id, PDO::PARAM_INT);
+                $statement->execute();
+                $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+                unset($user['password']);
+                $_SESSION['user'] = $user;
 
                 redirect('/profile.php');
             } else {

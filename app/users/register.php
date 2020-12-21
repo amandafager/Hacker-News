@@ -82,25 +82,8 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
 
         $user = $statement->fetch(PDO::FETCH_ASSOC);
         unset($user['password']);
-
-        $userId = $user['id'];
-        $status = 1;
-
-        $queryInsertImgData = 'INSERT INTO profileimg (user_id, status) VALUES (:userId, :status)';
-
-        $statement = $database->prepare($queryInsertImgData);
-
-        if (!$statement) {
-            die(var_dump($database->errorInfo()));
-        }
-
-        $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
-        $statement->bindParam(':status', $status, PDO::PARAM_INT);
-        $statement->execute();
-
-        unset($_SESSION['user']);
-        $_SESSION['message'] = 'You have succcssfully created an account. Please login!';
-        redirect('/login.php');
+        $_SESSION['user'] = $user;
+        $_SESSION['message'] = 'You have succcssfully created an account and are now logged in. Update your profile!';
     }
 }
-redirect('/');
+redirect('/profile.php');
