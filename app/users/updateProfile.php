@@ -67,7 +67,69 @@ if (isset($_FILES['profile-img'])) {
     }
 }
 
-if (isset($_POST['update-email'], $_POST['biography'])) {
+if (isset($_POST['update-email'])) {
+
+    $newEmail = filter_var($_POST['update-email'], FILTER_SANITIZE_EMAIL);
+
+
+    if ($newEmail) {
+
+        $userCheckEmailQuery = 'SELECT * FROM users WHERE email = :email LIMIT 1';
+
+        $statement = $database->prepare($userCheckEmailQuery);
+
+        if (!$statement) {
+            die(var_dump($database->errorInfo()));
+        }
+        $statement->bindParam(':email',  $newEmail, PDO::PARAM_STR);
+        $statement->execute();
+        // Fetch the user as an associative array.
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+        unset($user['password']);
+
+        if (!filter_var($newEmail, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['error'] = 'The email address is not a valid email address!';
+            redirect('/profile.php');
+        }
+        if ($user['email'] === $newEmail) {
+            $_SESSION['error'] = 'Email already exists';
+            redirect('/profile.php');
+        }
+
+        if (filter_var($newEmail, FILTER_VALIDATE_EMAIL) && $user['email'] !== $newEmail) {
+
+            $updateUserEmail = 'UPDATE users SET email = :email WHERE id = :id';
+            $statement = $database->prepare($updateUserEmail);
+            $statement->bindParam(':email', $newEmail, PDO::PARAM_STR);
+            $statement->bindParam(':id', $id, PDO::PARAM_INT);
+            $statement->execute();
+        }
+    }
+}
+
+
+if (isset($_POST['biography'])) {
+
+    $biography = filter_var($_POST['biography'], FILTER_SANITIZE_STRING);
+
+    if ($biography) {
+        $updateUserBio = 'UPDATE users SET biography = :biography WHERE id = :id';
+        $statement = $database->prepare($updateUserBio);
+        $statement->bindParam(':biography', $biography, PDO::PARAM_STR);
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        $statement->execute();
+    }
+}
+
+$statement = $database->prepare('SELECT * FROM users WHERE id = :id');
+$statement->bindParam(':id', $id, PDO::PARAM_INT);
+$statement->execute();
+$user = $statement->fetch(PDO::FETCH_ASSOC);
+unset($user['password']);
+$_SESSION['user'] = $user;
+redirect('/profile.php');
+
+/*if (isset($_POST['update-email'], $_POST['biography'])) {
 
     $newEmail = filter_var($_POST['update-email'], FILTER_SANITIZE_EMAIL);
     $biography = filter_var($_POST['biography'], FILTER_SANITIZE_STRING);
@@ -113,12 +175,4 @@ if (isset($_POST['update-email'], $_POST['biography'])) {
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
     }
-}
-
-$statement = $database->prepare('SELECT * FROM users WHERE id = :id');
-$statement->bindParam(':id', $id, PDO::PARAM_INT);
-$statement->execute();
-$user = $statement->fetch(PDO::FETCH_ASSOC);
-unset($user['password']);
-$_SESSION['user'] = $user;
-redirect('/profile.php');
+}*/

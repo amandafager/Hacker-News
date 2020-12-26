@@ -37,14 +37,17 @@
                     <label for="biography">Biography:</label>
                     <textarea id="biography" name="biography"><?php echo $_SESSION['user']['biography'] ?></textarea>
                 </div>
+                <button type="submit" name="sumbit" value="Submit">Update bio</button>
+            </form>
+
+            <form action="app/users/updateProfile.php" method="post">
                 <div class="">
                     <label for="update-email">Email:</label>
                     <input type="email" id="update-email" name="update-email" value="<?php echo $_SESSION['user']['email'] ?>"></input>
                 </div>
-                <a href="#">Change password</a>
-                <button type="submit" name="sumbit" value="Submit">Update</button>
+                <button type="submit" name="sumbit" value="Submit">Update email</button>
             </form>
-
+            <a href="changePassword.php">Change password</a>
         </section>
     <?php endif; ?>
 
