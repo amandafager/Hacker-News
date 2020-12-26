@@ -83,7 +83,6 @@ if (isset($_POST['update-email'])) {
         }
         $statement->bindParam(':email',  $newEmail, PDO::PARAM_STR);
         $statement->execute();
-        // Fetch the user as an associative array.
         $user = $statement->fetch(PDO::FETCH_ASSOC);
         unset($user['password']);
 

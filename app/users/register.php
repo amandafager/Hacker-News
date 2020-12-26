@@ -68,7 +68,6 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
             die(var_dump($database->errorInfo()));
         }
 
-        $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->bindParam(':name', $name, PDO::PARAM_STR);
         $statement->bindParam(':email', $email, PDO::PARAM_STR);
         $statement->bindParam(':password', $hash, PDO::PARAM_STR);

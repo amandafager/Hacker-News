@@ -16,7 +16,7 @@
             </li><!-- /nav-item -->
 
             <li class="nav-item">
-                <a class="nav-link" href="/about.php">Submit</a>
+                <a class="nav-link" href="/createPost.php">Submit</a>
             </li><!-- /nav-item -->
         </ul><!-- /navbar-nav -->
     </nav><!-- /navbar -->

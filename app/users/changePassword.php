@@ -29,6 +29,7 @@ if (isset($_POST['current-password'], $_POST['update-password'])) {
         redirect('/profile.php');
     } else {
         $_SESSION['error'] = 'Try again, the typed password did not match your password!';
+        unset($user['password']);
         redirect('/changePassword.php');
     }
 }
