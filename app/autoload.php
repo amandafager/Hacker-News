@@ -19,3 +19,5 @@ $config = require __DIR__ . '/config.php';
 
 // Setup the database connection.
 $database = new PDO($config['database_path']);
+
+require __DIR__ . '/posts.php';
