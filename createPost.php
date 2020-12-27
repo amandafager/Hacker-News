@@ -15,7 +15,7 @@
     <?php if (isset($_SESSION['user'])) : ?>
         <section>
             <h2>Create new post</h2>
-            <form action="/app/users/createPost.php" method="post">
+            <form action="/app/posts/store.php" method="post">
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input class="form-control save" type="title" name="title" id="title" placeholder="Title" value="" required>
@@ -31,7 +31,7 @@
                     <textarea class="form-control" type="text" name="description" id="description" placeholder="Description" required></textarea>
                 </div>
 
-                <button type="submit" name="submit" class="btn btn-primary">submit</button>
+                <button type="submit" name="submit-post" class="btn btn-primary">submit</button>
             </form>
         </section>
     <?php else : ?>

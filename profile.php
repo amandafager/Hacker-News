@@ -16,8 +16,8 @@
         <section>
             <h1>Profile</h1>
             <p>User: <?php echo $_SESSION['user']['username']; ?> </p>
-            <p>Created: <?php echo $_SESSION['user']['created_at']; ?></p>
 
+            <p>Created: <?php echo  $_SESSION['user']['created_at']; ?> </p>
 
             <div class="pro-img-container">
                 <img src="/app/users/uploads/<?php echo $_SESSION['user']['img_src']; ?>" alt="profile image">
@@ -47,7 +47,10 @@
                 </div>
                 <button type="submit" name="sumbit" value="Submit">Update email</button>
             </form>
+
             <a href="changePassword.php">Change password</a>
+            <a href="myPosts.php">My posts</a>
+
         </section>
     <?php endif; ?>
 

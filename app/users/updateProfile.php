@@ -17,9 +17,9 @@ if (isset($_FILES['profile-img'])) {
     $fileExt = explode('.', $fileName);
     $fileActualExt = strtolower(end($fileExt));
 
-    $allowed = ['jpg', 'jpeg', 'png'];
+    $allowedFile = ['image/jpg', 'image/jpeg', 'image/png'];
 
-    if (in_array($fileActualExt, $allowed)) {
+    if (in_array($fileType, $allowedFile)) {
         if ($fileError === 0) {
             if ($fileSize < 2097152) {
                 $fileNameNew = "profile" . $id . "." . $fileActualExt;

@@ -13,7 +13,7 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
     $email = filter_var($_POST['new-email'], FILTER_SANITIZE_EMAIL);
     $passphrase1 = $_POST['new-password-1'];
     $passphrase2 = $_POST['new-password-2'];
-    $created = date('ymd');
+    $created =  date('Y-m-d h:m:s');
 
     if (empty($email)) {
         $_SESSION['error'] = 'Email is required';
