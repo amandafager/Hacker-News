@@ -9,8 +9,9 @@ require __DIR__ . '/../autoload.php';
 if (isset($_GET['postId'])) {
 
     $id = filter_var($_GET['postId'], FILTER_SANITIZE_NUMBER_INT);
+    $userId = $_SESSION['user']['id'];
 
-    $deletePostQuery = 'DELETE FROM posts WHERE id = :id';
+    $deletePostQuery = 'DELETE FROM posts WHERE id = :id AND user_id = :userId';
 
     $statement = $database->prepare($deletePostQuery);
 
@@ -19,6 +20,7 @@ if (isset($_GET['postId'])) {
     }
 
     $statement->bindParam(':id', $id, PDO::PARAM_INT);
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
     $statement->execute();
 }
 
