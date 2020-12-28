@@ -11,7 +11,7 @@ if (isset($_POST['submit-post'])) {
 
     $title = filter_var($_POST['title'], FILTER_SANITIZE_STRING);
     $url = filter_var($_POST['url'], FILTER_SANITIZE_URL);
-    $description = $_POST['description'];
+    $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
     $userId = $_SESSION['user']['id'];
     $author = $_SESSION['user']['username'];
     $created = date('Y-m-d h:m:s');
@@ -31,4 +31,4 @@ if (isset($_POST['submit-post'])) {
     $statement->execute();
 }
 
-redirect('/');
+redirect('/posts.php?userId=' . $_SESSION['user']['id']);

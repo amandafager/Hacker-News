@@ -22,4 +22,4 @@ if (isset($_GET['postId'])) {
     $statement->execute();
 }
 
-redirect('/');
+redirect('/posts.php?userId=' . $_SESSION['user']['id']);

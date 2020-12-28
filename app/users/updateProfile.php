@@ -36,8 +36,8 @@ if (isset($_FILES['profile-img'])) {
                 move_uploaded_file($fileTmpName, $fileDestination);
 
                 $imgSrc = $fileNameNew;
-                $updateImgSrc = 'UPDATE users SET img_src = :imgSrc WHERE id = :id';
-                $statement = $database->prepare($updateImgSrc);
+                $updateImgSrcQuery = 'UPDATE users SET img_src = :imgSrc WHERE id = :id';
+                $statement = $database->prepare($updateImgSrcQuery);
                 $statement->bindParam(':id', $id, PDO::PARAM_INT);
                 $statement->bindParam(':imgSrc', $imgSrc, PDO::PARAM_STR);
                 $statement->execute();

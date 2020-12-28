@@ -29,7 +29,7 @@
                 </div>
 
                 <button type="submit" name="edit-post" class="btn btn-primary">Save</button>
-                <button type="submit" name="delete-post" class="btn btn-primary">Delete</button>
+                <!--<button type="submit" name="delete-post" class="btn btn-primary">Delete</button>-->
             </form>
         </section>
     <?php endif ?>
