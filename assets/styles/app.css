@@ -120,3 +120,27 @@ form:first-of-type {
   height: 100%;
   object-fit: cover;
 }
+
+/*Posts user submits*/
+
+.user-posts {
+  background-color: rgb(238, 238, 238);
+  margin: 0.7rem 0 0.7rem 0;
+  padding: 1rem;
+  line-height: 2rem;
+}
+
+.user-posts .title {
+  display: flex;
+  align-items: center;
+}
+
+.user-posts .post-info {
+  display: flex;
+  align-items: center;
+}
+.user-posts .post-info p,
+span,
+a {
+  padding-right: 0.5rem;
+}

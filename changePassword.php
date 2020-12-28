@@ -5,6 +5,7 @@
         echo $_SESSION['error'];
         unset($_SESSION['error']);
     } ?>
+    <a href="profile.php">Back</a>
 
     <section class="">
 
