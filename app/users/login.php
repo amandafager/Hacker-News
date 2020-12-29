@@ -7,7 +7,7 @@ require __DIR__ . '/../autoload.php';
 // In this file we login users.
 
 if (isset($_POST['current-email'], $_POST['current-password'])) {
-    $email = filter_var($_POST['current-email'], FILTER_SANITIZE_EMAIL);
+    $email = strtolower(filter_var($_POST['current-email'], FILTER_SANITIZE_EMAIL));
     $password = htmlentities($_POST['current-password']);
 
 
