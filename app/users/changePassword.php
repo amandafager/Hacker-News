@@ -34,5 +34,4 @@ if (isset($_POST['current-password'], $_POST['update-password'])) {
     }
 }
 
-
 redirect('/profile.php');

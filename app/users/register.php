@@ -9,7 +9,7 @@ require __DIR__ . '/../autoload.php';
 // Check if both email and password exists in the POST request.
 if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'], $_POST['new-password-2'])) {
 
-    $name = filter_var($_POST['new-username'], FILTER_SANITIZE_STRING);
+    $name = sanitizeString($_POST['new-username']);
     $email = sanitizeEmail($_POST['new-email']);
     $passphrase1 = $_POST['new-password-1'];
     $passphrase2 = $_POST['new-password-2'];
@@ -17,6 +17,10 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
 
     if (empty($email)) {
         $_SESSION['error'] = 'Email is required';
+        redirect('/login.php');
+    }
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $_SESSION['error'] = 'The email address is not a valid email address!';
         redirect('/login.php');
     }
     if (empty($passphrase1)) {
@@ -54,7 +58,6 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
             redirect('/login.php');
         }
     }
-
 
     if (!$user) {
 

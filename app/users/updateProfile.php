@@ -7,7 +7,7 @@ require __DIR__ . '/../autoload.php';
 $id = $_SESSION['user']['id'];
 
 if (isset($_FILES['profile-img'])) {
-    $file = trim(filter_var($_FILES['profile-img'], FILTER_SANITIZE_STRING));
+    $file = sanitizeString($_FILES['profile-img']);
     $fileName = $_FILES['profile-img']['name'];
     $fileTmpName = $_FILES['profile-img']['tmp_name'];
     $fileSize = $_FILES['profile-img']['size'];
@@ -79,12 +79,12 @@ if (isset($_POST['update-email'])) {
         if (!$statement) {
             die(var_dump($database->errorInfo()));
         }
-        $statement->bindParam(':email',  $newEmail, PDO::PARAM_STR);
+        $statement->bindParam(':email', $newEmail, PDO::PARAM_STR);
         $statement->execute();
         $user = $statement->fetch(PDO::FETCH_ASSOC);
         unset($user['password']);
 
-        if (!filter_var($newEmail, FILTER_VALIDATE_EMAIL)) {
+        if (!validateEmail($newEmail)) {
             $_SESSION['error'] = 'The email address is not a valid email address!';
             redirect('/profile.php');
         }
@@ -107,7 +107,8 @@ if (isset($_POST['update-email'])) {
 
 if (isset($_POST['biography'])) {
 
-    $biography = trim(filter_var($_POST['biography'], FILTER_SANITIZE_SPECIAL_CHARS));
+
+    $biography = sanitizeText($_POST['biography']);
 
     if ($biography) {
         $updateUserBio = 'UPDATE users SET biography = :biography WHERE id = :id';
@@ -122,6 +123,7 @@ $statement = $database->prepare('SELECT * FROM users WHERE id = :id');
 $statement->bindParam(':id', $id, PDO::PARAM_INT);
 $statement->execute();
 $user = $statement->fetch(PDO::FETCH_ASSOC);
+
 unset($user['password']);
 $_SESSION['user'] = $user;
 redirect('/profile.php');

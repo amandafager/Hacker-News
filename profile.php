@@ -35,7 +35,7 @@
             <form action="app/users/updateProfile.php" method="post">
                 <div class="">
                     <label for="biography">Biography:</label>
-                    <textarea id="biography" name="biography"><?php echo $_SESSION['user']['biography'] ?></textarea>
+                    <textarea id="biography" name="biography"><?php echo htmlspecialchars($_SESSION['user']['biography']) ?></textarea>
                 </div>
                 <button type="submit" name="sumbit" value="Submit">Update bio</button>
             </form>

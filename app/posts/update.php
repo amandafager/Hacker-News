@@ -8,22 +8,28 @@ require __DIR__ . '/../autoload.php';
 
 if (isset($_POST['edit-post'])) {
 
-    $title = filter_var($_POST['edit-title'], FILTER_SANITIZE_STRING);
-    $url = filter_var($_POST['edit-url'], FILTER_SANITIZE_URL);
-    $description = filter_var($_POST['edit-description'], FILTER_SANITIZE_STRING);
+    $title = sanitizeString($_POST['edit-title']);
+    $url = $url = sanitizeUrl($_POST['edit-url']);
+    $description = sanitizeText($_POST['edit-description']);
     $id = $_SESSION['post']['id'];
     $userId = $_SESSION['user']['id'];
 
-    $updatePostQuery = 'UPDATE posts SET title = :title, url = :url, description = :description WHERE id = :id AND user_id = :userId';
-    $statement = $database->prepare($updatePostQuery);
+    if (!filter_var($url, FILTER_VALIDATE_URL)) {
+        $_SESSION['error'] = 'The' . $url . 'is not a valid!';
+        redirect('/editPost.php');
+    } else {
 
-    $statement->bindParam(':title', $title, PDO::PARAM_STR);
-    $statement->bindParam(':url', $url, PDO::PARAM_STR);
-    $statement->bindParam(':description', $description, PDO::PARAM_STR);
-    $statement->bindParam(':id', $id, PDO::PARAM_INT);
-    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $updatePostQuery = 'UPDATE posts SET title = :title, url = :url, description = :description WHERE id = :id AND user_id = :userId';
+        $statement = $database->prepare($updatePostQuery);
 
-    $statement->execute();
+        $statement->bindParam(':title', $title, PDO::PARAM_STR);
+        $statement->bindParam(':url', $url, PDO::PARAM_STR);
+        $statement->bindParam(':description', $description, PDO::PARAM_STR);
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+
+        $statement->execute();
+    }
 }
 
 redirect('/posts.php?userId=' . $_SESSION['user']['id']);

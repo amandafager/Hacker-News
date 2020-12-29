@@ -14,7 +14,7 @@
                     <h3><?= $post['title']; ?></h3>
                 </a>
             </div>
-            <p><?= $post['description']; ?></p>
+            <p><?= htmlspecialchars($post['description']); ?></p>
             <div class="post-info">
                 <p>Likes</p>
                 <p>by <a href="#"><?= $post['author']; ?></a></p>

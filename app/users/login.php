@@ -23,7 +23,6 @@ if (isset($_POST['current-email'], $_POST['current-password'])) {
         $_SESSION['user'] = $user;
         $_SESSION['success'] = "You are now logged in";
     } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-
         $_SESSION['error'] = 'The email address is not a valid email address!';
         redirect('/login.php');
     } else if ($email !== $user['email'] && $password !== $user['password']) {

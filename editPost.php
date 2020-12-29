@@ -4,6 +4,15 @@
 <?php $id = $_GET['postId']; ?>
 
 <main>
+    <?php if (isset($_SESSION['error'])) {
+        echo $_SESSION['error'];
+        unset($_SESSION['error']);
+    } ?>
+    <?php if (isset($_SESSION['message'])) {
+        echo $_SESSION['message'];
+        unset($_SESSION['message']);
+    } ?>
+
     <a href="posts.php?userId=<?= $_SESSION['user']['id']; ?>">Back</a>
 
     <?php if (isset($_SESSION['post'])) : ?>
@@ -25,7 +34,7 @@
 
                 <div class="form-group">
                     <label for="edit-description">Description</label>
-                    <textarea class="form-control" type="text" name="edit-description" id="edit-description" placeholder="Description" required value=""><?= $post['description']; ?></textarea>
+                    <textarea class="form-control" type="text" name="edit-description" id="edit-description" placeholder="Description" required value=""><?= htmlspecialchars($post['description']); ?></textarea>
                 </div>
 
                 <button type="submit" name="edit-post" class="btn btn-primary">Save</button>
