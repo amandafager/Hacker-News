@@ -7,9 +7,9 @@ require __DIR__ . '/../autoload.php';
 // In this file we login users.
 
 if (isset($_POST['current-email'], $_POST['current-password'])) {
-    $email = strtolower(filter_var($_POST['current-email'], FILTER_SANITIZE_EMAIL));
-    $password = htmlentities($_POST['current-password']);
 
+    $email = sanitizeEmail($_POST['current-email']);
+    $password = htmlentities($_POST['current-password']);
 
     $statement = $database->prepare('SELECT * FROM users WHERE email = :email');
     $statement->bindParam(':email', $email, PDO::PARAM_STR);

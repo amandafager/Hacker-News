@@ -8,6 +8,16 @@ function redirect(string $path)
     exit;
 }
 
+function sanitizeEmail(string $email): string
+{
+    return strtolower(trim(filter_var($email, FILTER_SANITIZE_EMAIL)));
+}
+
+
+
+
+
+
 function getPostsByUserId($database, int $userId): array
 {
     $statement = $database->prepare('SELECT * FROM posts WHERE user_id = :userId ORDER BY created_at DESC');

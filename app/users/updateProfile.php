@@ -68,7 +68,7 @@ if (isset($_FILES['profile-img'])) {
 
 if (isset($_POST['update-email'])) {
 
-    $newEmail = strtolower(trim(filter_var($_POST['update-email'], FILTER_SANITIZE_EMAIL)));
+    $newEmail = sanitizeEmail($_POST['update-email']);
 
     if ($newEmail) {
 
