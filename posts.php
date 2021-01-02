@@ -8,7 +8,7 @@
     <a href=" profile.php">Back</a>
 
     <?php foreach ($posts as $post) : ?>
-        <article class="user-posts">
+        <article class="post">
             <div class="title">
                 <a href="<?= $post['url']; ?>">
                     <h3><?= $post['title']; ?></h3>
@@ -23,7 +23,7 @@
                 <a class="edit-post" href="editPost.php?postId=<?= $post['id']; ?>">Edit</a>
                 <span>|</span>
                 <form action="app/posts/delete.php" method="post">
-                    <input type="hidden" id="post-id" name="post-id" value="<?= $post['id'] ?>"></input>
+                    <input type="hidden" id="post-id" name="post-id" value="<?= $post['id']; ?>"></input>
                     <button type="submit" name="delete-post" value="Submit">Delete</button>
                 </form>
             </div>

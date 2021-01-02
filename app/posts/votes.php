@@ -20,9 +20,9 @@ if (isset($_POST['vote'])) {
     $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
     $statement->execute();
 
-    $like = $statement->fetch(PDO::FETCH_ASSOC);
+    $vote = $statement->fetch(PDO::FETCH_ASSOC);
 
-    if (!$like) {
+    if (!$vote) {
 
         $query = 'UPDATE posts SET votes = votes + 1 WHERE id = :postId';
         $statement = $database->prepare($query);
@@ -46,6 +46,8 @@ if (isset($_POST['vote'])) {
         $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
         $statement->execute();
     } else {
+
+        $_SESSION['vote'] = "Upvote";
 
         $query = 'UPDATE posts SET votes = votes - 1 WHERE id = :postId';
         $statement = $database->prepare($query);

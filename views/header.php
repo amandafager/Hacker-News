@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="assets/styles/normalize.css">
     <link rel="stylesheet" href="assets/styles/global.css">
     <link rel="stylesheet" href="/assets/styles/app.css">
+    <link rel="stylesheet" href="assets/styles/post.css">
 </head>
 
 <body class="loading">

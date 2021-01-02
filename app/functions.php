@@ -113,3 +113,25 @@ function newPostsOrderByCreatedAt($database): array
 
     return $_SESSION['post'];
 }
+
+
+function getVoteStatus($database, int $userId, int $postId): bool
+{
+    $query = 'SELECT * FROM votes WHERE user_id = :userId and post_id = :postId';
+    $statement = $database->prepare($query);
+
+    if (!$statement) {
+        die(var_dump($database->errorInfo()));
+    }
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
+    $statement->execute();
+
+    $vote = $statement->fetch(PDO::FETCH_ASSOC);
+
+    if ($vote) {
+        return true;
+    } else {
+        return false;
+    }
+}

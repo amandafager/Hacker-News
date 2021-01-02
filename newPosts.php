@@ -11,7 +11,7 @@
     <?php foreach ($posts as $post) : ?>
         <?php if (isset($_SESSION['user'])) : ?>
             <?php if ($post['user_id'] === $_SESSION['user']['id']) : ?>
-                <article class="user-posts">
+                <article class="post">
                     <div class="title">
                         <a href="<?= $post['url']; ?>">
                             <h3><?= $post['title']; ?></h3>
@@ -19,7 +19,7 @@
                     </div>
                     <p><?= htmlspecialchars($post['description']); ?></p>
                     <div class="post-info">
-                        <p>Likes</p>
+                        <p><?= $post['votes']; ?> Votes</p>
                         <p>by <a href="#"><?= $post['author']; ?></a></p>
                         <p><?= $post['created_at']; ?></p>
                         <span>|</span>
@@ -34,7 +34,19 @@
                     </div>
                 </article>
             <?php else : ?>
-                <article class="user-posts">
+                <article class="post">
+
+                    <form action="app/posts/votes.php" method="post">
+                        <input type="hidden" id="post-id" name="vote" value="<?= $post['id']; ?>"></input>
+                        <button class="vote-btn" type="submit" value="Submit">
+                            <?php if (getVoteStatus($database, $_SESSION['user']['id'], $post['id']) === true) : ?>
+                                <?= "Unvote"; ?>
+                            <?php else : ?>
+                                <?= "Upvote"; ?>
+                            <?php endif; ?>
+                        </button>
+                    </form>
+
                     <div class="title">
                         <a href="<?= $post['url']; ?>">
                             <h3><?= $post['title']; ?></h3>
@@ -42,10 +54,7 @@
                     </div>
                     <p><?= htmlspecialchars($post['description']); ?></p>
                     <div class="post-info">
-                        <form action="app/posts/votes.php" method="post">
-                            <input type="hidden" id="post-id" name="vote" value="<?= $post['id'] ?>"></input>
-                            <button class="like-btn" type="submit" value="Submit">Upvote</button>
-                        </form>
+
                         <p><?= $post['votes']; ?> Votes</p>
                         <p>by <a href="#"><?= $post['author']; ?></a></p>
                         <p><?= $post['created_at']; ?></p>
@@ -55,7 +64,7 @@
                 </article>
             <?php endif; ?>
         <?php else : ?>
-            <article class="user-posts">
+            <article class="post">
                 <div class="title">
                     <a href="<?= $post['url']; ?>">
                         <h3><?= $post['title']; ?></h3>

@@ -32,15 +32,3 @@ if (logout) {
 window.addEventListener("load", () => {
   document.body.classList.remove("loading");
 });
-
-const likeBtns = document.querySelectorAll(".like-btn");
-
-likeBtns.forEach((likeBtn) => {
-  likeBtn.addEventListener("click", () => {
-    if (likeBtn.textContent === "Like") {
-      likeBtn.textContent === "Dislike";
-    } else {
-      likeBtn.textContent === "Like";
-    }
-  });
-});
