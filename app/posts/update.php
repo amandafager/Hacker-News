@@ -14,7 +14,7 @@ if (isset($_POST['edit-post'])) {
     $id = $_SESSION['post']['id'];
     $userId = $_SESSION['user']['id'];
 
-    if (!filter_var($url, FILTER_VALIDATE_URL)) {
+    if (!validateUrl($url)) {
         $_SESSION['error'] = 'The' . $url . 'is not a valid!';
         redirect('/editPost.php');
     } else {

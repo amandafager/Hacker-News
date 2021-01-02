@@ -39,7 +39,7 @@
                     <form action="app/posts/votes.php" method="post">
                         <input type="hidden" id="post-id" name="vote" value="<?= $post['id']; ?>"></input>
                         <button class="vote-btn" type="submit" value="Submit">
-                            <?php if (getVoteStatus($database, $_SESSION['user']['id'], $post['id']) === true) : ?>
+                            <?php if (checkVoteStatus($database, $_SESSION['user']['id'], $post['id'])) : ?>
                                 <?= "Unvote"; ?>
                             <?php else : ?>
                                 <?= "Upvote"; ?>

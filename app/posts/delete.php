@@ -8,13 +8,10 @@ require __DIR__ . '/../autoload.php';
 
 if (isset($_POST['post-id'])) {
 
-
     $postId = filter_var($_POST['post-id'], FILTER_SANITIZE_NUMBER_INT);
-
     $userId = $_SESSION['user']['id'];
 
     $deletePostQuery = 'DELETE FROM posts WHERE id = :postId AND user_id = :userId';
-
     $statement = $database->prepare($deletePostQuery);
 
     if (!$statement) {

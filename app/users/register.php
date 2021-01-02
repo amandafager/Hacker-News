@@ -19,7 +19,7 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
         $_SESSION['error'] = 'Email is required';
         redirect('/login.php');
     }
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    if (!validateEmail($email)) {
         $_SESSION['error'] = 'The email address is not a valid email address!';
         redirect('/login.php');
     }

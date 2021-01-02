@@ -8,37 +8,47 @@ function redirect(string $path)
     exit;
 }
 
-//Functions that sanitize and validates emails
+//Functions for sanitize and validates emails
 function sanitizeEmail(string $email): string
 {
     return strtolower(trim(filter_var($email, FILTER_SANITIZE_EMAIL)));
 }
 
-//Dont work
 function validateEmail(string $email): bool
 {
     $isValid = filter_var($email, FILTER_VALIDATE_EMAIL);
-    $isValid = true;
-    return $isValid;
+
+    if ($isValid) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
-//Functions that sanitize and validates text fiels
+//Function for sanitize text fiels
 function sanitizeText(string $text): string
 {
     return trim(filter_var($text, FILTER_SANITIZE_SPECIAL_CHARS));
 }
 
-//Functions that sanitize and validates URLs
+//Functions for sanitize and validates URLs
 function sanitizeUrl(string $url): string
 {
     return trim(filter_var($url, FILTER_SANITIZE_URL));
 }
-//Dont work
+
 function validateUrl(string $url): bool
 {
-    return (filter_var($url, FILTER_VALIDATE_URL));
+    $isValid = filter_var($url, FILTER_VALIDATE_URL);
+
+    if ($isValid) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
+//Function for sanitize text input type string, as name and title
 function sanitizeString(string $string): string
 {
     return trim(filter_var($string, FILTER_SANITIZE_STRING));
@@ -47,7 +57,7 @@ function sanitizeString(string $string): string
 
 
 
-function getPostsByUserId($database, int $userId): array
+function getPostsByUserId(PDO $database, int $userId): array
 {
     $statement = $database->prepare('SELECT * FROM posts WHERE user_id = :userId ORDER BY created_at DESC');
 
@@ -63,7 +73,7 @@ function getPostsByUserId($database, int $userId): array
 }
 
 
-function getPostsById($database, int $id): array
+function getPostsById(PDO $database, int $id): array
 {
     $statement = $database->prepare('SELECT * FROM posts WHERE id = :id');
 
@@ -81,7 +91,7 @@ function getPostsById($database, int $id): array
 }
 
 
-function newPostsOrderByLikes($database): array
+function newPostsOrderByLikes(PDO $database): array
 {
     $statement = $database->prepare('SELECT * FROM posts ORDER BY votes DESC');
 
@@ -98,7 +108,7 @@ function newPostsOrderByLikes($database): array
 }
 
 
-function newPostsOrderByCreatedAt($database): array
+function newPostsOrderByCreatedAt(PDO $database): array
 {
     $statement = $database->prepare('SELECT * FROM posts ORDER BY created_at DESC');
 
@@ -115,7 +125,8 @@ function newPostsOrderByCreatedAt($database): array
 }
 
 
-function getVoteStatus($database, int $userId, int $postId): bool
+//Check if a user has voted on a post or not
+function checkVoteStatus(PDO $database, int $userId, int $postId): bool
 {
     $query = 'SELECT * FROM votes WHERE user_id = :userId and post_id = :postId';
     $statement = $database->prepare($query);
@@ -129,7 +140,7 @@ function getVoteStatus($database, int $userId, int $postId): bool
 
     $vote = $statement->fetch(PDO::FETCH_ASSOC);
 
-    if ($vote) {
+    if ($vote) { //If vote exist return true else false
         return true;
     } else {
         return false;

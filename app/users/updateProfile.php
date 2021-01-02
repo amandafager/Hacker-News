@@ -93,7 +93,7 @@ if (isset($_POST['update-email'])) {
             redirect('/profile.php');
         }
 
-        if (filter_var($newEmail, FILTER_VALIDATE_EMAIL) && $user['email'] !== $newEmail) {
+        if (validateEmail($newEmail) && $user['email'] !== $newEmail) {
 
             $updateUserEmail = 'UPDATE users SET email = :email WHERE id = :id';
             $statement = $database->prepare($updateUserEmail);
