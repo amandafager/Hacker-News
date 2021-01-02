@@ -81,7 +81,24 @@ function getPostsById($database, int $id): array
 }
 
 
-function newPosts($database): array
+function newPostsOrderByLikes($database): array
+{
+    $statement = $database->prepare('SELECT * FROM posts ORDER BY votes DESC');
+
+    if (!$statement) {
+        die(var_dump($database->errorInfo()));
+    }
+    $statement->execute();
+
+    $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    $_SESSION['post'] = $posts;
+
+    return $_SESSION['post'];
+}
+
+
+function newPostsOrderByCreatedAt($database): array
 {
     $statement = $database->prepare('SELECT * FROM posts ORDER BY created_at DESC');
 

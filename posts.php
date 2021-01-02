@@ -16,13 +16,16 @@
             </div>
             <p><?= htmlspecialchars($post['description']); ?></p>
             <div class="post-info">
-                <p>Likes</p>
+                <p><?= $post['votes']; ?> Votes</p>
                 <p>by <a href="#"><?= $post['author']; ?></a></p>
                 <p><?= $post['created_at']; ?></p>
                 <span>|</span>
                 <a class="edit-post" href="editPost.php?postId=<?= $post['id']; ?>">Edit</a>
                 <span>|</span>
-                <a class="delete-post" href="app/posts/delete.php?postId=<?= $post['id']; ?>">Delete</a>
+                <form action="app/posts/delete.php" method="post">
+                    <input type="hidden" id="post-id" name="post-id" value="<?= $post['id'] ?>"></input>
+                    <button type="submit" name="delete-post" value="Submit">Delete</button>
+                </form>
             </div>
         </article>
     <?php endforeach; ?>

@@ -33,33 +33,14 @@ window.addEventListener("load", () => {
   document.body.classList.remove("loading");
 });
 
-/*
-function saveInput(e) {
-  const inputs = document.querySelectorAll(".save").value;
-  inputs.forEach((input) => {
-    e.preventDefault();
-    alert(input);
+const likeBtns = document.querySelectorAll(".like-btn");
+
+likeBtns.forEach((likeBtn) => {
+  likeBtn.addEventListener("click", () => {
+    if (likeBtn.textContent === "Like") {
+      likeBtn.textContent === "Dislike";
+    } else {
+      likeBtn.textContent === "Like";
+    }
   });
-}
-
-const sumbits = document.querySelectorAll(".btn");
-sumbits.forEach((submit) => {
-  submit.addEventListener("click", saveInput);
 });
-*/
-
-/*
-const inputImg = document.querySelector(".pro-img");
-
-const value = inputImg.value;
-const proImg = document.querySelector(".pro-img-container img");
-proImg.src = value;
-*/
-
-//console.log(inputImg);
-
-/*
-inputImg.addEventListener("change", () => {
- 
-});
-*/

@@ -6,12 +6,14 @@ require __DIR__ . '/../autoload.php';
 
 // In this file we delete new posts in the database.
 
-if (isset($_GET['postId'])) {
+if (isset($_POST['post-id'])) {
 
-    $id = filter_var($_GET['postId'], FILTER_SANITIZE_NUMBER_INT);
+
+    $postId = filter_var($_POST['post-id'], FILTER_SANITIZE_NUMBER_INT);
+
     $userId = $_SESSION['user']['id'];
 
-    $deletePostQuery = 'DELETE FROM posts WHERE id = :id AND user_id = :userId';
+    $deletePostQuery = 'DELETE FROM posts WHERE id = :postId AND user_id = :userId';
 
     $statement = $database->prepare($deletePostQuery);
 
@@ -19,7 +21,7 @@ if (isset($_GET['postId'])) {
         die(var_dump($pdo->errorInfo()));
     }
 
-    $statement->bindParam(':id', $id, PDO::PARAM_INT);
+    $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
     $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
     $statement->execute();
 }

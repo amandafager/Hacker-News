@@ -40,6 +40,10 @@
                 <button type="submit" name="edit-post" class="btn btn-primary">Save</button>
                 <!--<button type="submit" name="delete-post" class="btn btn-primary">Delete</button>-->
             </form>
+            <form action="app/posts/delete.php" method="post">
+                <input type="hidden" id="post-id" name="post-id" value="<?= $post['id'] ?>"></input>
+                <button type="submit" name="delete-post" value="Submit">Delete</button>
+            </form>
         </section>
     <?php endif ?>
 </main>

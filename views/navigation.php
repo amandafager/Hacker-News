@@ -4,15 +4,11 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="/newPosts.php">New</a>
+                <a class="nav-link" href="/newPosts.php?new">New</a>
             </li><!-- /nav-item -->
 
             <li class="nav-item">
-                <a class="nav-link" href="/about.php">Show</a>
-            </li><!-- /nav-item -->
-
-            <li class="nav-item">
-                <a class="nav-link" href="/about.php">Past</a>
+                <a class="nav-link" href="/newPosts.php?pop">Popular posts</a>
             </li><!-- /nav-item -->
 
             <li class="nav-item">
