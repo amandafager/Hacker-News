@@ -55,4 +55,4 @@ if (isset($_POST['vote'])) {
     }
 }
 
-redirect('/newPosts.php');
+redirect($_SERVER['HTTP_REFERER']);

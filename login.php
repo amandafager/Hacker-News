@@ -14,13 +14,14 @@
     } ?>
 
 
+
     <article class="log">
         <h2>Login</h2>
 
         <form action="app/users/login.php" method="post">
             <div class="form-group">
                 <label for="current-email">Email</label>
-                <input class="form-control save" type="current-email" name="current-email" id="current-email" placeholder="Email" value="" required>
+                <input class="form-control save" type="current-email" name="current-email" id="current-email" placeholder="Email" value="<?= sessionInput() ?>" required>
                 <!--<small class="form-text text-muted">Please provide your email address.</small>-->
             </div><!-- /form-group -->
 
@@ -34,6 +35,7 @@
         </form>
         <a href="#">Forgot your password?</a>
     </article>
+
 
     <article class="log">
 

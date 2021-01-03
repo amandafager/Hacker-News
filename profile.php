@@ -49,7 +49,7 @@
             </form>
 
             <a href="changePassword.php">Change password</a>
-            <a href="posts.php?userId=<?= $_SESSION['user']['id']; ?>">My posts</a>
+            <a href="userPosts.php?userId=<?= $_SESSION['user']['id']; ?>">My posts</a>
 
         </section>
     <?php endif; ?>

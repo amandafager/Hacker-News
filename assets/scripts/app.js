@@ -32,3 +32,19 @@ if (logout) {
 window.addEventListener("load", () => {
   document.body.classList.remove("loading");
 });
+
+/*function goBack() {
+  window.history.back();
+}
+const back = document.querySelector(".go-back");
+back.addEventListener("click", goBack);
+*/
+/*
+const voteBtns = document.querySelectorAll(".vote-btn");
+
+voteBtns.forEach((voteBtn) => {
+  if (voteBtn.textContent === "Upvote") {
+    voteBtn.style.backgroundColor = "blue";
+  }
+});
+*/

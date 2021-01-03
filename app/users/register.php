@@ -15,12 +15,16 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
     $passphrase2 = $_POST['new-password-2'];
     $created =  date('Y-m-d h:m:s');
 
+    if (empty($name)) {
+        $_SESSION['error'] = 'Username is required';
+        redirect('/login.php');
+    }
     if (empty($email)) {
         $_SESSION['error'] = 'Email is required';
         redirect('/login.php');
     }
     if (!validateEmail($email)) {
-        $_SESSION['error'] = 'The email address is not a valid email address!';
+        $_SESSION['error'] = $email . ' is not a valid email address!';
         redirect('/login.php');
     }
     if (empty($passphrase1)) {
@@ -51,6 +55,7 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
     if ($user) { // if user exists
         if ($user['email'] === $email) {
             $_SESSION['error'] = 'Email already exists';
+            $_SESSION['input'] = $email;
             redirect('/login.php');
         }
         if ($user['username'] === $name) {

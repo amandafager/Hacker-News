@@ -36,4 +36,4 @@ if (isset($_POST['submit-post'])) {
     }
 }
 
-redirect('/posts.php?userId=' . $_SESSION['user']['id']);
+redirect('/userPosts.php?userId=' . $_SESSION['user']['id']);

@@ -146,3 +146,13 @@ function checkVoteStatus(PDO $database, int $userId, int $postId): bool
         return false;
     }
 }
+
+
+
+function sessionInput()
+{
+    if (isset($_SESSION['input'])) {
+        echo $_SESSION['input'];
+        unset($_SESSION['input']);
+    }
+}

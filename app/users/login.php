@@ -23,15 +23,19 @@ if (isset($_POST['current-email'], $_POST['current-password'])) {
         $_SESSION['user'] = $user;
         $_SESSION['success'] = "You are now logged in";
     } else if (!validateEmail($email)) {
-        $_SESSION['error'] = 'The email address is not a valid email address!';
+
+        $_SESSION['error'] = $email . ' is not a valid email address!';
+
         redirect('/login.php');
     } else if ($email !== $user['email'] && $password !== $user['password']) {
 
         $_SESSION['error'] = 'Whoops... The provided credentials does not match our records!';
+
         redirect('/login.php');
     } else if ($email === $user['email'] && !password_verify($password, $user['password'])) {
 
         $_SESSION['error'] = 'Whoops! Looks like you missed something. Please enter correct password.';
+
         redirect('/login.php');
     }
 }
