@@ -23,3 +23,9 @@ span,
 a {
   padding-right: 0.5rem;
 }
+
+.comment {
+  background-color: rgb(238, 238, 238);
+  margin: 0.7rem 0 0.7rem 0;
+  padding: 1rem;
+}

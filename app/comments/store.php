@@ -27,4 +27,5 @@ if (isset($_POST['comment'], $_POST['post-id'])) {
     $statement->execute();
 }
 
-redirect($_SERVER['HTTP_REFERER']);
+redirect('/comments.php?postId=' . $postId);
+//redirect($_SERVER['HTTP_REFERER']);

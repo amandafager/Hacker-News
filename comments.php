@@ -4,9 +4,10 @@
 <?php $id = $_GET['postId']; ?>
 
 <?php $post = getPostsById($database, $id); ?>
+<?php $comments = getCommentByPostId($database, $post['id']); ?>
 
 <main>
-    <a href="<?= $_SERVER['HTTP_REFERER'] ?>">Back</a>
+    <a href="posts.php">Back</a>
 
     <article class="post">
         <form action="app/posts/votes.php" method="post">
@@ -44,10 +45,25 @@
         </form>
     </section>
 
-    <section class="comments">
-        <article>
 
-        </article>
+    <section class="comments">
+        <?php foreach ($comments as $comment) : ?>
+            <article class="comment">
+                <p>by <a href="#"><?= $comment['author']; ?></a></p>
+                <p><?= $comment['comment_created_at']; ?> </p>
+                <p><?= $comment['comment']; ?> </p>
+                <?php if (isset($_SESSION['user'])) : ?>
+                    <?php if ($comment['by_user_id'] === $_SESSION['user']['id']) : ?>
+                        <form action="app/comments/delete.php" method="post">
+                            <input type="hidden" id="comment-id" name="comment-id" value="<?= $comment['comment_id'] ?>"></input>
+                            <button type="submit" name="delete-comment" value="Submit">Delete</button>
+                        </form>
+                        <button type="submit" name="edit-comment" value="Submit">Edit</button>
+                    <?php endif; ?>
+                <?php endif; ?>
+            </article>
+
+        <?php endforeach; ?>
     </section>
 
 </main>
