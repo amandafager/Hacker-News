@@ -29,3 +29,19 @@ a {
   margin: 0.7rem 0 0.7rem 0;
   padding: 1rem;
 }
+
+.edit-comment {
+  display: none;
+}
+
+.show-edit {
+  display: flex;
+}
+
+.comment-text {
+  display: flex;
+}
+
+.hide-text {
+  display: none;
+}

@@ -33,18 +33,22 @@ window.addEventListener("load", () => {
   document.body.classList.remove("loading");
 });
 
-/*function goBack() {
-  window.history.back();
-}
-const back = document.querySelector(".go-back");
-back.addEventListener("click", goBack);
-*/
-/*
-const voteBtns = document.querySelectorAll(".vote-btn");
+const editCommentBtns = document.querySelectorAll(".edit-comment-btn");
+const editForms = document.querySelectorAll(".edit-comment");
+const comments = document.querySelectorAll(".comment-text");
 
-voteBtns.forEach((voteBtn) => {
-  if (voteBtn.textContent === "Upvote") {
-    voteBtn.style.backgroundColor = "blue";
-  }
+editCommentBtns.forEach((editCommentBtn) => {
+  editCommentBtn.addEventListener("click", () => {
+    editForms.forEach((form) => {
+      if (editCommentBtn.dataset.id === form.dataset.id) {
+        form.classList.toggle("show-edit");
+      }
+    });
+
+    comments.forEach((comment) => {
+      if (editCommentBtn.dataset.id === comment.dataset.id) {
+        comment.classList.toggle("hide-text");
+      }
+    });
+  });
 });
-*/
