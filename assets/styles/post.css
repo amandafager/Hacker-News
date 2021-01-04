@@ -3,25 +3,51 @@
 .post {
   background-color: rgb(238, 238, 238);
   margin: 0.7rem 0 0.7rem 0;
-  padding: 1rem;
+
   /*line-height: 2rem;*/
 }
 
-.user-posts .title {
+.top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.5rem 0 0.5rem;
+}
+
+.top-left {
   display: flex;
   align-items: center;
 }
 
-/*
-.post .post-info {
-  display: flex;
-  align-items: center;
-}*/
+.top-left p,
+form {
+  padding-right: 0.7rem;
+}
 
-.user-posts .post-info p,
-span,
-a {
+.post-content {
+  padding: 1rem;
+}
+
+.post-content h3 {
+  padding-bottom: 0.7rem;
+}
+
+.bottom {
+  display: flex;
+  padding: 0 0 0.5rem 1rem;
+  list-style: none;
+}
+
+.bottom li {
   padding-right: 0.5rem;
+}
+
+.delete-btn {
+  border: none;
+  text-decoration: underline;
+  color: rgb(202, 37, 18);
+  padding: 0;
 }
 
 .comment {

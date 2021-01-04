@@ -34,7 +34,7 @@
 
                 <div class="form-group">
                     <label for="edit-description">Description</label>
-                    <textarea class="form-control" type="text" name="edit-description" id="edit-description" placeholder="Description" required value=""><?= htmlspecialchars($post['description']); ?></textarea>
+                    <textarea class="form-control" type="text" name="edit-description" id="edit-description" placeholder="Description" value=""><?= $post['description']; ?></textarea>
                 </div>
 
                 <button type="submit" name="edit-post" class="btn btn-primary">Save</button>

@@ -32,4 +32,6 @@ if (isset($_POST['edit-post'])) {
     }
 }
 
-redirect('/userPosts.php?userId=' . $_SESSION['user']['id']);
+//redirect('/userPosts.php?userId=' . $_SESSION['user']['id']);
+
+redirect($_SERVER['HTTP_REFERER']);

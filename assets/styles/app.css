@@ -82,15 +82,15 @@ a {
 /*login*/
 
 form {
-  width: 100%;
-  max-width: 280px;
+  /*width: 100%;*/
+  /*max-width: 280px;*/
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
 form:first-of-type {
-  padding-bottom: 1rem;
+  /*padding-bottom: 1rem;*/
 }
 
 .form-group {
@@ -120,4 +120,3 @@ form:first-of-type {
   height: 100%;
   object-fit: cover;
 }
-

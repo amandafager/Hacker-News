@@ -7,7 +7,7 @@ require __DIR__ . '/../autoload.php';
 $id = $_SESSION['user']['id'];
 
 if (isset($_FILES['profile-img'])) {
-    $file = sanitizeString($_FILES['profile-img']);
+    $file = $_FILES['profile-img'];
     $fileName = $_FILES['profile-img']['name'];
     $fileTmpName = $_FILES['profile-img']['tmp_name'];
     $fileSize = $_FILES['profile-img']['size'];

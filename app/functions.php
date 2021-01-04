@@ -91,9 +91,9 @@ function getPostsById(PDO $database, int $id): array
 }
 
 
-function newPostsOrderByLikes(PDO $database): array
+function getPostsOrderBy(PDO $database, string $orderBy): array
 {
-    $statement = $database->prepare('SELECT * FROM posts ORDER BY votes DESC');
+    $statement = $database->prepare("SELECT * FROM posts ORDER BY $orderBy DESC");
 
     if (!$statement) {
         die(var_dump($database->errorInfo()));
@@ -102,31 +102,12 @@ function newPostsOrderByLikes(PDO $database): array
 
     $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    $_SESSION['post'] = $posts;
-
-    return $_SESSION['post'];
-}
-
-
-function newPostsOrderByCreatedAt(PDO $database): array
-{
-    $statement = $database->prepare('SELECT * FROM posts ORDER BY created_at DESC');
-
-    if (!$statement) {
-        die(var_dump($database->errorInfo()));
-    }
-    $statement->execute();
-
-    $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-    $_SESSION['post'] = $posts;
-
-    return $_SESSION['post'];
+    return $posts;
 }
 
 
 //Check if a user has voted on a post or not
-function checkVoteStatus(PDO $database, int $userId, int $postId): bool
+function isUpvoted(PDO $database, int $userId, int $postId): bool
 {
     $query = 'SELECT * FROM votes WHERE user_id = :userId and post_id = :postId';
     $statement = $database->prepare($query);
@@ -158,26 +139,10 @@ function sessionInput()
 }
 
 
-/*
-function getCommentByPostId(PDO $database, int $postId): array
+
+function getCommentsByPostId(PDO $database, int $postId): array
 {
-    $statement = $database->prepare('SELECT * FROM comments WHERE on_post_id = :postId ORDER BY created_at DESC');
-
-    if (!$statement) {
-        die(var_dump($database->errorInfo()));
-    }
-    $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
-    $statement->execute();
-
-    $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-    return $comments;
-}*/
-
-
-function getCommentByPostId(PDO $database, int $postId): array
-{
-    $statement = $database->prepare('SELECT comments.id AS comment_id, on_post_id, by_user_id, comment, comments.created_at AS comment_created_at, users.id AS user_id_users, users.username AS author FROM comments INNER JOIN users ON users.id = comments.by_user_id WHERE on_post_id = :postId');
+    $statement = $database->prepare('SELECT comments.id AS comment_id, on_post_id, by_user_id, comment, comments.created_at AS comment_created_at, users.id AS user_id_users, users.username AS author FROM comments INNER JOIN users ON users.id = comments.by_user_id WHERE on_post_id = :postId ORDER BY comment_created_at DESC');
 
     if (!$statement) {
         die(var_dump($database->errorInfo()));
@@ -189,4 +154,28 @@ function getCommentByPostId(PDO $database, int $postId): array
     $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     return $comments;
+}
+
+
+
+function numberOfComments(PDO $database, int $postId): string
+{
+
+    $comments = getCommentsByPostId($database, $postId);
+
+    $numberOfComments = count($comments);
+
+    if ($numberOfComments === 0) {
+
+        $text = "discuss";
+        return $text;
+    } else if ($numberOfComments === 1) {
+
+        $text = "$numberOfComments comment";
+        return $text;
+    } else {
+
+        $text = "$numberOfComments comments";
+        return $text;
+    }
 }

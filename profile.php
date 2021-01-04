@@ -52,6 +52,8 @@
             <a href="userPosts.php?userId=<?= $_SESSION['user']['id']; ?>">My posts</a>
 
         </section>
+    <?php else :  ?>
+
     <?php endif; ?>
 
 </main>

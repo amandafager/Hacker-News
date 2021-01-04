@@ -9,16 +9,21 @@
     <?php $number = 1; ?>
     <?php foreach ($posts as $post) : ?>
         <article class="post">
-            <div class="title">
+            <div>
                 <p><?= $number++; ?></p>
+            </div>
+
+
+            <div class="title">
+
                 <a href="<?= $post['url']; ?>">
                     <h3><?= $post['title']; ?></h3>
                 </a>
             </div>
-            <p><?= htmlspecialchars($post['description']); ?></p>
+            <p><?= $post['description']; ?></p>
             <div class="post-info">
                 <p><?= $post['votes']; ?> Votes</p>
-                <p>by <a href="#"><?= $post['author']; ?></a></p>
+                <p>by <a href="profil.php"><?= $post['author']; ?></a></p>
                 <p><?= $post['created_at']; ?></p>
 
                 <a class="edit-post" href="editPost.php?postId=<?= $post['id']; ?>">Edit</a>

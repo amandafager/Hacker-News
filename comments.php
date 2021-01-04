@@ -1,37 +1,59 @@
 <?php require __DIR__ . '/app/autoload.php'; ?>
 <?php require __DIR__ . '/views/header.php'; ?>
 
-<?php $id = $_GET['postId']; ?>
+<?php $postId = $_GET['postId']; ?>
 
-<?php $post = getPostsById($database, $id); ?>
-<?php $comments = getCommentByPostId($database, $post['id']); ?>
+<?php $post = getPostsById($database, $postId); ?>
+<?php $comments = getCommentsByPostId($database, $post['id']); ?>
 
 <main>
-    <a href="posts.php">Back</a>
+
+    <!--<a href="posts.php">Back</a>-->
+    <a class="go-back" href="">Back</a>
+
+
     <?php if (isset($_SESSION['user'])) : ?>
-        <article class="post">
-            <form action="app/posts/votes.php" method="post">
-                <input type="hidden" id="post-id" name="vote" value="<?= $post['id']; ?>"></input>
-                <button class="vote-btn" type="submit" value="Submit">
-                    <?php if (checkVoteStatus($database, $_SESSION['user']['id'], $post['id'])) : ?>
-                        <?= "Unvote"; ?>
-                    <?php else : ?>
-                        <?= "Upvote"; ?>
-                    <?php endif; ?>
-                </button>
-            </form>
-            <div class="title">
-                <a href="<?= $post['url']; ?>">
+
+        <article class="post" id="<?= $post['id']; ?>">
+            <div class="top">
+                <div class="top-left">
+                    <form action="app/posts/votes.php" method="post">
+                        <input type="hidden" id="post-id" name="vote" value="<?= $post['id']; ?>"></input>
+                        <button class="vote-btn" type="submit" value="Submit">
+                            <?php if (isUpvoted($database, $_SESSION['user']['id'], $post['id'])) : ?>
+                                <?= "Unvote"; ?>
+                            <?php else : ?>
+                                <?= "Upvote"; ?>
+                            <?php endif; ?>
+                        </button>
+                    </form>
+                    <p>by <a href="profile.php"><?= $post['author']; ?></a></p>
+                </div>
+                <p><?= $post['created_at']; ?></p>
+            </div>
+            <div class="post-content">
+                <a class="title" href="<?= $post['url']; ?>">
                     <h3><?= $post['title']; ?></h3>
                 </a>
+                <p><?= $post['description']; ?></p>
             </div>
-            <p><?= htmlspecialchars($post['description']); ?></p>
-            <div class="post-info">
-                <p><?= $post['votes']; ?> Votes</p>
-                <p>by <a href="#"><?= $post['author']; ?></a></p>
-                <p><?= $post['created_at']; ?></p>
-                <a class="" href="comments.php?postId=<?= $post['id']; ?>">Comments</a>
-            </div>
+            <ul class="bottom">
+                <li>
+                    <p><?= $post['votes']; ?> points</p>
+                </li>
+                <li>
+                    <a class="" href="comments.php?postId=<?= $post['id']; ?>"><?= numberOfComments($database, $postId); ?></a>
+                </li>
+                <li>
+                    <a class="edit-post" href="editPost.php?postId=<?= $post['id']; ?>">edit</a>
+                </li>
+                <li>
+                    <form action="app/posts/delete.php" method="post">
+                        <input type="hidden" id="post-id" name="post-id" value="<?= $post['id'] ?>"></input>
+                        <button class="delete-btn" type="submit" name="delete-post" value="Submit">delete</button>
+                    </form>
+                </li>
+            </ul>
         </article>
 
         <section>
@@ -45,18 +67,32 @@
             </form>
         </section>
     <?php else : ?>
-        <article class="post">
-            <div class="title">
-                <a href="<?= $post['url']; ?>">
-                    <h3><?= $post['title']; ?></h3>
-                </a>
-            </div>
-            <p><?= htmlspecialchars($post['description']); ?></p>
-            <div class="post-info">
-                <p><?= $post['votes']; ?> Votes</p>
-                <p>by <a href="#"><?= $post['author']; ?></a></p>
+
+        <article class="post" id="<?= $post['id']; ?>">
+            <div class="top">
+                <div class="top-left">
+                    <form action="login.php" method="post">
+                        <input type="hidden" id="post-id" name="vote" value="<?= $post['id']; ?>"></input>
+                        <button class="vote-btn" type="submit" value="Submit">Upvote</button>
+                    </form>
+                    <p>by <a href="profile.php"><?= $post['author']; ?></a></p>
+                </div>
                 <p><?= $post['created_at']; ?></p>
             </div>
+            <div class="post-content">
+                <a class="title" href="<?= $post['url']; ?>">
+                    <h3><?= $post['title']; ?></h3>
+                </a>
+                <p><?= $post['description']; ?></p>
+            </div>
+            <ul class="bottom">
+                <li>
+                    <p><?= $post['votes']; ?> points</p>
+                </li>
+                <li>
+                    <a class="" href="comments.php?postId=<?= $post['id']; ?>"><?= numberOfComments($database, $postId); ?> </a>
+                </li>
+            </ul>
         </article>
 
         <section class="add-comment">
@@ -74,7 +110,7 @@
 
     <section class="comments">
         <?php foreach ($comments as $comment) : ?>
-            <article class="comment">
+            <article class="comment" id="<?= $comment['comment_id'] ?>">
                 <p>by
                     <a href="#"><?= $comment['author']; ?></a>
                 </p>

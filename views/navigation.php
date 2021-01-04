@@ -4,11 +4,11 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="/posts.php?new">New</a>
+                <a class="nav-link" href="/posts.php?top">Top</a>
             </li><!-- /nav-item -->
 
             <li class="nav-item">
-                <a class="nav-link" href="/posts.php?pop">Popular posts</a>
+                <a class="nav-link" href="/posts.php?new">New</a>
             </li><!-- /nav-item -->
 
             <li class="nav-item">
