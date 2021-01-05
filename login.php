@@ -21,7 +21,7 @@
         <form action="app/users/login.php" method="post">
             <div class="form-group">
                 <label for="current-email">Email</label>
-                <input class="form-control save" type="current-email" name="current-email" id="current-email" placeholder="Email" value="<?= sessionInput() ?>" required>
+                <input class="form-control save" type="current-email" name="current-email" id="current-email" placeholder="Email" value="" required>
                 <!--<small class="form-text text-muted">Please provide your email address.</small>-->
             </div><!-- /form-group -->
 

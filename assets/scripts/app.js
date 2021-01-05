@@ -53,7 +53,6 @@ editCommentBtns.forEach((editCommentBtn) => {
   });
 });
 
-/*
 const back = document.querySelector(".go-back");
 
 console.log(back);
@@ -63,4 +62,3 @@ if (back) {
     window.history.back();
   });
 }
-*/

@@ -5,7 +5,7 @@
 <?php $posts = getPostsByUserId($database, $userId); ?>
 
 <main>
-    <a href="profile.php">Back</a>
+    <a href="profile.php?userId=<?= $userId ?>">Back</a>
     <?php $number = 1; ?>
     <?php foreach ($posts as $post) : ?>
         <article class="post">

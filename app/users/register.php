@@ -94,4 +94,4 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
         $_SESSION['message'] = 'You have succcssfully created an account and are now logged in. Update your profile!';
     }
 }
-redirect('/profile.php');
+redirect('/profile.php?userId=' . $_SESSION['user']['id']);

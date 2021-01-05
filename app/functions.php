@@ -73,7 +73,23 @@ function getPostsByUserId(PDO $database, int $userId): array
 }
 
 
-function getPostsById(PDO $database, int $id): array
+function getUserProfile(PDO $database, int $userId): array
+{
+    $statement = $database->prepare('SELECT * FROM users WHERE id = :userId');
+
+    if (!$statement) {
+        die(var_dump($database->errorInfo()));
+    }
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $statement->execute();
+
+    $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+    return $user;
+}
+
+
+function getPostByPostId(PDO $database, int $id): array
 {
     $statement = $database->prepare('SELECT * FROM posts WHERE id = :id');
 

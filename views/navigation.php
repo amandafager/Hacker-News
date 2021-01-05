@@ -25,7 +25,7 @@
 
     <?php else : ?>
         <section class="log-status">
-            <a id="me" href="profile.php"><?= $_SESSION['user']['username']; ?> Profile</a>
+            <a id="me" href="profile.php?userId=<?= $_SESSION['user']['id']; ?>"><?= $_SESSION['user']['username']; ?> Profile</a>
             <a class="logout-link" href="/app/users/logout.php">Logout</a>
         </section>
     <?php endif; ?>

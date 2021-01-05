@@ -3,7 +3,7 @@
 
 <?php $postId = $_GET['postId']; ?>
 
-<?php $post = getPostsById($database, $postId); ?>
+<?php $post = getPostByPostId($database, $postId); ?>
 <?php $comments = getCommentsByPostId($database, $post['id']); ?>
 
 <main>
@@ -27,7 +27,7 @@
                             <?php endif; ?>
                         </button>
                     </form>
-                    <p>by <a href="profile.php"><?= $post['author']; ?></a></p>
+                    <p>by <a href="profile.php?userId=<?= $post['user_id']; ?>"><?= $post['author']; ?></a></p>
                 </div>
                 <p><?= $post['created_at']; ?></p>
             </div>

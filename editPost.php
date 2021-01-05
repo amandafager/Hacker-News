@@ -16,7 +16,7 @@
     <a href="posts.php?userId=<?= $_SESSION['user']['id']; ?>">Back</a>
 
     <?php if (isset($_SESSION['post'])) : ?>
-        <?php $post = getPostsById($database, $id); ?>
+        <?php $post = getPostByPostId($database, $id); ?>
 
         <section>
             <h2>Edit post</h2>

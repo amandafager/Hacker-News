@@ -17,9 +17,28 @@ if (isset($_POST['post-id'])) {
     if (!$statement) {
         die(var_dump($pdo->errorInfo()));
     }
-
     $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
     $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $statement->execute();
+
+
+    $deleteCommentsQuery = 'DELETE FROM comments WHERE on_post_id = :postId';
+    $statement = $database->prepare($deleteCommentsQuery);
+
+    if (!$statement) {
+        die(var_dump($pdo->errorInfo()));
+    }
+    $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
+    $statement->execute();
+
+
+    $deleteVotesQuery = 'DELETE FROM votes WHERE post_id = :postId';
+    $statement = $database->prepare($deleteVotesQuery);
+
+    if (!$statement) {
+        die(var_dump($pdo->errorInfo()));
+    }
+    $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
     $statement->execute();
 }
 
