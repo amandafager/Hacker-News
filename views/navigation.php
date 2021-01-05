@@ -26,7 +26,24 @@
     <?php else : ?>
         <section class="log-status">
             <a id="me" href="profile.php?userId=<?= $_SESSION['user']['id']; ?>"><?= $_SESSION['user']['username']; ?> Profile</a>
-            <a class="logout-link" href="/app/users/logout.php">Logout</a>
+            <a class="logout-link" href="#">Logout</a>
         </section>
+
+
+        <div class="modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <button class="closebtn" type="close"></button>
+                    <h4 class="modal-question"></h4>
+                    <div class="modal-btn-container">
+                        <button class="modal-btn modal-btn-no" type="submit">No</button>
+                        <form class="modal-form" action="" method="post">
+                            <input class="input" type="hidden" id="id" name="id" value=""></input>
+                            <button class="modal-btn modal-btn-yes" type="submit" value="Submit">Yes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     <?php endif; ?>
 </header>

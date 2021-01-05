@@ -53,10 +53,7 @@
                             <a class="edit-post" href="editPost.php?postId=<?= $post['id']; ?>">edit</a>
                         </li>
                         <li>
-                            <form action="app/posts/delete.php" method="post">
-                                <input type="hidden" id="post-id" name="post-id" value="<?= $post['id'] ?>"></input>
-                                <button class="delete-btn" type="submit" name="delete-post" value="Submit">delete</button>
-                            </form>
+                            <button class="delete-btn" type="submit" name="delete-post" value="<?= $post['id']; ?>">delete</button>
                         </li>
                     </ul>
                 </article>

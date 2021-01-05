@@ -15,19 +15,6 @@ menuLinks.forEach(function (menuLink) {
   menuLink.addEventListener("click", toggleHamburger);
 });
 
-//Logout
-
-const logout = document.querySelector(".logout-link");
-if (logout) {
-  logout.addEventListener("click", () => {
-    if (!confirm("Are you sure you want to logout?")) {
-      return false;
-    } else {
-      return true;
-    }
-  });
-}
-
 //remove loading of transition
 window.addEventListener("load", () => {
   document.body.classList.remove("loading");
@@ -60,5 +47,54 @@ if (back) {
   back.addEventListener("click", (e) => {
     e.preventDefault();
     window.history.back();
+  });
+}
+
+//Logout
+const body = document.querySelector("body");
+const modalBox = document.querySelector(".modal");
+const modalContent = document.querySelector(".modal-dialog .modal-content");
+const logout = document.querySelector(".logout-link");
+const noBtn = document.querySelector(".modal-btn-no");
+const closeBtn = document.querySelector(".closebtn");
+
+const modalQuestion = document.querySelector(".modal-question");
+const modalForm = document.querySelector(".modal-form");
+
+if (logout) {
+  logout.addEventListener("click", (e) => {
+    e.preventDefault();
+    modalBox.classList.toggle("show-modal");
+    modalContent.classList.toggle("show-modal-content");
+
+    modalQuestion.textContent = "Do you want to logout?";
+    modalForm.action = "/app/users/logout.php";
+  });
+
+  closeBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    modalBox.classList.toggle("show-modal");
+    modalContent.classList.toggle("show-modal-content");
+  });
+
+  noBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    modalBox.classList.toggle("show-modal");
+    modalContent.classList.toggle("show-modal-content");
+  });
+}
+
+const deletePost = document.querySelector(".delete-btn");
+const modalInput = document.querySelector(".modal-form .input");
+
+if (deletePost) {
+  deletePost.addEventListener("click", (e) => {
+    e.preventDefault();
+    modalQuestion.textContent = "Do you want to delete post?";
+    modalForm.action = "app/posts/delete.php";
+    let postId = deletePost.value;
+    modalInput.value = postId;
+    modalBox.classList.toggle("show-modal");
+    modalContent.classList.toggle("show-modal-content");
   });
 }

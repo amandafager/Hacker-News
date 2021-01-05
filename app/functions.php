@@ -84,6 +84,7 @@ function getUserProfile(PDO $database, int $userId): array
     $statement->execute();
 
     $user = $statement->fetch(PDO::FETCH_ASSOC);
+    unset($user['password']);
 
     return $user;
 }

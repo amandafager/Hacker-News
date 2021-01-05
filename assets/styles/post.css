@@ -27,6 +27,8 @@ form {
 
 .post-content {
   padding: 1rem;
+  width: 100%;
+  overflow-wrap: break-word;
 }
 
 .post-content h3 {
