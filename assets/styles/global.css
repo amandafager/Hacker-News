@@ -3,8 +3,28 @@
   margin: 0;
 }
 
+main {
+  padding-top: 50px;
+}
+
 @media screen and (min-width: 1400px) {
   main {
-    padding: 0rem 1rem 0rem 1rem;
+    padding: 50px 1rem 0rem 1rem;
   }
+}
+
+/*
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-group {
+  width: 100%;
+  height: 100%;
+}
+*/
+:root {
+  --main-orange: #ee6f2d;
 }

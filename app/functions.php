@@ -146,17 +146,6 @@ function isUpvoted(PDO $database, int $userId, int $postId): bool
 }
 
 
-
-function sessionInput()
-{
-    if (isset($_SESSION['input'])) {
-        echo $_SESSION['input'];
-        unset($_SESSION['input']);
-    }
-}
-
-
-
 function getCommentsByPostId(PDO $database, int $postId): array
 {
     $statement = $database->prepare('SELECT comments.id AS comment_id, on_post_id, by_user_id, comment, comments.created_at AS comment_created_at, users.id AS user_id_users, users.username AS author FROM comments INNER JOIN users ON users.id = comments.by_user_id WHERE on_post_id = :postId ORDER BY comment_created_at DESC');
@@ -171,6 +160,43 @@ function getCommentsByPostId(PDO $database, int $postId): array
     $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     return $comments;
+}
+
+
+
+function numberOfVotes(PDO $database, int $postId): string
+{
+    /*$statement = $database->prepare('SELECT count(id) FROM votes WHERE post_id = :postId');
+    if (!$statement) {
+        die(var_dump($database->errorInfo()));
+    }
+
+    $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
+    $statement->execute();
+
+    $count = $statement->fetch(PDO::FETCH_ASSOC);;
+
+    $votes = count($count);
+    return  $votes;*/
+
+    $statement = $database->prepare('SELECT * FROM posts WHERE id = :postId');
+
+    if (!$statement) {
+        die(var_dump($database->errorInfo()));
+    }
+
+    $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
+    $statement->execute();
+
+    $post = $statement->fetch(PDO::FETCH_ASSOC);;
+
+    $votes = $post['votes'];
+
+    if ($votes <= 1) {
+        return "$votes point";
+    } else {
+        return "$votes points";
+    }
 }
 
 

@@ -1,6 +1,10 @@
-    </div><!-- /container -->
+<script src="/assets/scripts/upvote.js"></script>
+<script src="/assets/scripts/profile.js"></script>
+<script src="/assets/scripts/app.js"></script>
 
-    <script src="/assets/scripts/app.js"></script>
-    </body>
 
-    </html>
+</div><!-- /container -->
+
+</body>
+
+</html>

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
 
+header('Content-Type: application/json');
+
 if (isset($_POST['vote'])) {
 
     $userId = $_SESSION['user']['id'];
@@ -30,6 +32,15 @@ if (isset($_POST['vote'])) {
         $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
         $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
         $statement->execute();
+
+        $numberOfVotes = numberOfVotes($database, $postId);
+        $buttonText = "Upvote";
+
+        $response = [
+            'numberOfVotes' => $numberOfVotes,
+            'buttonText' => $buttonText
+        ];
+        echo json_encode($response);
     } else { // If vote do not exist from user - add vote
 
         $query = 'UPDATE posts SET votes = votes + 1 WHERE id = :postId';
@@ -52,9 +63,13 @@ if (isset($_POST['vote'])) {
         $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
         $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
         $statement->execute();
+        $numberOfVotes = numberOfVotes($database, $postId);
+        $buttonText = "Unvote";
+
+        $response = [
+            'numberOfVotes' => $numberOfVotes,
+            'buttonText' => $buttonText
+        ];
+        echo json_encode($response);
     }
 }
-
-redirect($_SERVER['HTTP_REFERER'] . "#" . $postId);
-
-//redirect('/comments.php?postId=' . $postId . "#" . $commentId);

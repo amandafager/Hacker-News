@@ -84,17 +84,17 @@ if (logout) {
   });
 }
 
-const deletePost = document.querySelector(".delete-btn");
+const deletePostBtns = document.querySelectorAll(".delete-btn");
 const modalInput = document.querySelector(".modal-form .input");
 
-if (deletePost) {
-  deletePost.addEventListener("click", (e) => {
-    e.preventDefault();
+deletePostBtns.forEach((deletePostBtn) => {
+  deletePostBtn.addEventListener("click", () => {
+    console.log(deletePostBtn);
     modalQuestion.textContent = "Do you want to delete post?";
     modalForm.action = "app/posts/delete.php";
-    let postId = deletePost.value;
+    let postId = deletePostBtn.value;
     modalInput.value = postId;
     modalBox.classList.toggle("show-modal");
     modalContent.classList.toggle("show-modal-content");
   });
-}
+});

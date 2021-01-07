@@ -1,115 +1,9 @@
-.ham {
-  position: absolute;
-  z-index: 1000;
-  right: 15px;
-  width: 36px;
-  height: 36px;
-  border: none;
-  cursor: pointer;
-  background-color: transparent;
-  background-image: url("menu.SVG");
-  background-size: 60%;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-.ham:focus {
-  outline: none;
-}
-
-.show-close {
-  background-image: url("closeMenu.SVG");
-}
-
-.navbar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: rgb(255, 255, 255);
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  color: white;
-  transform: translateY(-100%);
-  transition: transform 0.2s ease;
-}
-
-.show-nav {
-  transform: translateY(0);
-}
-
-.navbar-nav {
-  height: 80%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  padding-left: 0rem;
-  justify-content: center;
-  align-items: center;
-}
-
-.nav-item {
-  margin: 2rem 0 2rem 0;
-}
-
-.loading .navbar {
-  transition: none;
-}
-
-header {
-  background-color: rgb(238, 238, 238);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  height: 50px;
-  padding: 0 1rem 0 1rem;
-}
-
-a {
-  color: black;
-}
-
-.log-status {
-  position: absolute;
-  right: 65px;
-}
-.log-status a:first-of-type {
-  text-decoration: none;
-}
-.log-status a:last-of-type {
-  padding-left: 1rem;
-}
-
-/*login*/
-
-form {
-  /*width: 100%;*/
-  /*max-width: 280px;*/
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-form:first-of-type {
-  /*padding-bottom: 1rem;*/
-}
-
-.form-group {
-  width: 100%;
-  max-width: 280px;
-  display: flex;
-  justify-content: space-between;
-  padding: 0.3rem 0rem 0.3rem 0rem;
-}
-
-.btn {
-  margin-top: 1rem;
-}
-
 /*Profile*/
 
 .pro-img-container {
   width: 200px;
   height: 200px;
+  border-radius: 50%;
   /*clip-path: circle(50% at 50% 50%);*/
   background-color: grey;
   z-index: 0;
@@ -118,5 +12,11 @@ form:first-of-type {
 .pro-img-container img {
   width: 100%;
   height: 100%;
+  border-radius: 50%;
   object-fit: cover;
+}
+
+textarea {
+  resize: none;
+  height: 100%;
 }

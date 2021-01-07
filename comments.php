@@ -17,7 +17,7 @@
         <article class="post" id="<?= $post['id']; ?>">
             <div class="top">
                 <div class="top-left">
-                    <form action="app/posts/votes.php" method="post">
+                    <form class="vote" action="app/posts/votes.php" method="post">
                         <input type="hidden" id="post-id" name="vote" value="<?= $post['id']; ?>"></input>
                         <button class="vote-btn" type="submit" value="Submit">
                             <?php if (isUpvoted($database, $_SESSION['user']['id'], $post['id'])) : ?>
@@ -56,16 +56,18 @@
             </ul>
         </article>
 
-        <section>
-            <form action="app/comments/store.php" method="post">
-                <div class="">
+        <section class="add-comment-wrapper">
+            <form action="app/comments/store.php" method="post" class="add-comment">
+                <div class="form-group">
                     <label for="comment"></label>
-                    <textarea class="form-control" type="text" name="comment" id="comment" placeholder="Add comment" required value=""></textarea>
-                    <input type="hidden" id="post-id" name="post-id" value="<?= $post['id']; ?>"></input>
+                    <textarea class="comment-text-input" type="text" name="comment" id="comment" placeholder="Add comment" required value=""></textarea>
                 </div>
-                <button type="submit" name="add-comment" class="btn btn-primary">Add comment</button>
+                <button type="submit" name="add-comment" class="add-comment-btn">Add comment</button>
+                <input type="hidden" id="post-id" name="post-id" value="<?= $post['id']; ?>"></input>
             </form>
         </section>
+
+
     <?php else : ?>
 
         <article class="post" id="<?= $post['id']; ?>">
@@ -96,12 +98,12 @@
         </article>
 
         <section class="add-comment">
-            <form action="login.php" method="post">
-                <div class="">
-                    <label for="comment"></label>
-                    <textarea class="form-control" type="text" name="comment" id="comment" placeholder="Add comment" required value=""></textarea>
-                    <input type="hidden" id="post-id" name="post-id" value="<?= $post['id']; ?>"></input>
+            <form action="login.php" method="post" class="add-comment">
+
+                <label for="comment"></label>
+                <textarea type="text" name="comment" id="comment" placeholder="Add comment" required value=""></textarea>
                 </div>
+                <input type="hidden" id="post-id" name="post-id" value="<?= $post['id']; ?>"></input>
                 <button type="sumbit" name="add-comment" class="btn btn-primary">Add comment</button>
             </form>
         </section>
@@ -109,6 +111,7 @@
 
 
     <section class="comments">
+        <h3>Comments</h3>
         <?php foreach ($comments as $comment) : ?>
             <article class="comment" id="<?= $comment['comment_id'] ?>">
                 <p>by
@@ -116,6 +119,7 @@
                 </p>
                 <p><?= $comment['comment_created_at']; ?> </p>
                 <p class="comment-text" data-id="<?= $comment['comment_id']; ?>"><?= $comment['comment']; ?> </p>
+
 
 
                 <?php if (isset($_SESSION['user'])) : ?>
@@ -136,12 +140,13 @@
                         </form>
 
                         <button class="edit-comment-btn" data-id="<?= $comment['comment_id']; ?>">Edit</button>
+                        <a href="reply.php?commentId=<?= $comment['comment_id']; ?>">reply</a>
                     <?php endif; ?>
                 <?php endif; ?>
             </article>
 
         <?php endforeach; ?>
     </section>
-
+    <div class="comments-bottom"></div>
 </main>
 <?php require __DIR__ . '/views/footer.php'; ?>

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
 
+header('Content-Type: application/json');
+
 $id = $_SESSION['user']['id'];
 
 if (isset($_FILES['profile-img'])) {
@@ -45,12 +47,11 @@ if (isset($_FILES['profile-img'])) {
                 $statement = $database->prepare('SELECT * FROM users WHERE id = :id');
                 $statement->bindParam(':id', $id, PDO::PARAM_INT);
                 $statement->execute();
+
+
                 $user = $statement->fetch(PDO::FETCH_ASSOC);
                 unset($user['password']);
                 $_SESSION['user'] = $user;
-                redirect('/profile.php');
-
-
                 redirect('/profile.php');
             } else {
                 $_SESSION['error'] = 'Your file is too big!';
@@ -72,7 +73,7 @@ if (isset($_POST['update-email'])) {
 
     if ($newEmail) {
 
-        $userCheckEmailQuery = 'SELECT * FROM users WHERE email = :email LIMIT 1';
+        $userCheckEmailQuery = 'SELECT email FROM users WHERE email = :email LIMIT 1';
 
         $statement = $database->prepare($userCheckEmailQuery);
 
@@ -100,6 +101,11 @@ if (isset($_POST['update-email'])) {
             $statement->bindParam(':email', $newEmail, PDO::PARAM_STR);
             $statement->bindParam(':id', $id, PDO::PARAM_INT);
             $statement->execute();
+
+            /*$response = [
+                'newEmail' => $newEmail
+            ];
+            echo json_encode($response);*/
         }
     }
 }
@@ -117,7 +123,13 @@ if (isset($_POST['biography'])) {
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
     }
+
+    $response = [
+        'biography' => $biography
+    ];
+    echo json_encode($response);
 }
+
 
 $statement = $database->prepare('SELECT * FROM users WHERE id = :id');
 $statement->bindParam(':id', $id, PDO::PARAM_INT);
@@ -126,4 +138,6 @@ $user = $statement->fetch(PDO::FETCH_ASSOC);
 
 unset($user['password']);
 $_SESSION['user'] = $user;
+
+
 redirect('/profile.php');

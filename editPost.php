@@ -13,7 +13,7 @@
         unset($_SESSION['message']);
     } ?>
 
-    <a href="posts.php?userId=<?= $_SESSION['user']['id']; ?>">Back</a>
+    <a href="index.php?userId=<?= $_SESSION['user']['id']; ?>">Back</a>
 
     <?php if (isset($_SESSION['post'])) : ?>
         <?php $post = getPostByPostId($database, $id); ?>
@@ -40,10 +40,7 @@
                 <button type="submit" name="edit-post" class="btn btn-primary">Save</button>
                 <!--<button type="submit" name="delete-post" class="btn btn-primary">Delete</button>-->
             </form>
-            <form action="app/posts/delete.php" method="post">
-                <input type="hidden" id="post-id" name="post-id" value="<?= $post['id'] ?>"></input>
-                <button type="submit" name="delete-post" value="Submit">Delete</button>
-            </form>
+            <button class="delete-btn" type="submit" name="delete-post" value="<?= $post['id']; ?>">delete</button>
         </section>
     <?php endif ?>
 </main>

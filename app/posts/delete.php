@@ -42,4 +42,4 @@ if (isset($_POST['id'])) {
     $statement->execute();
 }
 
-redirect('/posts.php?userId=' . $_SESSION['user']['id']);
+redirect('/index.php?userId=' . $_SESSION['user']['id']);
