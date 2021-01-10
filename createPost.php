@@ -13,8 +13,8 @@
 
 
     <?php if (isset($_SESSION['user'])) : ?>
-        <section>
-            <h2>Create new post</h2>
+        <section class="create-post">
+            <h1>Create new post</h1>
             <form action="/app/posts/store.php" method="post">
                 <div class="form-group">
                     <label for="title">Title</label>
@@ -28,10 +28,10 @@
 
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" type="text" name="description" id="description" placeholder="Description" required></textarea>
+                    <textarea class="form-control" type="text" name="description" id="description" placeholder="Description"></textarea>
                 </div>
 
-                <button type="submit" name="submit-post" class="btn btn-primary">submit</button>
+                <button type="submit" name="submit-post" class="btn btn-secondary submit-post-btn">submit</button>
             </form>
         </section>
     <?php else : ?>

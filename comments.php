@@ -9,144 +9,129 @@
 <main>
 
     <!--<a href="posts.php">Back</a>-->
-    <a class="go-back" href="">Back</a>
+    <section>
+        <a class="go-back" href="">Back</a>
+    </section>
 
-
-    <?php if (isset($_SESSION['user'])) : ?>
-
-        <article class="post" id="<?= $post['id']; ?>">
-            <div class="top">
-                <div class="top-left">
+    <article class="post" id="<?= $post['id']; ?>">
+        <div class="top">
+            <div class="top-left">
+                <?php if (isset($_SESSION['user'])) : ?>
                     <form class="vote" action="app/posts/votes.php" method="post">
                         <input type="hidden" id="post-id" name="vote" value="<?= $post['id']; ?>"></input>
-                        <button class="vote-btn" type="submit" value="Submit">
-                            <?php if (isUpvoted($database, $_SESSION['user']['id'], $post['id'])) : ?>
-                                <?= "Unvote"; ?>
-                            <?php else : ?>
-                                <?= "Upvote"; ?>
-                            <?php endif; ?>
-                        </button>
+                        <?php if (isUpvoted($database, $_SESSION['user']['id'], $post['id'])) : ?>
+                            <button style="background-color: var(--main-orange);" class=" vote-btn" type="submit" value="Submit" data-id="<?= $post['id']; ?>"></button>
+                        <?php else : ?>
+                            <button style="background-color: grey;" class="vote-btn" type="submit" value="Submit" data-id="<?= $post['id']; ?>"></button>
+                        <?php endif; ?>
                     </form>
-                    <p>by <a href="profile.php?userId=<?= $post['user_id']; ?>"><?= $post['author']; ?></a></p>
-                </div>
-                <p><?= $post['created_at']; ?></p>
-            </div>
-            <div class="post-content">
-                <a class="title" href="<?= $post['url']; ?>">
-                    <h3><?= $post['title']; ?></h3>
-                </a>
-                <p><?= $post['description']; ?></p>
-            </div>
-            <ul class="bottom">
-                <li>
-                    <p><?= $post['votes']; ?> points</p>
-                </li>
-                <li>
-                    <a class="" href="comments.php?postId=<?= $post['id']; ?>"><?= numberOfComments($database, $postId); ?></a>
-                </li>
-                <li>
-                    <a class="edit-post" href="editPost.php?postId=<?= $post['id']; ?>">edit</a>
-                </li>
-                <li>
-                    <form action="app/posts/delete.php" method="post">
-                        <input type="hidden" id="post-id" name="post-id" value="<?= $post['id'] ?>"></input>
-                        <button class="delete-btn" type="submit" name="delete-post" value="Submit">delete</button>
+                <?php else : ?>
+                    <form class="vote-offline" action="app/posts/votes.php" method="post">
+                        <button name="vote-offline" class="vote-btn-offline" style="background-color: grey;"></button>
                     </form>
-                </li>
-            </ul>
-        </article>
+                <?php endif; ?>
 
-        <section class="add-comment-wrapper">
-            <form action="app/comments/store.php" method="post" class="add-comment">
-                <div class="form-group">
-                    <label for="comment"></label>
-                    <textarea class="comment-text-input" type="text" name="comment" id="comment" placeholder="Add comment" required value=""></textarea>
-                </div>
-                <button type="submit" name="add-comment" class="add-comment-btn">Add comment</button>
-                <input type="hidden" id="post-id" name="post-id" value="<?= $post['id']; ?>"></input>
-            </form>
-        </section>
-
-
-    <?php else : ?>
-
-        <article class="post" id="<?= $post['id']; ?>">
-            <div class="top">
-                <div class="top-left">
-                    <form action="login.php" method="post">
-                        <input type="hidden" id="post-id" name="vote" value="<?= $post['id']; ?>"></input>
-                        <button class="vote-btn" type="submit" value="Submit">Upvote</button>
-                    </form>
-                    <p>by <a href="profile.php"><?= $post['author']; ?></a></p>
-                </div>
-                <p><?= $post['created_at']; ?></p>
+                <p>by <a href="profile.php?userId=<?= $post['user_id']; ?>"><?= $post['author']; ?></a></p>
             </div>
-            <div class="post-content">
-                <a class="title" href="<?= $post['url']; ?>">
-                    <h3><?= $post['title']; ?></h3>
-                </a>
-                <p><?= $post['description']; ?></p>
-            </div>
-            <ul class="bottom">
-                <li>
-                    <p><?= $post['votes']; ?> points</p>
-                </li>
-                <li>
-                    <a class="" href="comments.php?postId=<?= $post['id']; ?>"><?= numberOfComments($database, $postId); ?> </a>
-                </li>
-            </ul>
-        </article>
+            <p><?= $post['created_at']; ?></p>
+        </div>
+        <div class="post-content">
+            <a class="title" href="<?= $post['url']; ?>">
+                <h3><?= $post['title']; ?></h3>
+            </a>
+            <?php if (!empty($post['description'])) : ?>
+                <details>
+                    <summary><span class="open-details">View description</span><span class="close-details">Hide description</span></summary>
+                    <p><?= $post['description']; ?></p>
+                </details>
+            <?php endif; ?>
+        </div>
+        <ul class="bottom">
+            <li>
+                <p class="number-of-votes" data-id="<?= $post['id']; ?>"><?= numberOfVotes($database, $post['id']) ?> </p>
+            </li>
+            <li>
+                <a class="" href="comments.php?postId=<?= $post['id']; ?>"><?= numberOfComments($database, $post['id']); ?></a>
+            </li>
 
-        <section class="add-comment">
-            <form action="login.php" method="post" class="add-comment">
+            <?php if (isset($_SESSION['user'])) : ?>
+                <?php if ($post['user_id'] === $_SESSION['user']['id']) : ?>
 
+                    <li>
+                        <a class="edit-post" href="editPost.php?postId=<?= $post['id']; ?>">Edit</a>
+                    </li>
+                    <li>
+                        <button class="delete-btn delete-btn-on-post" type="submit" name="delete-post" value="<?= $post['id']; ?>">Delete</button>
+                    </li>
+
+                <?php endif; ?>
+            <?php endif; ?>
+        </ul>
+    </article>
+
+
+
+
+    <section class="add-comment-wrapper">
+        <form class="add-comment-form" action="app/comments/store.php" method="post">
+            <div class="form-group">
                 <label for="comment"></label>
-                <textarea type="text" name="comment" id="comment" placeholder="Add comment" required value=""></textarea>
-                </div>
-                <input type="hidden" id="post-id" name="post-id" value="<?= $post['id']; ?>"></input>
-                <button type="sumbit" name="add-comment" class="btn btn-primary">Add comment</button>
-            </form>
-        </section>
-    <?php endif; ?>
+                <textarea class="form-control" type="text" name="comment" id="comment" placeholder="Add comment" required rows="3"></textarea>
+            </div>
+            <button class="add-comment-btn btn btn-secondary" type="submit" name="add-comment">Add comment</button>
+            <input type="hidden" id="post-id" name="post-id" value="<?= $post['id']; ?>"></input>
+        </form>
+    </section>
 
 
     <section class="comments">
         <h3>Comments</h3>
         <?php foreach ($comments as $comment) : ?>
+
+
             <article class="comment" id="<?= $comment['comment_id'] ?>">
-                <p>by
-                    <a href="#"><?= $comment['author']; ?></a>
-                </p>
-                <p><?= $comment['comment_created_at']; ?> </p>
+                <div class="comment-top">
+                    <p>by
+                        <a href="#"><?= $comment['author']; ?></a>
+                    </p>
+                    <p><?= $comment['comment_created_at']; ?> </p>
+                </div>
                 <p class="comment-text" data-id="<?= $comment['comment_id']; ?>"><?= $comment['comment']; ?> </p>
-
-
-
                 <?php if (isset($_SESSION['user'])) : ?>
 
                     <?php if ($comment['by_user_id'] === $_SESSION['user']['id']) : ?>
 
-                        <form class="edit-comment" action="app/comments/update.php" method="post" data-id="<?= $comment['comment_id']; ?>">
-                            <label for="edit-comment"></label>
-                            <textarea class="form-control" type="text" name="edit-comment" id="edit-comment" placeholder="" required value=""> <?= $comment['comment']; ?> </textarea>
+
+                        <form class="edit-comment-form" action="app/comments/update.php" method="post" data-id="<?= $comment['comment_id']; ?>">
+                            <div class="input-group mb-3">
+                                <textarea type="text" name="edit-comment" class="form-control" rows="3" required><?= $comment['comment']; ?> </textarea>
+                                <button class="save-edit-btn btn btn-outline-secondary" type="submit" name="edit" id="button-addon2" value="Submit">Save</button>
+                            </div>
                             <input type="hidden" id="comment-id" name="comment-id" value="<?= $comment['comment_id'] ?>"></input>
                             <input type="hidden" id="post-id" name="post-id" value="<?= $post['id']; ?>"></input>
-                            <button type="submit" name="edit" value="Submit">Save</button>
                         </form>
 
-                        <form action="app/comments/delete.php" method="post">
-                            <input type="hidden" id="comment-id" name="comment-id" value="<?= $comment['comment_id'] ?>"></input>
-                            <button type="submit" name="delete-comment" value="Submit">Delete</button>
-                        </form>
+                        <ul class="comment-bottom">
+                            <li>
+                                <a href="reply.php?commentId=<?= $comment['comment_id']; ?>">Reply</a>
+                            </li>
+                            <li>
+                                <button class="edit-comment-btn" data-id="<?= $comment['comment_id']; ?>">Edit</button>
+                            </li>
+                            <li>
+                                <form action="app/comments/delete.php" method="post">
+                                    <input type="hidden" id="comment-id" name="comment-id" value="<?= $comment['comment_id'] ?>"></input>
+                                    <button class="delete-btn delete-btn-on-post" type="submit" name="delete-comment" value="Submit">Delete</button>
+                                </form>
+                            </li>
+                        </ul>
 
-                        <button class="edit-comment-btn" data-id="<?= $comment['comment_id']; ?>">Edit</button>
-                        <a href="reply.php?commentId=<?= $comment['comment_id']; ?>">reply</a>
                     <?php endif; ?>
                 <?php endif; ?>
             </article>
 
         <?php endforeach; ?>
     </section>
-    <div class="comments-bottom"></div>
+
 </main>
 <?php require __DIR__ . '/views/footer.php'; ?>

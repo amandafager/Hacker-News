@@ -21,7 +21,7 @@
             <form action="app/users/login.php" method="post">
                 <div class="form-group">
                     <label for="current-email">Email</label>
-                    <input class="form-control save" type="current-email" name="current-email" id="current-email" placeholder="Email" value="" required>
+                    <input class="form-control save" type="current-email" name="current-email" id="current-email" placeholder="you@example.com" value="" required>
                 </div><!-- /form-group -->
 
                 <div class="form-group">
@@ -29,9 +29,10 @@
                     <input class="form-control" type="password" name="current-password" id="current-password" placeholder="Password" required>
                 </div><!-- /form-group -->
 
-                <button type="submit" name="submit" class="btn btn-secondary">Login</button>
+                <button type="submit" name="submit" class="btn btn-secondary log-btn">Login</button>
             </form>
-            <a href="#">Forgot your password?</a>
+
+            <a href="#"><small class="text-muted">Forgot your Password?</small></a>
         </article>
 
 
@@ -40,12 +41,12 @@
 
             <form action="app/users/register.php" method="post">
                 <div class="form-group">
-                    <label for="new-username">Username</label>
+                    <label for="new-username ">Username</label>
                     <input class="form-control save" type="new-username" name="new-username" id="new-username" placeholder="Username" value="" required>
                 </div><!-- /form-group -->
                 <div class="form-group">
                     <label for="new-email">Email</label>
-                    <input class="form-control save" type="new-email" name="new-email" id="new-email" placeholder="Email" value="" required>
+                    <input class="form-control save" type="new-email" name="new-email" id="new-email" placeholder="you@example.com" value="" required>
                 </div><!-- /form-group -->
 
                 <div class="form-group">
@@ -54,16 +55,15 @@
                 </div><!-- /form-group -->
 
                 <div class="form-group">
-                    <label for="new-password-2">Password</label>
-                    <input class="form-control" type="password" name="new-password-2" id="new-password-2" placeholder="Confirm Password" required>
+                    <label for="new-password-2">Confirm password</label>
+                    <input class="form-control" type="password" name="new-password-2" id="new-password-2" placeholder="Confirm password" required>
                     <!--<small class="form-text text-muted">Please provide a password (passphrase).</small>-->
                 </div><!-- /form-group -->
 
-                <button type="submit" name="submit" class="btn btn-secondary">Create Account</button>
+                <button type="submit" name="submit" class="btn btn-secondary log-btn">Create Account</button>
             </form>
         </article>
     </div>
-
 
 </main>
 <?php require __DIR__ . '/views/footer.php'; ?>

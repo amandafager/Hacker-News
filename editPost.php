@@ -13,13 +13,16 @@
         unset($_SESSION['message']);
     } ?>
 
-    <a href="index.php?userId=<?= $_SESSION['user']['id']; ?>">Back</a>
+    <section>
+        <a href="index.php?userId=<?= $_SESSION['user']['id']; ?>">Back</a>
+    </section>
+
 
     <?php if (isset($_SESSION['post'])) : ?>
         <?php $post = getPostByPostId($database, $id); ?>
 
-        <section>
-            <h2>Edit post</h2>
+        <section class="edit-post">
+            <h1>Edit post</h1>
 
             <form action="/app/posts/update.php" method="post">
                 <div class="form-group">
@@ -37,10 +40,11 @@
                     <textarea class="form-control" type="text" name="edit-description" id="edit-description" placeholder="Description" value=""><?= $post['description']; ?></textarea>
                 </div>
 
-                <button type="submit" name="edit-post" class="btn btn-primary">Save</button>
-                <!--<button type="submit" name="delete-post" class="btn btn-primary">Delete</button>-->
+                <button class="btn btn-secondary edit-post-save-btn" type="submit" name="edit-post">Save</button>
             </form>
-            <button class="delete-btn" type="submit" name="delete-post" value="<?= $post['id']; ?>">delete</button>
+
+            <button class="delete-btn btn btn-danger edit-post-delete-btn" type="submit" name="delete-post" value="<?= $post['id']; ?>">delete</button>
+
         </section>
     <?php endif ?>
 </main>

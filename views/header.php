@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/assets/styles/login.css">
     <link rel="stylesheet" href="/assets/styles/confirmBox.css">
     <link rel="stylesheet" href="assets/styles/post.css">
+    <link rel="stylesheet" href="assets/styles/comments.css">
 </head>
 
 <body class="loading">

@@ -1,10 +1,13 @@
 /*Posts user submits*/
 
 .post {
-  background-color: rgb(238, 238, 238);
-  margin: 0.7rem 0 0.7rem 0;
-
-  /*line-height: 2rem;*/
+  width: 100%;
+  border-bottom: 1px solid grey;
+  padding: 1rem 1rem 0rem 1rem;
+}
+.post:first-of-type {
+  border-top: 1px solid grey;
+  margin-top: 1rem;
 }
 
 .top {
@@ -12,7 +15,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 0.5rem 0 0.5rem;
 }
 
 .top-left {
@@ -21,108 +23,124 @@
 }
 
 .top-left p,
-.vote {
-  padding-right: 0.7rem;
+.vote,
+.vote-offline {
+  padding-right: 0.5rem;
+}
+
+.vote,
+.vote-offline {
+  align-self: start;
+}
+
+.vote-btn,
+.vote-btn-offline {
+  width: 20px;
+  height: 17px;
+  border: 0;
+  outline: none;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.vote-btn:focus {
+  outline: none;
+  border: 0;
 }
 
 .post-content {
-  padding: 1rem;
   width: 100%;
   overflow-wrap: break-word;
 }
 
 .post-content h3 {
   padding-bottom: 0.7rem;
+  line-height: 2rem;
 }
 
 .bottom {
+  height: 100%;
   display: flex;
-  padding: 0 0 0.5rem 1rem;
+  padding-left: 0;
   list-style: none;
+  margin-bottom: 0;
 }
 
 .bottom li {
   padding-right: 0.5rem;
 }
 
-.delete-btn {
+.delete-btn-on-post {
   border: none;
-  text-decoration: underline;
+  background-color: transparent;
   color: rgb(202, 37, 18);
   padding: 0;
 }
 
-.comment {
-  background-color: rgb(238, 238, 238);
-  margin: 0.7rem 0 0.7rem 0;
-  padding: 1rem;
+.delete-btn-on-post:focus,
+.delete-btn-on-post:active,
+.delete-btn-on-post:hover {
+  outline: none;
+  color: rgb(159, 32, 18);
 }
 
-.edit-comment {
+/*The read more 'button'. When you click on it it will show full article*/
+details {
+  cursor: pointer;
+  font-weight: bold;
+  padding-bottom: 0.5rem;
+  list-style-type: none;
+}
+
+details p {
+  font-weight: normal;
+  margin-bottom: 0;
+}
+
+/*When the Show Full Article not is open the 'hide Article' is hidden*/
+.close-details {
   display: none;
 }
 
-.show-edit {
-  display: flex;
-}
-
-.comment-text {
-  display: flex;
-}
-
-.hide-text {
+/*Hides the 'Show Full Article' text when it its open*/
+details[open] .open-details {
   display: none;
 }
 
-.add-comment {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.5rem 1rem 0.5rem 1rem;
+/*Now the 'Hide Article' shows up*/
+details[open] .close-details {
+  display: unset;
 }
 
-.comment-text-input {
-  width: 100%;
-  height: 100px;
+details[open] summary {
+  margin-bottom: 0.2rem;
 }
 
-.add-comment-btn {
-  align-self: flex-end;
-}
-
-.add-comment-wrapper {
-  bottom: 0px;
-  width: 100%;
-  background-color: white;
-}
-
-.comments-bottom {
-  height: 120px;
-  width: 100%;
-}
-
-.triangle-up {
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 20px solid #555;
-}
-
-.triangle-up:hover {
-  border-bottom: 20px solid rgb(0, 0, 0);
-}
-.triangle-up:focus {
-  border-bottom: 20px solid rgb(0, 0, 0);
-}
-
-.like-btn {
-  border: 0;
+summary {
+  /*transition: 0.5s ease;*/
   outline: none;
 }
 
-.like-btn:focus {
-  outline: none;
-  border: 0;
+/*
+summary::marker {
+  display: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}*/
+
+/*create post/edit post*/
+.create-post,
+.edit-post {
+  max-width: 600px;
+}
+
+.edit-post-delete-btn,
+.edit-post-save-btn,
+.submit-post-btn {
+  width: 130px;
+}
+
+.edit-post-delete-btn {
+  margin-top: 0.5rem;
 }

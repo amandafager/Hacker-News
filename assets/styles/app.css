@@ -4,9 +4,8 @@
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  /*clip-path: circle(50% at 50% 50%);*/
-  background-color: grey;
-  z-index: 0;
+  background-color: #dcdcdc;
+  margin-bottom: 1.5rem;
 }
 
 .pro-img-container img {
@@ -16,7 +15,34 @@
   object-fit: cover;
 }
 
-textarea {
-  resize: none;
-  height: 100%;
+.user-profile {
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-profile h1 {
+  margin-bottom: 2rem;
+}
+
+.user-profile p {
+  margin-bottom: 0;
+}
+
+.update-profile-btn {
+  width: 100%;
+}
+.profile-list {
+  width: 100%;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.profile-list li {
+  padding: 0.5rem;
 }

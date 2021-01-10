@@ -1,18 +1,19 @@
 header {
   background-color: var(--main-orange);
   display: flex;
-  flex-direction: row;
+  justify-content: center;
   align-items: center;
   height: 50px;
   width: 100%;
   padding: 0 1rem 0 1rem;
   position: fixed;
+  z-index: 100;
 }
 
 .ham {
   position: absolute;
-  z-index: 1000;
-  right: 15px;
+  z-index: 100;
+  left: 15px;
   width: 36px;
   height: 36px;
   border: none;
@@ -35,7 +36,6 @@ header {
   position: absolute;
   top: 0;
   left: 0;
-  background: rgb(255, 255, 255);
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -51,15 +51,16 @@ header {
 .navbar-nav {
   height: 100%;
   width: 100%;
+  /*padding: 4rem 0 0 2rem;*/
+
   display: flex;
   flex-direction: column;
-  padding-left: 0rem;
   justify-content: center;
   align-items: center;
 }
 
 .nav-item {
-  margin: 2rem 0 2rem 0;
+  margin: 1rem 0 1rem 0;
 }
 
 .loading .navbar {

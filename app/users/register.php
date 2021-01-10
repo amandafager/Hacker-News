@@ -67,7 +67,7 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
     if (!$user) {
 
         $hash = password_hash($passphrase1, PASSWORD_DEFAULT);
-        $imgSrc = "profile.jpeg";
+        $imgSrc = "profile.svg";
         $biography = "";
         $query = 'INSERT INTO users (id, username, email, password, created_at, img_src, biography) VALUES (:id, :name, :email, :password, :created, :imgSrc, :biography)';
         $statement = $database->prepare($query);
@@ -91,7 +91,7 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
         $user = $statement->fetch(PDO::FETCH_ASSOC);
         unset($user['password']);
         $_SESSION['user'] = $user;
-        $_SESSION['message'] = 'You have succcssfully created an account and are now logged in. Update your profile!';
+        $_SESSION['message'] = "Welcome " . $_SESSION['user']['username'] . " You have succcssfully created an account and are now logged in. Update your profile!";
     }
 }
 redirect('/profile.php?userId=' . $_SESSION['user']['id']);

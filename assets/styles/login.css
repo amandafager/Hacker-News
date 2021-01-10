@@ -8,7 +8,7 @@
 
 .form-group {
   width: 100%;
-  padding: 0.5rem 0rem 0.5rem 0rem;
+  padding: 0.3rem 0rem 0.3rem 0rem;
 }
 
 .form-group label {
@@ -19,53 +19,16 @@
   width: 100%;
 }
 
-/*
-.form-control:focus {
-  outline: none;
-  box-shadow: 0 0 0 0.2rem #ee702d93;
-  border-color: var(--main-orange);
-}*/
-/*
-.form-control:not(:empty) {
-  background-color: thistle;
-}*/
-
 .log {
   padding: 1rem;
   width: 100%;
   max-width: 400px;
 }
 
-.btn-secondary {
-  margin-top: 1rem;
+.log:first-of-type {
+  margin-bottom: 2rem;
+}
+
+.log-btn {
   width: 100%;
 }
-
-/*
-.btn-primary {
-  margin-top: 1rem;
-  width: 100%;
-  background-color: var(--main-orange);
-  border-color: var(--main-orange);
-}
-
-.btn-primary:focus {
-  box-shadow: 0 0 0 0.2rem #ee702d93;
-}
-
-.btn-primary:active {
-  box-shadow: 0 0 0 0.2rem #ee702d93;
-}
-
-.btn-primary:hover {
-  background-color: #d56224;
-  border-color: var(--main-orange);
-}
-
-.btn-primary:visited {
-  box-shadow: 0 0 0 0.2rem #ee702d93;
-}
-*/
-/*
-
-*/

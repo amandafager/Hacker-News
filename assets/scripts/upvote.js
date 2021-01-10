@@ -15,7 +15,13 @@ forms.forEach((form) => {
       .then((response) => response.json())
       .then((json) => {
         const voteBtn = event.target.querySelector(".vote-btn");
-        voteBtn.textContent = json.buttonText;
+        const buttonStatus = json.buttonText;
+
+        if (buttonStatus === "Upvote") {
+          voteBtn.style.backgroundColor = "grey";
+        } else {
+          voteBtn.style.backgroundColor = "var(--main-orange)";
+        }
 
         const voteNumbers = document.querySelectorAll(".number-of-votes");
         voteNumbers.forEach((voteNumber) => {

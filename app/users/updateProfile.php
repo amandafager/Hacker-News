@@ -30,7 +30,7 @@ if (isset($_FILES['profile-img'])) {
                 $currentImg = $_SESSION['user']['img_src'];
 
                 if (file_exists(__DIR__ . '/uploads/' . $currentImg)) {
-                    if ($currentImg !== 'profile.jpeg')
+                    if ($currentImg !== 'profile.svg')
                         unlink(__DIR__ . '/uploads/' . $currentImg);
                 }
 
@@ -52,22 +52,38 @@ if (isset($_FILES['profile-img'])) {
                 $user = $statement->fetch(PDO::FETCH_ASSOC);
                 unset($user['password']);
                 $_SESSION['user'] = $user;
-                redirect('/profile.php');
+                //redirect('/profile.php');
+                redirect('/profile.php?userId=' . $_SESSION['user']['id']);
             } else {
                 $_SESSION['error'] = 'Your file is too big!';
-                redirect('/profile.php');
+                //redirect('/profile.php');
+                redirect('/profile.php?userId=' . $_SESSION['user']['id']);
             }
         } else {
             $_SESSION['error'] = 'There was an error on your uploaded file.';
-            redirect('/profile.php');
+            //redirect('/profile.php');
+            redirect('/profile.php?userId=' . $_SESSION['user']['id']);
         }
     } else {
         $_SESSION['error'] = 'The uploaded file type is not allowed.';
-        redirect('/profile.php');
+        //redirect('/profile.php');
+        redirect('/profile.php?userId=' . $_SESSION['user']['id']);
     }
 }
 
-if (isset($_POST['update-email'])) {
+
+if (isset($_POST['update-profile'])) {
+
+
+    $biography = sanitizeText($_POST['biography']);
+
+    if ($biography) {
+        $updateUserBio = 'UPDATE users SET biography = :biography WHERE id = :id';
+        $statement = $database->prepare($updateUserBio);
+        $statement->bindParam(':biography', $biography, PDO::PARAM_STR);
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        $statement->execute();
+    }
 
     $newEmail = sanitizeEmail($_POST['update-email']);
 
@@ -87,11 +103,13 @@ if (isset($_POST['update-email'])) {
 
         if (!validateEmail($newEmail)) {
             $_SESSION['error'] = 'The email address is not a valid email address!';
-            redirect('/profile.php');
+            //redirect('/profile.php');
+            redirect('/profile.php?userId=' . $_SESSION['user']['id']);
         }
-        if ($user['email'] === $newEmail) {
+        if ($user['email'] === $newEmail && !$newEmail === $_SESSION['user']['email']) {
             $_SESSION['error'] = 'Email already exists';
-            redirect('/profile.php');
+            redirect('/profile.php?userId=' . $_SESSION['user']['id']);
+            // redirect('/profile.php');
         }
 
         if (validateEmail($newEmail) && $user['email'] !== $newEmail) {
@@ -101,33 +119,8 @@ if (isset($_POST['update-email'])) {
             $statement->bindParam(':email', $newEmail, PDO::PARAM_STR);
             $statement->bindParam(':id', $id, PDO::PARAM_INT);
             $statement->execute();
-
-            /*$response = [
-                'newEmail' => $newEmail
-            ];
-            echo json_encode($response);*/
         }
     }
-}
-
-
-if (isset($_POST['biography'])) {
-
-
-    $biography = sanitizeText($_POST['biography']);
-
-    if ($biography) {
-        $updateUserBio = 'UPDATE users SET biography = :biography WHERE id = :id';
-        $statement = $database->prepare($updateUserBio);
-        $statement->bindParam(':biography', $biography, PDO::PARAM_STR);
-        $statement->bindParam(':id', $id, PDO::PARAM_INT);
-        $statement->execute();
-    }
-
-    $response = [
-        'biography' => $biography
-    ];
-    echo json_encode($response);
 }
 
 
@@ -139,5 +132,4 @@ $user = $statement->fetch(PDO::FETCH_ASSOC);
 unset($user['password']);
 $_SESSION['user'] = $user;
 
-
-redirect('/profile.php');
+redirect('/profile.php?userId=' . $_SESSION['user']['id']);

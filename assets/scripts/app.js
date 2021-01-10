@@ -21,7 +21,7 @@ window.addEventListener("load", () => {
 });
 
 const editCommentBtns = document.querySelectorAll(".edit-comment-btn");
-const editForms = document.querySelectorAll(".edit-comment");
+const editForms = document.querySelectorAll(".edit-comment-form");
 const comments = document.querySelectorAll(".comment-text");
 
 editCommentBtns.forEach((editCommentBtn) => {
@@ -61,26 +61,28 @@ const closeBtn = document.querySelector(".closebtn");
 const modalQuestion = document.querySelector(".modal-question");
 const modalForm = document.querySelector(".modal-form");
 
+function toggleModal() {
+  modalBox.classList.toggle("show-modal");
+  modalContent.classList.toggle("show-modal-content");
+  /*body.classList.toggle("body-modal-open");*/
+}
+
 if (logout) {
   logout.addEventListener("click", (e) => {
     e.preventDefault();
-    modalBox.classList.toggle("show-modal");
-    modalContent.classList.toggle("show-modal-content");
-
-    modalQuestion.textContent = "Do you want to logout?";
+    toggleModal();
+    modalQuestion.textContent = "Logout?";
     modalForm.action = "/app/users/logout.php";
   });
 
   closeBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    modalBox.classList.toggle("show-modal");
-    modalContent.classList.toggle("show-modal-content");
+    toggleModal();
   });
 
   noBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    modalBox.classList.toggle("show-modal");
-    modalContent.classList.toggle("show-modal-content");
+    toggleModal();
   });
 }
 
@@ -90,11 +92,10 @@ const modalInput = document.querySelector(".modal-form .input");
 deletePostBtns.forEach((deletePostBtn) => {
   deletePostBtn.addEventListener("click", () => {
     console.log(deletePostBtn);
-    modalQuestion.textContent = "Do you want to delete post?";
+    modalQuestion.textContent = "Delete your post?";
     modalForm.action = "app/posts/delete.php";
     let postId = deletePostBtn.value;
     modalInput.value = postId;
-    modalBox.classList.toggle("show-modal");
-    modalContent.classList.toggle("show-modal-content");
+    toggleModal();
   });
 });

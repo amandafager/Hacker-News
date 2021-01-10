@@ -78,6 +78,7 @@
   border: none;
   width: 30px;
   height: 30px;
+  border-radius: 50%;
   background-color: transparent;
   background-image: url("closeMenu.SVG");
   background-repeat: no-repeat;
@@ -87,10 +88,11 @@
 }
 
 .closebtn:hover,
-.closebtn:focus {
-  background-color: rgb(215, 84, 84);
-  text-decoration: none;
-  cursor: pointer;
+.closebtn:focus,
+.closebtn:active {
+  background-color: var(--main-orange);
+  border: hidden;
+  outline: none;
 }
 
 .modal-question {
@@ -102,7 +104,7 @@
 .modal-btn-container {
   display: flex;
   justify-content: center;
-  padding: 2rem 0rem 2rem 0rem;
+  padding: 1rem 0rem 2rem 0rem;
 }
 
 .modal-btn-container form {
@@ -110,5 +112,6 @@
 }
 
 .modal-btn {
-  margin: 0 1rem 0 1rem;
+  width: 70px;
+  margin: 0 0.6rem 0 0.6rem;
 }
