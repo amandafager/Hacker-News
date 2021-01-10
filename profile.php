@@ -17,16 +17,19 @@
     } ?>
 
 
+
+
+
     <?php if (isset($_SESSION['user']) && $_SESSION['user']['id'] === $userId) : ?>
+
         <section class="user-profile">
             <h1><?= $_SESSION['user']['username']; ?></h1>
             <div class="pro-img-container">
                 <img src="/app/users/uploads/<?= $_SESSION['user']['img_src']; ?>" alt="profile image">
             </div>
-            <p>Created: <?= $_SESSION['user']['created_at']; ?> </p>
+            <p>Created: <?= formatDate($_SESSION['user']['created_at']); ?> </p>
 
             <section class="update">
-
                 <form class="form-img" action="app/users/updateProfile.php" method="post" enctype="multipart/form-data">
 
                     <div class="form-group">
@@ -71,7 +74,7 @@
                 <img src="/app/users/uploads/<?= $user['img_src']; ?>" alt="profile image">
             </div>
             <div>
-                <p class="mb-3"> <strong> Created: </strong> <br> <?= $user['created_at']; ?> </p>
+                <p class="mb-3"> <strong> Created: </strong> <br> <?= formatDate($user['created_at']); ?> </p>
                 <p> <strong>Biography: </strong> <br> <?= $user['biography']; ?></p>
             </div>
             <ul class="profile-list">

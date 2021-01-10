@@ -222,3 +222,34 @@ function numberOfComments(PDO $database, int $postId): string
         return $text;
     }
 }
+
+
+function formatDate(string $date): string
+{
+
+    $saved_time = $date;
+
+    $formated_saved_time = new DateTime($saved_time);
+    $current_time = new DateTime();
+    $interval = $current_time->diff($formated_saved_time);
+
+    if (!empty($interval->format('%a'))) {
+        $time_difference = $interval->format('%a days ago');
+        return $time_difference;
+    } elseif ($formated_saved_time->format('d') != $current_time->format('d')) {
+        $time_difference = "yesterday";
+        return $time_difference;
+    } elseif (!empty($interval->format('%h'))) {
+        $time_difference = $interval->format('%h hr, %i min ago');
+        return $time_difference;
+    } elseif (!empty($interval->format('%i'))) {
+        $time_difference = $interval->format('%i min ago');
+        return $time_difference;
+    } elseif (!empty($interval->format('%s'))) {
+        $time_difference = $interval->format('%s sec ago');
+        return $time_difference;
+    } else {
+        $time_difference = "Now";
+        return $time_difference;
+    }
+}

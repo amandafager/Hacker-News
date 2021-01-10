@@ -13,7 +13,7 @@ if (isset($_SESSION['user'])) {
         $postId = filter_var($_POST['post-id'], FILTER_SANITIZE_NUMBER_INT);
         $userId = $_SESSION['user']['id'];
         $comment = sanitizeText($_POST['comment']);
-        $created = date('Y-m-d h:m:s');
+        $created = strftime('%Y-%m-%d %H:%M:%S');
 
         $createCommentQuery = 'INSERT INTO comments (id, on_post_id, by_user_id, comment, created_at) VALUES (:id, :postId, :userId, :comment, :created)';
         $statement = $database->prepare($createCommentQuery);

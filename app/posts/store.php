@@ -13,7 +13,7 @@ if (isset($_POST['submit-post'])) {
     $description = sanitizeText($_POST['description']);
     $userId = $_SESSION['user']['id'];
     $author = $_SESSION['user']['username'];
-    $created = date('Y-m-d h:m:s');
+    $created = strftime('%Y-%m-%d %H:%M:%S');
 
     if (!validateUrl($url)) {
         $_SESSION['error'] = 'The' . $url . 'is not valid!';

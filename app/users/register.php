@@ -13,7 +13,7 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
     $email = sanitizeEmail($_POST['new-email']);
     $passphrase1 = $_POST['new-password-1'];
     $passphrase2 = $_POST['new-password-2'];
-    $created =  date('Y-m-d h:m:s');
+
 
     if (empty($name)) {
         $_SESSION['error'] = 'Username is required!';
@@ -67,8 +67,11 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
     if (!$user) {
 
         $hash = password_hash($passphrase1, PASSWORD_DEFAULT);
+        //$created =  date('Y-m-d h:m:s');
+        $created = strftime('%Y-%m-%d %H:%M:%S');
         $imgSrc = "profile.svg";
         $biography = "";
+
         $query = 'INSERT INTO users (id, username, email, password, created_at, img_src, biography) VALUES (:id, :name, :email, :password, :created, :imgSrc, :biography)';
         $statement = $database->prepare($query);
 

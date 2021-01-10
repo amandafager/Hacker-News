@@ -5,14 +5,6 @@
 
 <main>
 
-
-
-
-
-
-
-
-
     <?php if (isset($_GET['top'])) : ?>
         <?php $orderBy = 'votes'; ?>
         <?php $posts = getPostsOrderBy($database, $orderBy); ?>
@@ -81,7 +73,7 @@
                     <p>by <a href="profile.php?userId=<?= $post['user_id']; ?>"><?= $post['author']; ?></a></p>
 
                 </div>
-                <p><?= $post['created_at']; ?></p>
+                <p><?= formatDate($post['created_at']); ?></p>
             </div>
             <div class="post-content">
                 <a class="title" href="<?= $post['url']; ?>">

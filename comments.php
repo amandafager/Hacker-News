@@ -33,7 +33,7 @@
 
                 <p>by <a href="profile.php?userId=<?= $post['user_id']; ?>"><?= $post['author']; ?></a></p>
             </div>
-            <p><?= $post['created_at']; ?></p>
+            <p><?= formatDate($post['created_at']); ?></p>
         </div>
         <div class="post-content">
             <a class="title" href="<?= $post['url']; ?>">
@@ -91,7 +91,7 @@
             <article class="comment" id="<?= $comment['comment_id'] ?>">
                 <div class="comment-top">
                     <p>by <a href="profile.php?userId=<?= $comment['by_user_id']; ?>"><?= $comment['author']; ?></a></p>
-                    <p><?= $comment['comment_created_at']; ?> </p>
+                    <p><?= formatDate($comment['comment_created_at']); ?> </p>
                 </div>
                 <p class="comment-text" data-id="<?= $comment['comment_id']; ?>"><?= $comment['comment']; ?> </p>
                 <?php if (isset($_SESSION['user'])) : ?>
