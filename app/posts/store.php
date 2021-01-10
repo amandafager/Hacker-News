@@ -6,7 +6,6 @@ require __DIR__ . '/../autoload.php';
 
 // In this file we store/insert new posts in the database.
 
-
 if (isset($_POST['submit-post'])) {
 
     $title = sanitizeString($_POST['title']);
@@ -18,7 +17,7 @@ if (isset($_POST['submit-post'])) {
 
     if (!validateUrl($url)) {
         $_SESSION['error'] = 'The' . $url . 'is not valid!';
-        redirect('/editPost.php');
+        redirect('/createPost.php');
     } else {
         $createPostQuery = 'INSERT INTO posts (id, user_id, author, title, url, description, created_at) VALUES (:id, :userId, :author, :title, :url, :description, :created)';
         $statement = $database->prepare($createPostQuery);
@@ -33,7 +32,8 @@ if (isset($_POST['submit-post'])) {
         $statement->bindParam(':description', $description, PDO::PARAM_STR);
         $statement->bindParam(':created', $created, PDO::PARAM_STR);
         $statement->execute();
+        $_SESSION['success'] = "Your post is submited.";
     }
 }
 
-redirect('/userPosts.php?userId=' . $_SESSION['user']['id']);
+redirect('/index.php?userId=' . $_SESSION['user']['id'] . '&name=' . $_SESSION['user']['username']);

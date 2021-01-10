@@ -27,11 +27,9 @@ if (isset($_POST['edit-post'])) {
         $statement->bindParam(':description', $description, PDO::PARAM_STR);
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
-
         $statement->execute();
+        $_SESSION['success'] = "Your post is know up to date.";
     }
 }
 
-//redirect('/userPosts.php?userId=' . $_SESSION['user']['id']);
-
-redirect($_SERVER['HTTP_REFERER']);
+redirect('/index.php?userId=' . $_SESSION['user']['id'] . '&name=' . $_SESSION['user']['username']);

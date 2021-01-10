@@ -88,12 +88,9 @@
         <h3>Comments</h3>
         <?php foreach ($comments as $comment) : ?>
 
-
             <article class="comment" id="<?= $comment['comment_id'] ?>">
                 <div class="comment-top">
-                    <p>by
-                        <a href="#"><?= $comment['author']; ?></a>
-                    </p>
+                    <p>by <a href="profile.php?userId=<?= $comment['by_user_id']; ?>"><?= $comment['author']; ?></a></p>
                     <p><?= $comment['comment_created_at']; ?> </p>
                 </div>
                 <p class="comment-text" data-id="<?= $comment['comment_id']; ?>"><?= $comment['comment']; ?> </p>

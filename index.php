@@ -6,42 +6,54 @@
 <main>
 
 
+
+
+
+
+
+
+
+    <?php if (isset($_GET['top'])) : ?>
+        <?php $orderBy = 'votes'; ?>
+        <?php $posts = getPostsOrderBy($database, $orderBy); ?>
+        <h1>Top posts</h1>
+    <?php else : ?>
+        <?php $orderBy = 'created_at'; ?>
+        <?php $posts = getPostsOrderBy($database, $orderBy); ?>
+    <?php endif; ?>
+
+
     <?php if (isset($_GET['new'])) : ?>
         <?php $orderBy = 'created_at'; ?>
         <?php $posts = getPostsOrderBy($database, $orderBy); ?>
         <h1>New posts</h1>
     <?php endif; ?>
 
-    <?php if (isset($_GET['top'])) : ?>
-        <?php $orderBy = 'votes'; ?>
-        <?php $posts = getPostsOrderBy($database, $orderBy); ?>
-        <h1>Top posts</h1>
-    <?php endif; ?>
-
     <?php if (isset($_GET['userId'], $_GET['name'])) : ?>
-        <?php $userId = $_GET['userId']; ?>
-        <?php $userName = $_GET['name']; ?>
+        <?php $userId = $_GET['userId']; ?> <?php $userName = $_GET['name']; ?>
         <?php $posts = getPostsByUserId($database, $userId); ?>
-        <section>
-            <a href="profile.php?userId=<?= $userId ?>">Back</a>
-        </section>
-        <h1>Posts by <?= $userName; ?> </h1>
+        <?php if ($userName === $_SESSION['user']['username']) : ?>
+            <h1>Posts by me</h1>
+        <?php else : ?>
+            <h1>Posts by <?= $userName; ?> </h1>
+        <?php endif; ?>
+        <?php if (empty($posts)) :  ?>
+            <p>There is no posts yet.</p>
+        <?php endif; ?>
     <?php endif; ?>
 
 
-    <section>
-        <?php if (isset($_SESSION['success'])) : ?>
-            <div class="error success">
-                <h3>
-                    <?php
-                    echo $_SESSION['success'];
-                    unset($_SESSION['success']);
-                    ?>
-                </h3>
-            </div>
-        <?php endif ?>
-    </section>
 
+    <?php if (isset($_SESSION['success'])) : ?>
+        <div class="error success">
+            <p>
+                <?php
+                echo $_SESSION['success'];
+                unset($_SESSION['success']);
+                ?>
+            </p>
+        </div>
+    <?php endif; ?>
 
     <?php $number = 1; ?>
     <?php foreach ($posts as $post) : ?>

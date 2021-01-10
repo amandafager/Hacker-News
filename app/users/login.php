@@ -21,7 +21,7 @@ if (isset($_POST['current-email'], $_POST['current-password'])) {
 
         unset($user['password']);
         $_SESSION['user'] = $user;
-        $_SESSION['success'] = "You are now logged in";
+        $_SESSION['success'] = "Welcome " . $_SESSION['user']['username'] . "! You are now logged in.";
     } else if (!validateEmail($email)) {
 
         $_SESSION['error'] = $email . ' is not a valid email address!';

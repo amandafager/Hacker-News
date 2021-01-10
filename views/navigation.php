@@ -19,11 +19,11 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="/index.php?top">Top</a>
+                <a class="nav-link" href="/index.php?new">New</a>
             </li><!-- /nav-item -->
 
             <li class="nav-item">
-                <a class="nav-link" href="/index.php?new">New</a>
+                <a class="nav-link" href="/index.php?top">Top</a>
             </li><!-- /nav-item -->
 
             <li class="nav-item">
@@ -32,7 +32,7 @@
             <?php if (!isset($_SESSION['user'])) : ?>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/login.php">Login</a>
+                    <a class="nav-link" href="/login.php">Login / Create Account</a>
                 </li><!-- /nav-item -->
 
             <?php else : ?>

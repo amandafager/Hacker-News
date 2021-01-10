@@ -20,11 +20,11 @@
 
 .comment {
   padding: 1rem;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid rgb(187, 187, 187);
 }
 
 .comment:first-of-type {
-  border-top: 1px solid grey;
+  border-top: 1px solid rgb(187, 187, 187);
 }
 
 .edit-comment-form {
@@ -57,4 +57,8 @@
 
 .hide-text {
   display: none;
+}
+
+.save-edit-btn {
+  margin-top: 0;
 }

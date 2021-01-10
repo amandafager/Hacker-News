@@ -4,14 +4,32 @@
 
 <main>
 
-    <?php if (isset($_SESSION['error'])) {
-        echo $_SESSION['error'];
-        unset($_SESSION['error']);
-    } ?>
-    <?php if (isset($_SESSION['message'])) {
-        echo $_SESSION['message'];
-        unset($_SESSION['message']);
-    } ?>
+
+
+    <?php if (isset($_SESSION['error'])) : ?>
+        <div class="error success">
+            <p class="alert alert-danger alert-dismissible">
+                <?php
+                echo $_SESSION['error'];
+                unset($_SESSION['error']);
+                ?>
+            </p>
+        </div>
+    <?php endif; ?>
+
+
+
+    <?php if (isset($_SESSION['message'])) : ?>
+        <div class="error success">
+            <p>
+                <?php
+                echo $_SESSION['message'];
+                unset($_SESSION['message']);
+                ?>
+            </p>
+        </div>
+    <?php endif; ?>
+
 
 
     <div class="log-wrapper">

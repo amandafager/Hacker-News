@@ -40,6 +40,8 @@ if (isset($_POST['id'])) {
     }
     $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
     $statement->execute();
+
+    $_SESSION['success'] = "Your post is removed.";
 }
 
-redirect('/index.php?userId=' . $_SESSION['user']['id']);
+redirect('/index.php?userId=' . $_SESSION['user']['id'] . '&name=' . $_SESSION['user']['username']);

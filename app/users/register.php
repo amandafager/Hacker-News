@@ -16,11 +16,11 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
     $created =  date('Y-m-d h:m:s');
 
     if (empty($name)) {
-        $_SESSION['error'] = 'Username is required';
+        $_SESSION['error'] = 'Username is required!';
         redirect('/login.php');
     }
     if (empty($email)) {
-        $_SESSION['error'] = 'Email is required';
+        $_SESSION['error'] = 'Email is required!';
         redirect('/login.php');
     }
     if (!validateEmail($email)) {
@@ -28,11 +28,11 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
         redirect('/login.php');
     }
     if (empty($passphrase1)) {
-        $_SESSION['error'] = 'Password is required';
+        $_SESSION['error'] = 'Password is required!';
         redirect('/login.php');
     }
     if ($passphrase1 != $passphrase2) {
-        $_SESSION['error'] = 'The two passwords do not match';
+        $_SESSION['error'] = 'The two passwords do not match!';
         redirect('/login.php');
     }
 
@@ -54,12 +54,12 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
 
     if ($user) { // if user exists
         if ($user['email'] === $email) {
-            $_SESSION['error'] = 'Email already exists';
+            $_SESSION['error'] = 'Email already exists!';
             $_SESSION['input'] = $email;
             redirect('/login.php');
         }
         if ($user['username'] === $name) {
-            $_SESSION['error'] = 'Username already exists';
+            $_SESSION['error'] = 'Username already exists!';
             redirect('/login.php');
         }
     }
@@ -91,7 +91,7 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
         $user = $statement->fetch(PDO::FETCH_ASSOC);
         unset($user['password']);
         $_SESSION['user'] = $user;
-        $_SESSION['message'] = "Welcome " . $_SESSION['user']['username'] . " You have succcssfully created an account and are now logged in. Update your profile!";
+        $_SESSION['message'] = "Welcome " . $_SESSION['user']['username'] . "! You have succcssfully created an account and are now logged in. Update your profile!";
     }
 }
 redirect('/profile.php?userId=' . $_SESSION['user']['id']);

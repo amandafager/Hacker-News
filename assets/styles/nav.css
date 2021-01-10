@@ -51,8 +51,6 @@ header {
 .navbar-nav {
   height: 100%;
   width: 100%;
-  /*padding: 4rem 0 0 2rem;*/
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -71,13 +69,6 @@ a {
   color: black;
 }
 
-.log-status {
-  position: absolute;
-  right: 65px;
-}
-.log-status a:first-of-type {
-  text-decoration: none;
-}
-.log-status a:last-of-type {
-  padding-left: 1rem;
+.navbar-brand {
+  margin-right: 0;
 }
