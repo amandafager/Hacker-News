@@ -11,4 +11,4 @@ $_SESSION['success'] = "You are now logged out. Welcome back!";
 
 unset($_SESSION['user']);
 
-redirect('/login.php');
+redirect('/');

@@ -83,7 +83,7 @@
             </div>
             <div class="post-content">
                 <a class="title" href="<?= $post['url']; ?>">
-                    <h3><?= $post['title']; ?></h3>
+                    <h2><?= $post['title']; ?></h2>
                 </a>
                 <?php if (!empty($post['description'])) : ?>
                     <details>

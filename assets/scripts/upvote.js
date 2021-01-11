@@ -15,7 +15,7 @@ forms.forEach((form) => {
       .then((response) => response.json())
       .then((json) => {
         const voteBtn = event.target.querySelector(".vote-btn");
-        const buttonStatus = json.buttonText;
+        const buttonStatus = json.status;
 
         if (buttonStatus === true) {
           voteBtn.style.backgroundColor = "grey";

@@ -48,7 +48,7 @@
         </div>
         <div class="post-content">
             <a class="title" href="<?= $post['url']; ?>">
-                <h3><?= $post['title']; ?></h3>
+                <h2><?= $post['title']; ?></h2>
             </a>
             <?php if (!empty($post['description'])) : ?>
                 <details>
@@ -92,7 +92,7 @@
     </section>
 
     <section class="comments">
-        <h3>Comments</h3>
+        <h1>Comments</h1>
         <?php foreach ($comments as $comment) : ?>
 
             <article class="comment" id="<?= $comment['comment_id'] ?>">
