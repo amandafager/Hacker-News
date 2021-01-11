@@ -1,15 +1,23 @@
 <?php require __DIR__ . '/app/autoload.php'; ?>
 <?php require __DIR__ . '/views/header.php'; ?>
 <main>
-    <?php if (isset($_SESSION['error'])) {
-        echo $_SESSION['error'];
-        unset($_SESSION['error']);
-    } ?>
-    <a href="profile.php">Back</a>
 
-    <section class="">
 
-        <h2>Change Password</h2>
+
+    <?php if (isset($_SESSION['error'])) : ?>
+        <div class="error success">
+            <p class="alert alert-danger alert-dismissible">
+                <?php
+                echo $_SESSION['error'];
+                unset($_SESSION['error']);
+                ?>
+            </p>
+        </div>
+    <?php endif; ?>
+
+    <section class="change-password">
+
+        <h1>Change Password</h1>
 
         <form action="app/users/changePassword.php" method="post">
             <div class="form-group">
@@ -24,9 +32,10 @@
 
             </div>
 
-            <button type="submit" name="submit" class="btn btn-primary">Change</button>
+            <button type="submit" name="submit" class="btn btn-secondary change-pass-btn">Change</button>
         </form>
     </section>
+
 
 </main>
 <?php require __DIR__ . '/views/footer.php'; ?>

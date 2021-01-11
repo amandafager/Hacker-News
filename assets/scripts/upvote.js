@@ -17,7 +17,7 @@ forms.forEach((form) => {
         const voteBtn = event.target.querySelector(".vote-btn");
         const buttonStatus = json.buttonText;
 
-        if (buttonStatus === "Upvote") {
+        if (buttonStatus === true) {
           voteBtn.style.backgroundColor = "grey";
         } else {
           voteBtn.style.backgroundColor = "var(--main-orange)";

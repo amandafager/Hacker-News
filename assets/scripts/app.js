@@ -1,12 +1,15 @@
 //menu
 const navbar = document.querySelector(".navbar");
 const ham = document.querySelector(".ham");
+const open = document.querySelector(".open-menu");
+const close = document.querySelector(".close-menu");
 
 ham.addEventListener("click", toggleHamburger);
 
 function toggleHamburger() {
   navbar.classList.toggle("show-nav");
-  ham.classList.toggle("show-close");
+  open.classList.toggle("hide-open");
+  close.classList.toggle("show-close");
 }
 
 const menuLinks = document.querySelectorAll(".nav-items");
@@ -50,7 +53,7 @@ if (back) {
   });
 }
 
-//Logout
+//Modal
 const body = document.querySelector("body");
 const modalBox = document.querySelector(".modal");
 const modalContent = document.querySelector(".modal-dialog .modal-content");
@@ -66,6 +69,8 @@ function toggleModal() {
   modalContent.classList.toggle("show-modal-content");
   /*body.classList.toggle("body-modal-open");*/
 }
+
+//Logout
 
 if (logout) {
   logout.addEventListener("click", (e) => {
@@ -96,6 +101,19 @@ deletePostBtns.forEach((deletePostBtn) => {
     modalForm.action = "app/posts/delete.php";
     let postId = deletePostBtn.value;
     modalInput.value = postId;
+    toggleModal();
+  });
+});
+
+const deleteCommentBtns = document.querySelectorAll(".delete-comment-btn");
+
+deleteCommentBtns.forEach((deleteCommentBtn) => {
+  deleteCommentBtn.addEventListener("click", () => {
+    console.log(deleteCommentBtn);
+    modalQuestion.textContent = "Delete your comment?";
+    modalForm.action = "app/comments/delete.php";
+    let commentId = deleteCommentBtn.value;
+    modalInput.value = commentId;
     toggleModal();
   });
 });

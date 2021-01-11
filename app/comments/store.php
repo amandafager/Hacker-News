@@ -27,6 +27,7 @@ if (isset($_SESSION['user'])) {
         $statement->bindParam(':comment', $comment, PDO::PARAM_STR);
         $statement->bindParam(':created', $created, PDO::PARAM_STR);
         $statement->execute();
+        $_SESSION['success'] = "Your comment is submited.";
     }
 
     redirect('/comments.php?postId=' . $postId);

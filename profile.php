@@ -7,18 +7,41 @@
 
 
 <main>
-    <?php if (isset($_SESSION['error'])) {
-        echo $_SESSION['error'];
-        unset($_SESSION['error']);
-    } ?>
-    <?php if (isset($_SESSION['message'])) {
-        echo $_SESSION['message'];
-        unset($_SESSION['message']);
-    } ?>
+
+    <?php if (isset($_SESSION['success'])) : ?>
+        <div class="error success">
+            <p class="alert alert-success">
+                <strong>Success!</strong>
+                <?php
+                echo $_SESSION['success'];
+                unset($_SESSION['success']);
+                ?>
+            </p>
+        </div>
+    <?php endif; ?>
 
 
+    <?php if (isset($_SESSION['error'])) : ?>
+        <div class="error success">
+            <p class="alert alert-danger alert-dismissible">
+                <?php
+                echo $_SESSION['error'];
+                unset($_SESSION['error']);
+                ?>
+            </p>
+        </div>
+    <?php endif; ?>
 
-
+    <?php if (isset($_SESSION['message'])) : ?>
+        <div class="error success">
+            <p class="alert alert-info">
+                <?php
+                echo $_SESSION['message'];
+                unset($_SESSION['message']);
+                ?>
+            </p>
+        </div>
+    <?php endif; ?>
 
     <?php if (isset($_SESSION['user']) && $_SESSION['user']['id'] === $userId) : ?>
 
@@ -65,21 +88,21 @@
             </ul>
         </section>
     <?php else :  ?>
-        <section>
-            <a class="go-back" href=""> back </a>
-        </section>
-        <section class="user-profile">
+
+        <section class="user-profile  user-profile-offline p-4 bg-white">
+
             <h1><?= $user['username']; ?></h1>
             <div class="pro-img-container">
                 <img src="/app/users/uploads/<?= $user['img_src']; ?>" alt="profile image">
             </div>
-            <div>
-                <p class="mb-3"> <strong> Created: </strong> <br> <?= formatDate($user['created_at']); ?> </p>
-                <p> <strong>Biography: </strong> <br> <?= $user['biography']; ?></p>
-            </div>
-            <ul class="profile-list">
-                <li>
-                    <a href="index.php?userId=<?= $user['id']; ?>&name=<?= $user['username']; ?>">posts</a>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <p> <strong> Created: </strong><?= formatDate($user['created_at']); ?> </p>
+                </li>
+                <li class="list-group-item">
+                    <p> <strong>Biography: </strong><?= $user['biography']; ?></p>
+                </li>
+                <li class="list-group-item"><a href="index.php?userId=<?= $user['id']; ?>&name=<?= $user['username']; ?>">Posts</a>
                 </li>
             </ul>
         </section>

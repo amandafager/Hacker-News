@@ -8,10 +8,21 @@
 
 <main>
 
-    <!--<a href="posts.php">Back</a>-->
     <section>
         <a class="go-back" href="">Back</a>
     </section>
+
+    <?php if (isset($_SESSION['success'])) : ?>
+        <div class="error success">
+            <p class="alert alert-success">
+                <strong>Success!</strong>
+                <?php
+                echo $_SESSION['success'];
+                unset($_SESSION['success']);
+                ?>
+            </p>
+        </div>
+    <?php endif; ?>
 
     <article class="post" id="<?= $post['id']; ?>">
         <div class="top">
@@ -69,9 +80,6 @@
         </ul>
     </article>
 
-
-
-
     <section class="add-comment-wrapper">
         <form class="add-comment-form" action="app/comments/store.php" method="post">
             <div class="form-group">
@@ -82,7 +90,6 @@
             <input type="hidden" id="post-id" name="post-id" value="<?= $post['id']; ?>"></input>
         </form>
     </section>
-
 
     <section class="comments">
         <h3>Comments</h3>
@@ -116,10 +123,7 @@
                                 <button class="edit-comment-btn" data-id="<?= $comment['comment_id']; ?>">Edit</button>
                             </li>
                             <li>
-                                <form action="app/comments/delete.php" method="post">
-                                    <input type="hidden" id="comment-id" name="comment-id" value="<?= $comment['comment_id'] ?>"></input>
-                                    <button class="delete-btn delete-btn-on-post" type="submit" name="delete-comment" value="Submit">Delete</button>
-                                </form>
+                                <button class="delete-comment-btn delete-btn-on-post" type="submit" value="<?= $comment['comment_id']; ?>">Delete</button>
                             </li>
                         </ul>
 

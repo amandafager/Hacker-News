@@ -49,7 +49,6 @@
   position: relative;
   outline: 0;
   border: 1px #777 solid;
-  text-align: justify;
   width: 80%;
   max-width: 400px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -61,6 +60,16 @@
   animation-name: fromTop;
   animation-duration: 0.5s;
 }
+
+.content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .show-modal {
   display: table;
   position: fixed;
@@ -78,21 +87,21 @@
   border: none;
   width: 30px;
   height: 30px;
-  border-radius: 50%;
   background-color: transparent;
-  background-image: url("closeMenu.SVG");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 60%;
   margin: 0.5rem;
 }
 
 .closebtn:hover,
 .closebtn:focus,
 .closebtn:active {
-  background-color: var(--main-orange);
   border: hidden;
   outline: none;
+}
+.close-modal:hover path,
+.close-modal:focus path,
+.close-modal:active path {
+  fill: var(--main-orange);
+  transition: fill 0.3s ease;
 }
 
 .modal-question {

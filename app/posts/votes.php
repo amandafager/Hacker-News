@@ -36,11 +36,11 @@ if (isset($_POST['vote'])) {
         $statement->execute();
 
         $numberOfVotes = numberOfVotes($database, $postId);
-        $buttonText = "Upvote";
+        $status = true;
 
         $response = [
             'numberOfVotes' => $numberOfVotes,
-            'buttonText' => $buttonText
+            'status' => $status
         ];
         echo json_encode($response);
     } else { // If vote do not exist from user - add vote
@@ -66,11 +66,11 @@ if (isset($_POST['vote'])) {
         $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
         $statement->execute();
         $numberOfVotes = numberOfVotes($database, $postId);
-        $buttonText = "Unvote";
+        $status = false;
 
         $response = [
             'numberOfVotes' => $numberOfVotes,
-            'buttonText' => $buttonText
+            'status' =>  $status
         ];
         echo json_encode($response);
     }

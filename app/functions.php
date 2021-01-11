@@ -228,7 +228,6 @@ function formatDate(string $date): string
 {
 
     $saved_time = $date;
-
     $formated_saved_time = new DateTime($saved_time);
     $current_time = new DateTime();
     $interval = $current_time->diff($formated_saved_time);
@@ -240,13 +239,13 @@ function formatDate(string $date): string
         $time_difference = "yesterday";
         return $time_difference;
     } elseif (!empty($interval->format('%h'))) {
-        $time_difference = $interval->format('%h hr, %i min ago');
+        $time_difference = $interval->format('%hh, %im ago');
         return $time_difference;
     } elseif (!empty($interval->format('%i'))) {
-        $time_difference = $interval->format('%i min ago');
+        $time_difference = $interval->format('%im ago');
         return $time_difference;
     } elseif (!empty($interval->format('%s'))) {
-        $time_difference = $interval->format('%s sec ago');
+        $time_difference = $interval->format('%ss ago');
         return $time_difference;
     } else {
         $time_difference = "Now";

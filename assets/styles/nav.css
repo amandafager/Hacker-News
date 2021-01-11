@@ -19,17 +19,35 @@ header {
   border: none;
   cursor: pointer;
   background-color: transparent;
-  background-image: url("menu.SVG");
-  background-size: 60%;
-  background-repeat: no-repeat;
-  background-position: center;
 }
+
 .ham:focus {
   outline: none;
 }
 
+.open-menu {
+  display: flex;
+}
+.open-menu:hover path,
+.open-menu:active path,
+.open-menu:focus path {
+  fill: white;
+}
+.hide-open {
+  display: none;
+}
+
+.close-menu {
+  display: none;
+}
+.close-menu:hover path,
+.close-menu:active path,
+.close-menu:focus path {
+  fill: var(--main-orange);
+}
+
 .show-close {
-  background-image: url("closeMenu.SVG");
+  display: flex;
 }
 
 .navbar {

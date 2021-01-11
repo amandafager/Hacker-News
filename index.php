@@ -24,21 +24,28 @@
     <?php if (isset($_GET['userId'], $_GET['name'])) : ?>
         <?php $userId = $_GET['userId']; ?> <?php $userName = $_GET['name']; ?>
         <?php $posts = getPostsByUserId($database, $userId); ?>
-        <?php if ($userName === $_SESSION['user']['username']) : ?>
-            <h1>Posts by me</h1>
+        <?php if (isset($_SESSION['user'])) : ?>
+            <?php if ($userName === $_SESSION['user']['username']) : ?>
+                <h1>Posts by me</h1>
+            <?php else : ?>
+                <h1>Posts by <?= $userName; ?> </h1>
+            <?php endif; ?>
+            <?php if (empty($posts)) :  ?>
+                <p>There is no posts.</p>
+            <?php endif; ?>
         <?php else : ?>
             <h1>Posts by <?= $userName; ?> </h1>
-        <?php endif; ?>
-        <?php if (empty($posts)) :  ?>
-            <p>There is no posts yet.</p>
         <?php endif; ?>
     <?php endif; ?>
 
 
 
+
+
     <?php if (isset($_SESSION['success'])) : ?>
-        <div class="error success">
-            <p>
+        <div class="error success mt-2">
+            <p class="alert alert-success">
+                <strong>Success!</strong>
                 <?php
                 echo $_SESSION['success'];
                 unset($_SESSION['success']);
@@ -68,7 +75,6 @@
                             <button name="vote-offline" class="vote-btn-offline" style="background-color: grey;"></button>
                         </form>
                     <?php endif; ?>
-
 
                     <p>by <a href="profile.php?userId=<?= $post['user_id']; ?>"><?= $post['author']; ?></a></p>
 

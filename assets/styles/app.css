@@ -22,12 +22,20 @@
   align-items: center;
 }
 
-.user-profile h1 {
-  margin-bottom: 2rem;
+.user-profile .profile-content {
+  width: 100%;
 }
 
 .user-profile p {
   margin-bottom: 0;
+}
+
+.user-profile-offline {
+  box-shadow: 0px 2px 7px 2px rgba(61, 61, 62, 0.25);
+}
+
+.user-profile-offline ul {
+  width: 100%;
 }
 
 .update-profile-btn {
@@ -45,4 +53,21 @@
 
 .profile-list li {
   padding: 0.5rem;
+}
+
+/*chnage password style */
+
+.change-password {
+  max-width: 450px;
+}
+
+.change-pass-btn {
+  width: 100%;
+}
+
+@media screen and (min-width: 500px) {
+  .change-password {
+    padding: 3rem;
+    box-shadow: 0px 2px 7px 2px rgba(61, 61, 62, 0.25);
+  }
 }

@@ -25,8 +25,8 @@ if (isset($_POST['current-password'], $_POST['update-password'])) {
         $statement->bindParam(':newPass', $hash, PDO::PARAM_STR);
         $statement->execute();
         unset($user['password']);
-        $_SESSION['message'] = "You have now changed password!";
-        redirect('/profile.php');
+        $_SESSION['success'] = "You have now changed password!";
+        redirect('/profile.php?userId=' . $_SESSION['user']['id']);
     } else {
         $_SESSION['error'] = 'Try again, the typed password did not match your password!';
         unset($user['password']);
@@ -34,4 +34,4 @@ if (isset($_POST['current-password'], $_POST['update-password'])) {
     }
 }
 
-redirect('/profile.php');
+redirect('/profile.php?userId=' . $_SESSION['user']['id']);

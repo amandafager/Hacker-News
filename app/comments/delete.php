@@ -6,9 +6,9 @@ require __DIR__ . '/../autoload.php';
 
 // In this file we delete comments in the database.
 
-if (isset($_POST['comment-id'])) {
+if (isset($_POST['id'])) {
 
-    $commentId = filter_var($_POST['comment-id'], FILTER_SANITIZE_NUMBER_INT);
+    $commentId = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
     $userId = $_SESSION['user']['id'];
 
     $deletePostQuery = 'DELETE FROM comments WHERE id = :commentId AND by_user_id = :userId';
@@ -21,6 +21,8 @@ if (isset($_POST['comment-id'])) {
     $statement->bindParam(':commentId', $commentId, PDO::PARAM_INT);
     $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
     $statement->execute();
+
+    $_SESSION['success'] = "Your comment is removed.";
 }
 
 redirect($_SERVER['HTTP_REFERER']);

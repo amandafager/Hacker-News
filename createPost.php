@@ -18,17 +18,17 @@
             <form action="/app/posts/store.php" method="post">
                 <div class="form-group">
                     <label for="title">Title</label>
-                    <input class="form-control save" type="title" name="title" id="title" placeholder="Title" value="" required>
+                    <input class="form-control save" type="title" name="title" id="title" placeholder="Enter title" required>
                 </div>
 
                 <div class="form-group">
                     <label for="url">URL</label>
-                    <input class="form-control" type="url" name="url" id="url" placeholder="URL" required>
+                    <input class="form-control" type="url" name="url" id="url" placeholder="Enter URL" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea class="form-control" type="text" name="description" id="description" placeholder="Description"></textarea>
+                    <label for="description">Description <small class="text-muted"><i> - Optional </i></small></label>
+                    <textarea class=" form-control" type="text" name="description" id="description" placeholder="Enter description"></textarea>
                 </div>
 
                 <button type="submit" name="submit-post" class="btn btn-secondary submit-post-btn">submit</button>
