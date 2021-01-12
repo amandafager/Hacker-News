@@ -39,9 +39,6 @@
     <?php endif; ?>
 
 
-
-
-
     <?php if (isset($_SESSION['success'])) : ?>
         <div class="error success mt-2">
             <p class="alert alert-success">

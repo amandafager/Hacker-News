@@ -117,3 +117,16 @@ deleteCommentBtns.forEach((deleteCommentBtn) => {
     toggleModal();
   });
 });
+
+const deleteReplyBtns = document.querySelectorAll(".delete-reply-btn");
+
+deleteReplyBtns.forEach((deleteReplyBtn) => {
+  deleteReplyBtn.addEventListener("click", () => {
+    console.log(deleteReplyBtn);
+    modalQuestion.textContent = "Delete your comment?";
+    modalForm.action = "app/replies/delete.php";
+    let replyId = deleteReplyBtn.value;
+    modalInput.value = replyId;
+    toggleModal();
+  });
+});

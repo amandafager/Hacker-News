@@ -6,6 +6,8 @@
 <?php $post = getPostByPostId($database, $postId); ?>
 <?php $comments = getCommentsByPostId($database, $post['id']); ?>
 
+
+
 <main>
 
     <section>
@@ -101,35 +103,84 @@
                     <p><?= formatDate($comment['comment_created_at']); ?> </p>
                 </div>
                 <p class="comment-text" data-id="<?= $comment['comment_id']; ?>"><?= $comment['comment']; ?> </p>
-                <?php if (isset($_SESSION['user'])) : ?>
 
-                    <?php if ($comment['by_user_id'] === $_SESSION['user']['id']) : ?>
+                <form class="edit-comment-form" action="app/comments/update.php" method="post" data-id="<?= $comment['comment_id']; ?>">
+                    <div class="input-group mb-3">
+                        <textarea type="text" name="edit-comment" class="form-control" rows="3" required><?= $comment['comment']; ?> </textarea>
+                        <button class="save-edit-btn btn btn-outline-secondary" type="submit" name="edit" id="button-addon2" value="Submit">Save</button>
+                    </div>
+                    <input type="hidden" id="comment-id" name="comment-id" value="<?= $comment['comment_id'] ?>"></input>
+                    <input type="hidden" id="post-id" name="post-id" value="<?= $post['id']; ?>"></input>
+                </form>
 
+                <ul class="comment-bottom">
+                    <li>
+                        <a href="reply.php?commentId=<?= $comment['comment_id'] . "&postId=" . $post['id'] . "&postTitle=" . $post['title'] ?>">Reply</a>
+                    </li>
 
-                        <form class="edit-comment-form" action="app/comments/update.php" method="post" data-id="<?= $comment['comment_id']; ?>">
-                            <div class="input-group mb-3">
-                                <textarea type="text" name="edit-comment" class="form-control" rows="3" required><?= $comment['comment']; ?> </textarea>
-                                <button class="save-edit-btn btn btn-outline-secondary" type="submit" name="edit" id="button-addon2" value="Submit">Save</button>
-                            </div>
-                            <input type="hidden" id="comment-id" name="comment-id" value="<?= $comment['comment_id'] ?>"></input>
-                            <input type="hidden" id="post-id" name="post-id" value="<?= $post['id']; ?>"></input>
-                        </form>
+                    <?php if (isset($_SESSION['user'])) : ?>
+                        <?php if ($comment['by_user_id'] === $_SESSION['user']['id']) : ?>
 
-                        <ul class="comment-bottom">
-                            <li>
-                                <a href="reply.php?commentId=<?= $comment['comment_id']; ?>">Reply</a>
-                            </li>
                             <li>
                                 <button class="edit-comment-btn" data-id="<?= $comment['comment_id']; ?>">Edit</button>
                             </li>
                             <li>
                                 <button class="delete-comment-btn delete-btn-on-post" type="submit" value="<?= $comment['comment_id']; ?>">Delete</button>
                             </li>
-                        </ul>
 
-                    <?php endif; ?>
-                <?php endif; ?>
+                </ul>
+
+
+
+            <?php endif; ?>
+        <?php endif; ?>
             </article>
+
+            <section class="comments replies">
+
+                <?php $replies = getReplysByCommentId($database, $comment['comment_id']); ?>
+
+                <?php foreach ($replies as $reply) : ?>
+
+                    <article class="comment reply" id="<?= $reply['id'] ?>">
+                        <div class="comment-top">
+                            <p> @ <?= $comment['author']; ?></p>
+                            <p>by <a href="profile.php?userId=<?= $reply['by_user_id']; ?>"><?= $reply['username']; ?></a></p>
+                            <p><?= formatDate($reply['created_at']); ?> </p>
+                        </div>
+                        <p class="comment-text" data-id="<?= $reply['id'] ?>"><?= $reply['comment']; ?> </p>
+
+                        <form class="edit-comment-form" action="app/replies/update.php" method="post" data-id="<?= $reply['id']; ?>">
+                            <div class="input-group mb-3">
+                                <textarea type="text" name="edit-reply" class="form-control" rows="3" required><?= $reply['comment']; ?> </textarea>
+                                <button class="save-edit-btn btn btn-outline-secondary" type="submit" name="edit" id="button-addon2" value="Submit">Save</button>
+                            </div>
+                            <input type="hidden" id="reply-id" name="reply-id" value="<?= $reply['id']; ?>"></input>
+                            <input type="hidden" id="comment-id" name="comment-id" value="<?= $comment['comment_id']; ?>"></input>
+                            <input type="hidden" id="post-id" name="post-id" value="<?= $post['id']; ?>"></input>
+                        </form>
+
+                        <?php if (isset($_SESSION['user'])) : ?>
+
+                            <?php if ($reply['by_user_id'] === $_SESSION['user']['id']) : ?>
+
+                                <ul class="comment-bottom">
+                                    <li>
+                                        <button class="edit-comment-btn" data-id="<?= $reply['id']; ?>">Edit</button>
+                                    </li>
+                                    <li>
+                                        <button class="delete-reply-btn delete-btn-on-post" type="submit" value="<?= $reply['id']; ?>">Delete</button>
+                                    </li>
+                                </ul>
+
+                            <?php endif; ?>
+                        <?php endif; ?>
+                    </article>
+
+                <?php endforeach; ?>
+            </section>
+
+
 
         <?php endforeach; ?>
     </section>

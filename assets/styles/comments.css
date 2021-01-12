@@ -43,7 +43,7 @@
 .comment-bottom li {
   padding-right: 0.5rem;
 }
-.comment-top p:first-of-type {
+.comment-top p {
   padding-right: 0.5rem;
 }
 
@@ -61,4 +61,32 @@
 
 .save-edit-btn {
   margin-top: 0;
+}
+
+.edit-comment-btn {
+  border: none;
+  background-color: transparent;
+  color: rgb(0, 0, 0);
+  padding: 0;
+}
+
+.edit-comment-btn:focus {
+  outline: none;
+}
+
+.replies {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.reply {
+  width: 90%;
+}
+.reply:first-of-type {
+  border-top: 0;
+}
+
+.reply:last-of-type {
 }

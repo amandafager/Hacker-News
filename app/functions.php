@@ -146,6 +146,40 @@ function isUpvoted(PDO $database, int $userId, int $postId): bool
 }
 
 
+function getAllCommentsByPostId(PDO $database, int $postId): array
+{
+    $statement = $database->prepare('SELECT comments.id AS comment_id, on_post_id, by_user_id, comment, comments.created_at AS comment_created_at, users.id AS user_id_users, users.username AS author, replies.id AS reply_id, replies.on_post_id AS on_post_id_replies, replies.on_comment_id AS reply_on_comment_id, replies.by_user_id AS reply_by_user_id, replies.comment AS reply, replies.created_at AS reply_created FROM comments INNER JOIN users ON users.id = comments.by_user_id INNER JOIN replies ON comments.id = replies.on_comment_id WHERE on_post_id = :postId ORDER BY comment_created_at DESC');
+
+    if (!$statement) {
+        die(var_dump($database->errorInfo()));
+    }
+
+    $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
+    $statement->execute();
+
+    $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    return $comments;
+}
+
+/*
+function getAllReplysByCommentId(PDO $database, int $postId): array
+{
+    $statement = $database->prepare('SELECT comments.id AS comment_id, on_post_id, by_user_id, comment, comments.created_at AS comment_created_at, users.id AS user_id_users, users.username AS author, replies.id AS reply_id, replies.on_post_id AS on_post_id_replies, replies.on_comment_id AS reply_on_comment_id, replies.by_user_id AS reply_by_user_id, replies.comment AS reply, replies.created_at AS reply_created FROM comments INNER JOIN users ON users.id = comments.by_user_id INNER JOIN replies ON comments.id = replies.on_comment_id WHERE on_post_id = :postId ORDER BY comment_created_at DESC');
+
+    if (!$statement) {
+        die(var_dump($database->errorInfo()));
+    }
+
+    $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
+    $statement->execute();
+
+    $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    return $comments;
+}
+*/
+
 function getCommentsByPostId(PDO $database, int $postId): array
 {
     $statement = $database->prepare('SELECT comments.id AS comment_id, on_post_id, by_user_id, comment, comments.created_at AS comment_created_at, users.id AS user_id_users, users.username AS author FROM comments INNER JOIN users ON users.id = comments.by_user_id WHERE on_post_id = :postId ORDER BY comment_created_at DESC');
@@ -164,20 +198,43 @@ function getCommentsByPostId(PDO $database, int $postId): array
 
 
 
-function numberOfVotes(PDO $database, int $postId): string
+function getCommentByCommentId(PDO $database, int $commentId): array
 {
-    /*$statement = $database->prepare('SELECT count(id) FROM votes WHERE post_id = :postId');
+
+    $statement = $database->prepare('SELECT comments.id AS id, on_post_id, by_user_id, comment, comments.created_at AS created_at, users.username as username FROM comments INNER JOIN users ON users.id = comments.by_user_id WHERE comments.id = :commentId');
+
     if (!$statement) {
         die(var_dump($database->errorInfo()));
     }
 
-    $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
+    $statement->bindParam(':commentId', $commentId, PDO::PARAM_INT);
     $statement->execute();
 
-    $count = $statement->fetch(PDO::FETCH_ASSOC);;
+    $comment = $statement->fetch(PDO::FETCH_ASSOC);
 
-    $votes = count($count);
-    return  $votes;*/
+    return $comment;
+}
+
+
+function getReplysByCommentId(PDO $database, int $commentId): array
+{
+    $statement = $database->prepare('SELECT replies.id AS id, on_post_id, on_comment_id, by_user_id, comment, replies.created_at AS created_at, users.username as username FROM replies INNER JOIN users ON users.id = replies.by_user_id WHERE replies.on_comment_id = :commentId ORDER BY replies.created_at DESC');
+
+    if (!$statement) {
+        die(var_dump($database->errorInfo()));
+    }
+
+    $statement->bindParam(':commentId', $commentId, PDO::PARAM_INT);
+    $statement->execute();
+
+    $replies = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    return $replies;
+}
+
+
+function numberOfVotes(PDO $database, int $postId): string
+{
 
     $statement = $database->prepare('SELECT * FROM posts WHERE id = :postId');
 
