@@ -31,8 +31,6 @@ if (isset($_SESSION['user'])) {
     }
 
     redirect('/comments.php?postId=' . $postId);
-    //redirect($_SERVER['HTTP_REFERER']);
-
 } else {
     $_SESSION['message'] = "You have to be logged in to add a comment.";
     redirect('../../login.php');

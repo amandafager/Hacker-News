@@ -11,6 +11,10 @@ if (isset($_POST['id'])) {
     $commentId = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
     $userId = $_SESSION['user']['id'];
 
+    $comment = getCommentByCommentId($database, (int)$commentId);
+
+    $postId =  $comment['on_post_id'];
+
     $deletePostQuery = 'DELETE FROM comments WHERE id = :commentId AND by_user_id = :userId';
     $statement = $database->prepare($deletePostQuery);
 
@@ -35,4 +39,4 @@ if (isset($_POST['id'])) {
     $_SESSION['success'] = "Your comment is removed.";
 }
 
-redirect($_SERVER['HTTP_REFERER']);
+redirect('/comments.php?postId=' . $postId . "#" . $commentId);

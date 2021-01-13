@@ -271,7 +271,7 @@ function formatDate(string $date): string
     $interval = $current_time->diff($formated_saved_time);
 
     if (!empty($interval->format('%a'))) {
-        $time_difference = $interval->format('%a days ago');
+        $time_difference = $interval->format('%ad ago');
         return $time_difference;
     } elseif ($formated_saved_time->format('d') != $current_time->format('d')) {
         $time_difference = "yesterday";

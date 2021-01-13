@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="/assets/styles/nav.css">
     <link rel="stylesheet" href="assets/styles/global.css">
-    <link rel="stylesheet" href="/assets/styles/app.css">
+    <link rel="stylesheet" href="/assets/styles/profile.css">
     <link rel="stylesheet" href="/assets/styles/login.css">
     <link rel="stylesheet" href="/assets/styles/confirmBox.css">
     <link rel="stylesheet" href="assets/styles/post.css">

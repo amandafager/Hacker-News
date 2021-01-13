@@ -67,7 +67,6 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
     if (!$user) {
 
         $hash = password_hash($passphrase1, PASSWORD_DEFAULT);
-        //$created =  date('Y-m-d h:m:s');
         $created = strftime('%Y-%m-%d %H:%M:%S');
         $imgSrc = "profile.svg";
         $biography = "";

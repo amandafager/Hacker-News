@@ -27,5 +27,3 @@ if (isset($_POST['edit-reply'])) {
 }
 
 redirect($_SERVER['HTTP_REFERER']);
-//redirect("/reply.php?commentId=" . $commentId  . "&postId=" . $postId . "&postTitle=" . $post['title']);
-//redirect('/comments.php?postId=' . $postId . "#" . $commentId);

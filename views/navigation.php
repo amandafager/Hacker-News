@@ -20,7 +20,7 @@
                 <a class="nav-link" href="/index.php?top">Top</a>
             </li><!-- /nav-item -->
 
-            
+
             <?php if (isset($_SESSION['user'])) : ?>
                 <li class="nav-item">
                     <a class="nav-link" href="/createPost.php">Submit</a>
@@ -32,7 +32,6 @@
                 </li><!-- /nav-item -->
 
             <?php endif; ?>
-
 
             <?php if (!isset($_SESSION['user'])) : ?>
 

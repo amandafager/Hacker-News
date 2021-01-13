@@ -24,4 +24,3 @@ if (isset($_POST['comment-id'], $_POST['edit-comment'], $_POST['post-id'])) {
 }
 
 redirect($_SERVER['HTTP_REFERER']);
-//redirect('/comments.php?postId=' . $postId . "#" . $commentId);

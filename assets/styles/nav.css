@@ -90,3 +90,12 @@ a {
 .navbar-brand {
   margin-right: 0;
 }
+
+footer {
+  width: 100%;
+  position: absolute;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

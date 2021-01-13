@@ -55,7 +55,7 @@
                         </li>
 
                         <li>
-                            <button class="delete-comment-btn delete-btn-on-post" type="submit" value="<?= $comment['id']; ?>">Delete</button>
+                            <button class="delete-comment-btn delete-btn-on-post" type="submit" value="<?= $commentId; ?>">Delete</button>
                         </li>
                     </ul>
 

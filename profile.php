@@ -15,7 +15,7 @@
 
         <section class="user-profile">
 
-            <h1><?= $_SESSION['user']['username']; ?></h1>
+            <h1 class="mb-4"><?= $_SESSION['user']['username']; ?></h1>
 
             <div class="pro-img-container">
                 <img src="/app/users/uploads/<?= $_SESSION['user']['img_src']; ?>" alt="profile image">
@@ -62,10 +62,6 @@
             </ul>
         </section>
     <?php else :  ?>
-
-        <section>
-            <a href="<?= $_SERVER['HTTP_REFERER']; ?>">Back</a>
-        </section>
 
         <section class="user-profile  user-profile-offline p-4 bg-white">
 
