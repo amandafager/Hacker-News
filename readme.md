@@ -42,7 +42,7 @@ Create a [Hacker News](https://news.ycombinator.com/news) clone.
 
 - As a user I'm able to reply to comments.
 
-### Written in
+## Written in
 
 - HTML
 - CSS
@@ -50,7 +50,7 @@ Create a [Hacker News](https://news.ycombinator.com/news) clone.
 - SQL
 - PHP
 
-### Installation
+## Installation
 
 1. #### Clone the repository
 
@@ -62,12 +62,12 @@ Create a [Hacker News](https://news.ycombinator.com/news) clone.
 
 3. #### Open the index.php file in your browser
 
-### Testers
+## Testers
 
 - test1
 - test2
 
-### Code Review
+## Code Review
 
 ### License
 
