@@ -31,7 +31,7 @@
 
         <article class="log" aria-label="Create Account form">
 
-            <h2>Create Account</h2>
+            <h2 class="mb-3">Create Account</h2>
 
             <form action="app/users/register.php" method="post">
                 <div class="form-group">

@@ -43,16 +43,6 @@ editCommentBtns.forEach((editCommentBtn) => {
   });
 });
 
-const back = document.querySelector(".go-back");
-
-console.log(back);
-if (back) {
-  back.addEventListener("click", (e) => {
-    e.preventDefault();
-    window.history.back();
-  });
-}
-
 //Modal
 const body = document.querySelector("body");
 const modalBox = document.querySelector(".modal");

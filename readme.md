@@ -38,7 +38,7 @@ Create a [Hacker News](https://news.ycombinator.com/news) clone.
 
 </details>
 
-## Extra feature in my project
+#### Extra feature in my project
 
 - As a user I'm able to reply to comments.
 
@@ -64,8 +64,8 @@ Create a [Hacker News](https://news.ycombinator.com/news) clone.
 
 ## Testers
 
-- test1
-- test2
+- Moa
+- Carolina
 
 ## Code Review
 
