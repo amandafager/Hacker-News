@@ -1,33 +1,15 @@
 <?php require __DIR__ . '/app/autoload.php'; ?>
 <?php require __DIR__ . '/views/header.php'; ?>
 
-
 <main>
 
-    <?php if (isset($_SESSION['error'])) : ?>
-        <div class="error success">
-            <p class="alert alert-danger alert-dismissible">
-                <?php
-                echo $_SESSION['error'];
-                unset($_SESSION['error']);
-                ?>
-            </p>
-        </div>
-    <?php endif; ?>
+    <?php SessionError(); ?>
+    <?php SessionMessage(); ?>
 
-    <?php if (isset($_SESSION['message'])) : ?>
-        <div class="error success">
-            <p class="alert alert-info">
-                <?php
-                echo $_SESSION['message'];
-                unset($_SESSION['message']);
-                ?>
-            </p>
-        </div>
-    <?php endif; ?>
 
     <div class="log-wrapper">
         <article class="log" aria-label="Login form">
+
             <h1>Login</h1>
 
             <form action="app/users/login.php" method="post">
@@ -44,9 +26,7 @@
                 <button type="submit" name="submit" class="btn btn-secondary log-btn">Login</button>
             </form>
 
-            <a href="#">Forgot your Password?</a>
         </article>
-
 
 
         <article class="log" aria-label="Create Account form">
@@ -70,14 +50,16 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="new-password-2">Confirm password</label>
-                    <input class="form-control" type="password" name="new-password-2" id="new-password-2" placeholder="Confirm password" required>
+                    <label for="new-password-2">Confirm Password</label>
+                    <input class="form-control" type="password" name="new-password-2" id="new-password-2" placeholder="Confirm Password" required>
                 </div>
 
                 <button type="submit" name="submit" class="btn btn-secondary log-btn">Create Account</button>
             </form>
+
         </article>
     </div>
 
 </main>
+
 <?php require __DIR__ . '/views/footer.php'; ?>

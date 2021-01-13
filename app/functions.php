@@ -162,23 +162,6 @@ function getAllCommentsByPostId(PDO $database, int $postId): array
     return $comments;
 }
 
-/*
-function getAllReplysByCommentId(PDO $database, int $postId): array
-{
-    $statement = $database->prepare('SELECT comments.id AS comment_id, on_post_id, by_user_id, comment, comments.created_at AS comment_created_at, users.id AS user_id_users, users.username AS author, replies.id AS reply_id, replies.on_post_id AS on_post_id_replies, replies.on_comment_id AS reply_on_comment_id, replies.by_user_id AS reply_by_user_id, replies.comment AS reply, replies.created_at AS reply_created FROM comments INNER JOIN users ON users.id = comments.by_user_id INNER JOIN replies ON comments.id = replies.on_comment_id WHERE on_post_id = :postId ORDER BY comment_created_at DESC');
-
-    if (!$statement) {
-        die(var_dump($database->errorInfo()));
-    }
-
-    $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
-    $statement->execute();
-
-    $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-    return $comments;
-}
-*/
 
 function getCommentsByPostId(PDO $database, int $postId): array
 {
@@ -195,7 +178,6 @@ function getCommentsByPostId(PDO $database, int $postId): array
 
     return $comments;
 }
-
 
 
 function getCommentByCommentId(PDO $database, int $commentId): array
@@ -257,7 +239,6 @@ function numberOfVotes(PDO $database, int $postId): string
 }
 
 
-
 function numberOfComments(PDO $database, int $postId): string
 {
 
@@ -308,4 +289,46 @@ function formatDate(string $date): string
         $time_difference = "Now";
         return $time_difference;
     }
+}
+
+function SessionError(): void
+{
+    if (isset($_SESSION['error'])) : ?>
+        <div class="error success">
+            <p class="alert alert-danger alert-dismissible">
+                <?php
+                echo $_SESSION['error'];
+                unset($_SESSION['error']);
+                ?>
+            </p>
+        </div>
+    <?php endif;
+}
+
+function SessionMessage(): void
+{
+    if (isset($_SESSION['message'])) : ?>
+        <div class="error success">
+            <p class="alert alert-info">
+                <?php
+                echo $_SESSION['message'];
+                unset($_SESSION['message']);
+                ?>
+            </p>
+        </div>
+    <?php endif;
+}
+
+function SessionSuccess(): void
+{
+    if (isset($_SESSION['success'])) : ?>
+        <div class="error success mt-2">
+            <p class="alert alert-success">
+                <?php
+                echo $_SESSION['success'];
+                unset($_SESSION['success']);
+                ?>
+            </p>
+        </div>
+<?php endif;
 }

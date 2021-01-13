@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
 
-header('Content-Type: application/json');
 
 $id = $_SESSION['user']['id'];
 
@@ -23,7 +22,7 @@ if (isset($_FILES['profile-img'])) {
 
     if (in_array($fileType, $allowedFileType)) {
         if ($fileError === 0) {
-            if ($fileSize < 2097152) {
+            if ($fileSize <= 2097152) {
                 $fileNameNew = "profile" . $id . "." . $fileActualExt;
                 $fileDestination = __DIR__ . '/uploads/' . $fileNameNew;
 
@@ -55,7 +54,7 @@ if (isset($_FILES['profile-img'])) {
                 //redirect('/profile.php');
                 redirect('/profile.php?userId=' . $_SESSION['user']['id']);
             } else {
-                $_SESSION['error'] = 'Your file is too big!';
+                $_SESSION['error'] = 'Your file is too big! The image size has to be lower then 2MB.';
                 //redirect('/profile.php');
                 redirect('/profile.php?userId=' . $_SESSION['user']['id']);
             }
@@ -73,7 +72,6 @@ if (isset($_FILES['profile-img'])) {
 
 
 if (isset($_POST['update-profile'])) {
-
 
     $biography = sanitizeText($_POST['biography']);
 

@@ -14,7 +14,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .top-left {
@@ -52,7 +52,7 @@
   overflow-wrap: break-word;
 }
 
-.post-content h3 {
+.post-content h2 {
   padding-bottom: 0.7rem;
   line-height: 2rem;
 }

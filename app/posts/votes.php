@@ -7,7 +7,6 @@ require __DIR__ . '/../autoload.php';
 header('Content-Type: application/json');
 
 
-
 if (isset($_POST['vote'])) {
 
     $userId = $_SESSION['user']['id'];
@@ -75,6 +74,6 @@ if (isset($_POST['vote'])) {
         echo json_encode($response);
     }
 } else {
-    $_SESSION['message'] = "You have to be logged in to vote.";
+    $_SESSION['message'] = "You have to be logged in to upvote.";
     redirect('../../login.php');
 }

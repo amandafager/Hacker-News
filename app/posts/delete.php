@@ -32,6 +32,16 @@ if (isset($_POST['id'])) {
     $statement->execute();
 
 
+    $deleteReplysQuery = 'DELETE FROM replies WHERE on_post_id = :postId';
+    $statement = $database->prepare($deleteReplysQuery);
+
+    if (!$statement) {
+        die(var_dump($pdo->errorInfo()));
+    }
+    $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
+    $statement->execute();
+
+
     $deleteVotesQuery = 'DELETE FROM votes WHERE post_id = :postId';
     $statement = $database->prepare($deleteVotesQuery);
 
@@ -40,6 +50,7 @@ if (isset($_POST['id'])) {
     }
     $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
     $statement->execute();
+
 
     $_SESSION['success'] = "Your post is removed.";
 }

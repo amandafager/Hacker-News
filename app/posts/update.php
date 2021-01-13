@@ -15,7 +15,7 @@ if (isset($_POST['edit-post'])) {
     $userId = $_SESSION['user']['id'];
 
     if (!validateUrl($url)) {
-        $_SESSION['error'] = 'The' . $url . 'is not a valid!';
+        $_SESSION['error'] = 'The' . $url . 'is not valid!';
         redirect('/editPost.php');
     } else {
 
@@ -28,7 +28,7 @@ if (isset($_POST['edit-post'])) {
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
         $statement->execute();
-        $_SESSION['success'] = "Your post is know up to date.";
+        $_SESSION['success'] = "Your post is now up to date.";
     }
 }
 

@@ -2,24 +2,14 @@
 <?php require __DIR__ . '/views/header.php'; ?>
 
 <?php $id = $_GET['postId']; ?>
+<?php $post = getPostByPostId($database, $id); ?>
 
 <main>
-    <?php if (isset($_SESSION['error'])) {
-        echo $_SESSION['error'];
-        unset($_SESSION['error']);
-    } ?>
-    <?php if (isset($_SESSION['message'])) {
-        echo $_SESSION['message'];
-        unset($_SESSION['message']);
-    } ?>
 
-    <section>
-        <a href="index.php?userId=<?= $_SESSION['user']['id']; ?>">Back</a>
-    </section>
+    <?php SessionError(); ?>
 
 
-    <?php if (isset($_SESSION['post'])) : ?>
-        <?php $post = getPostByPostId($database, $id); ?>
+    <?php if (isset($_SESSION['user'])) : ?>
 
         <section class="edit-post">
             <h1>Edit post</h1>
@@ -44,9 +34,10 @@
             </form>
 
             <button class="delete-btn btn btn-danger edit-post-delete-btn" type="submit" name="delete-post" value="<?= $post['id']; ?>">delete</button>
-
         </section>
+
     <?php endif ?>
+
 </main>
 
 <?php require __DIR__ . '/views/footer.php'; ?>

@@ -22,6 +22,16 @@ if (isset($_POST['id'])) {
     $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
     $statement->execute();
 
+
+    $deleteReplysQuery = 'DELETE FROM replies WHERE on_comment_id = :commentId';
+    $statement = $database->prepare($deleteReplysQuery);
+
+    if (!$statement) {
+        die(var_dump($pdo->errorInfo()));
+    }
+    $statement->bindParam(':commentId', $commentId, PDO::PARAM_INT);
+    $statement->execute();
+
     $_SESSION['success'] = "Your comment is removed.";
 }
 

@@ -2,19 +2,15 @@
 <?php require __DIR__ . '/views/header.php'; ?>
 
 <main>
-    <?php if (isset($_SESSION['error'])) {
-        echo $_SESSION['error'];
-        unset($_SESSION['error']);
-    } ?>
-    <?php if (isset($_SESSION['message'])) {
-        echo $_SESSION['message'];
-        unset($_SESSION['message']);
-    } ?>
+
+    <?php SessionError(); ?>
 
 
     <?php if (isset($_SESSION['user'])) : ?>
+
         <section class="create-post">
             <h1>Create new post</h1>
+
             <form action="/app/posts/store.php" method="post">
                 <div class="form-group">
                     <label for="title">Title</label>
@@ -33,10 +29,11 @@
 
                 <button type="submit" name="submit-post" class="btn btn-secondary submit-post-btn">submit</button>
             </form>
+
         </section>
-    <?php else : ?>
-        <p>You have to login to create a post.</p>
+
     <?php endif ?>
 
 </main>
+
 <?php require __DIR__ . '/views/footer.php'; ?>

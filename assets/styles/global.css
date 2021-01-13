@@ -16,7 +16,7 @@ body {
 }
 
 h1 {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 main {
@@ -43,9 +43,9 @@ textarea {
 }*/
 
 @media screen and (min-width: 1400px) {
-  main {
+  /* main {
     padding: 50px 1rem 0rem 1rem;
-  }
+  }*/
 }
 
 :root {
