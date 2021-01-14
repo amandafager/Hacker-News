@@ -27,17 +27,13 @@
 
 
     <?php if (isset($_GET['userId'], $_GET['name'])) : ?>
-
         <?php $userId = $_GET['userId']; ?> <?php $userName = $_GET['name']; ?>
         <?php $posts = getPostsByUserId($database, $userId); ?>
 
         <?php if (isset($_SESSION['user'])) : ?>
             <?php if ($userName === $_SESSION['user']['username']) : ?>
-
                 <h1>Posts by me</h1>
-
             <?php else : ?>
-
                 <h1>Posts by <?= $userName; ?> </h1>
             <?php endif; ?>
 
@@ -55,7 +51,6 @@
             <h1>Posts by <?= $userName; ?> </h1>
             <?php if (empty($posts)) :  ?>
                 <p>There is no posts.</p>
-
             <?php endif; ?>
 
         <?php endif; ?>
@@ -67,7 +62,6 @@
         <article class="post" id="<?= $post['id']; ?>">
             <div class="top">
                 <div class="top-left text-secondary">
-
                     <p><?= $number++; ?>.</p>
 
                     <?php if (isset($_SESSION['user'])) : ?>
@@ -79,9 +73,7 @@
                                 <button style="background-color: grey;" class="vote-btn" type="submit" value="Submit" data-id="<?= $post['id']; ?>"></button>
                             <?php endif; ?>
                         </form>
-
                     <?php else : ?>
-
                         <form class="vote-offline" action="app/posts/votes.php" method="post">
                             <button name="vote-offline" class="vote-btn-offline" style="background-color: grey;"></button>
                         </form>
@@ -90,9 +82,7 @@
                     <p>by
                         <a href="profile.php?userId=<?= $post['user_id']; ?>"><?= $post['author']; ?></a>
                     </p>
-
                 </div>
-
                 <time class="text-secondary"><?= formatDate($post['created_at']); ?></time>
             </div>
 

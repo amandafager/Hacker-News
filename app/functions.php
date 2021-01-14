@@ -226,11 +226,9 @@ function numberOfVotes(PDO $database, int $postId): string
 
     $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
     $statement->execute();
-
     $post = $statement->fetch(PDO::FETCH_ASSOC);;
 
     $votes = $post['votes'];
-
     if ($votes <= 1) {
         return "$votes point";
     } else {
@@ -247,15 +245,12 @@ function numberOfComments(PDO $database, int $postId): string
     $numberOfComments = count($comments);
 
     if ($numberOfComments === 0) {
-
         $text = "discuss";
         return $text;
     } else if ($numberOfComments === 1) {
-
         $text = "$numberOfComments comment";
         return $text;
     } else {
-
         $text = "$numberOfComments comments";
         return $text;
     }

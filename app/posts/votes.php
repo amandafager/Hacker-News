@@ -8,12 +8,10 @@ header('Content-Type: application/json');
 
 
 if (isset($_POST['vote'])) {
-
     $userId = $_SESSION['user']['id'];
     $postId = filter_var($_POST['vote'], FILTER_SANITIZE_NUMBER_INT);
 
     if (isUpvoted($database, (int) $_SESSION['user']['id'], (int) $postId)) { //Checks if user has voted, if vote exist - remove the vote
-
         $query = 'UPDATE posts SET votes = votes - 1 WHERE id = :postId';
         $statement = $database->prepare($query);
 
@@ -43,7 +41,6 @@ if (isset($_POST['vote'])) {
         ];
         echo json_encode($response);
     } else { // If vote do not exist from user - add vote
-
         $query = 'UPDATE posts SET votes = votes + 1 WHERE id = :postId';
         $statement = $database->prepare($query);
 

@@ -29,8 +29,9 @@ if (isset($_FILES['profile-img'])) {
                 $currentImg = $_SESSION['user']['img_src'];
 
                 if (file_exists(__DIR__ . '/uploads/' . $currentImg)) {
-                    if ($currentImg !== 'profile.svg')
+                    if ($currentImg !== 'profile.svg') {
                         unlink(__DIR__ . '/uploads/' . $currentImg);
+                    }
                 }
 
                 move_uploaded_file($fileTmpName, $fileDestination);
@@ -66,9 +67,7 @@ if (isset($_FILES['profile-img'])) {
     }
 }
 
-
 if (isset($_POST['update-profile'])) {
-
     $biography = sanitizeText($_POST['biography']);
 
     if ($biography || empty($biography)) {
@@ -82,7 +81,6 @@ if (isset($_POST['update-profile'])) {
     $newEmail = sanitizeEmail($_POST['update-email']);
 
     if ($newEmail) {
-
         $userCheckEmailQuery = 'SELECT email FROM users WHERE email = :email LIMIT 1';
 
         $statement = $database->prepare($userCheckEmailQuery);
@@ -105,7 +103,6 @@ if (isset($_POST['update-profile'])) {
         }
 
         if (validateEmail($newEmail) && $user['email'] !== $newEmail) {
-
             $updateUserEmail = 'UPDATE users SET email = :email WHERE id = :id';
             $statement = $database->prepare($updateUserEmail);
             $statement->bindParam(':email', $newEmail, PDO::PARAM_STR);

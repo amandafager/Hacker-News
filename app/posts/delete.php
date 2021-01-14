@@ -7,7 +7,6 @@ require __DIR__ . '/../autoload.php';
 // In this file we delete new posts in the database.
 
 if (isset($_POST['id'])) {
-
     $postId = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
     $userId = $_SESSION['user']['id'];
 

@@ -7,7 +7,6 @@ require __DIR__ . '/../autoload.php';
 // In this file we update posts in the database.
 
 if (isset($_POST['edit-post'])) {
-
     $title = sanitizeString($_POST['edit-title']);
     $url = $url = sanitizeUrl($_POST['edit-url']);
     $description = sanitizeText($_POST['edit-description']);
@@ -18,7 +17,6 @@ if (isset($_POST['edit-post'])) {
         $_SESSION['error'] = 'The' . $url . 'is not valid!';
         redirect('/editPost.php');
     } else {
-
         $updatePostQuery = 'UPDATE posts SET title = :title, url = :url, description = :description WHERE id = :id AND user_id = :userId';
         $statement = $database->prepare($updatePostQuery);
 

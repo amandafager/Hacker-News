@@ -7,7 +7,6 @@ require __DIR__ . '/../autoload.php';
 $id = $_SESSION['user']['id'];
 
 if (isset($_POST['current-password'], $_POST['update-password'])) {
-
     $typedCurrentPass = $_POST['current-password'];
     $hash = password_hash($_POST['update-password'], PASSWORD_DEFAULT);
 
@@ -17,7 +16,6 @@ if (isset($_POST['current-password'], $_POST['update-password'])) {
     $user = $statement->fetch(PDO::FETCH_ASSOC);
 
     if (password_verify($typedCurrentPass, $user['password'])) {
-
         $user['password'] = $currentPass;
         $updateUserPassword = 'UPDATE users SET password = :newPass WHERE id = :id';
         $statement = $database->prepare($updateUserPassword);
