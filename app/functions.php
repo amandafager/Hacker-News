@@ -219,7 +219,6 @@ function numberOfVotes(PDO $database, int $postId): string
 {
 
     $statement = $database->prepare('SELECT * FROM posts WHERE id = :postId');
-
     if (!$statement) {
         die(var_dump($database->errorInfo()));
     }
@@ -227,10 +226,14 @@ function numberOfVotes(PDO $database, int $postId): string
     $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
     $statement->execute();
     $post = $statement->fetch(PDO::FETCH_ASSOC);;
+
     $votes = $post['votes'];
+
     if ($votes <= 1) {
+
         return "$votes point";
     } else {
+
         return "$votes points";
     }
 }
