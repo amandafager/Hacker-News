@@ -89,7 +89,6 @@
         <h1>Comments</h1>
 
         <?php foreach ($comments as $comment) : ?>
-
             <article class="comment" id="<?= $comment['comment_id'] ?>">
                 <div class="comment-top text-secondary">
                     <p>by

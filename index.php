@@ -47,7 +47,6 @@
             <?php endif; ?>
 
         <?php else : ?>
-
             <h1>Posts by <?= $userName; ?> </h1>
             <?php if (empty($posts)) :  ?>
                 <p>There is no posts.</p>
