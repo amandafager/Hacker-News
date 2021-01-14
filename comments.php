@@ -1,5 +1,6 @@
 <?php require __DIR__ . '/app/autoload.php'; ?>
 <?php require __DIR__ . '/views/header.php'; ?>
+<?php require __DIR__ . '/views/messages.php'; ?>
 
 <?php $postId = $_GET['postId']; ?>
 <?php $post = getPostByPostId($database, $postId); ?>
@@ -8,7 +9,6 @@
 <main>
 
     <?php SessionSuccess(); ?>
-
 
     <article class="post" id="<?= $post['id']; ?>">
         <div class="top text-secondary">

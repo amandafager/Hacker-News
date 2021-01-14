@@ -1,5 +1,6 @@
 <?php require __DIR__ . '/app/autoload.php'; ?>
 <?php require __DIR__ . '/views/header.php'; ?>
+<?php require __DIR__ . '/views/messages.php'; ?>
 
 <?php if (isset($_GET['commentId'], $_GET['postId'], $_GET['postTitle'])) : ?>
     <?php $commentId = $_GET['commentId']; ?>

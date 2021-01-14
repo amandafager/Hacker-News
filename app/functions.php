@@ -222,8 +222,10 @@ function numberOfVotes(PDO $database, int $postId): string
         die(var_dump($database->errorInfo()));
     }
     $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
+
     $statement->execute();
-    $post = $statement->fetch(PDO::FETCH_ASSOC);;
+
+    $post = $statement->fetch(PDO::FETCH_ASSOC);
 
     $votes = $post['votes'];
     if ($votes <= 1) {
@@ -280,46 +282,4 @@ function formatDate(string $date): string
         $time_difference = "Now";
         return $time_difference;
     }
-}
-
-function SessionError(): void
-{
-    if (isset($_SESSION['error'])) : ?>
-        <div class="error success">
-            <p class="alert alert-danger alert-dismissible">
-                <?php
-                echo $_SESSION['error'];
-                unset($_SESSION['error']);
-                ?>
-            </p>
-        </div>
-    <?php endif;
-}
-
-function SessionMessage(): void
-{
-    if (isset($_SESSION['message'])) : ?>
-        <div class="error success">
-            <p class="alert alert-info">
-                <?php
-                echo $_SESSION['message'];
-                unset($_SESSION['message']);
-                ?>
-            </p>
-        </div>
-    <?php endif;
-}
-
-function SessionSuccess(): void
-{
-    if (isset($_SESSION['success'])) : ?>
-        <div class="error success mt-2">
-            <p class="alert alert-success">
-                <?php
-                echo $_SESSION['success'];
-                unset($_SESSION['success']);
-                ?>
-            </p>
-        </div>
-<?php endif;
 }

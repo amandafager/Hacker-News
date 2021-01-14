@@ -1,10 +1,10 @@
 <?php require __DIR__ . '/app/autoload.php'; ?>
 <?php require __DIR__ . '/views/header.php'; ?>
+<?php require __DIR__ . '/views/messages.php'; ?>
 
 <main>
 
     <?php SessionError(); ?>
-
 
     <section class="change-password">
         <h1>Change Password</h1>
