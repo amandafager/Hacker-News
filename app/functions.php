@@ -219,6 +219,7 @@ function numberOfVotes(PDO $database, int $postId): string
 {
 
     $statement = $database->prepare('SELECT * FROM posts WHERE id = :postId');
+
     if (!$statement) {
         die(var_dump($database->errorInfo()));
     }
