@@ -8,9 +8,7 @@
 
     <?php SessionError(); ?>
 
-
     <?php if (isset($_SESSION['user'])) : ?>
-
         <section class="edit-post">
             <h1>Edit post</h1>
 

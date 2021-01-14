@@ -7,7 +7,6 @@
 
 
     <?php if (isset($_SESSION['user'])) : ?>
-
         <section class="create-post">
             <h1>Create new post</h1>
 

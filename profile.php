@@ -12,7 +12,6 @@
 
 
     <?php if (isset($_SESSION['user']) && $_SESSION['user']['id'] === $userId) : ?>
-
         <section class="user-profile">
 
             <h1 class="mb-4"><?= $_SESSION['user']['username']; ?></h1>
@@ -62,7 +61,6 @@
             </ul>
         </section>
     <?php else :  ?>
-
         <section class="user-profile  user-profile-offline p-4 bg-white">
 
             <h1><?= $user['username']; ?></h1>
