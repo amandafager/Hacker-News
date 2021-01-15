@@ -1,13 +1,10 @@
 <?php require __DIR__ . '/app/autoload.php'; ?>
 <?php require __DIR__ . '/views/header.php'; ?>
-<?php require __DIR__ . '/views/messages.php'; ?>
+
 
 <main>
 
-
-    <?php SessionError(); ?>
-    <?php SessionMessage(); ?>
-
+    <?php require __DIR__ . '/views/messages.php'; ?>
 
     <div class="log-wrapper">
         <article class="log" aria-label="Login form">
