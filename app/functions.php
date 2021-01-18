@@ -217,20 +217,17 @@ function getReplysByCommentId(PDO $database, int $commentId): array
 
 function numberOfVotes(PDO $database, int $postId): string
 {
-
     $statement = $database->prepare('SELECT * FROM posts WHERE id = :postId');
-
     if (!$statement) {
         die(var_dump($database->errorInfo()));
     }
-
     $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
+
     $statement->execute();
 
-    $post = $statement->fetch(PDO::FETCH_ASSOC);;
+    $post = $statement->fetch(PDO::FETCH_ASSOC);
 
     $votes = $post['votes'];
-
     if ($votes <= 1) {
         return "$votes point";
     } else {
@@ -241,21 +238,17 @@ function numberOfVotes(PDO $database, int $postId): string
 
 function numberOfComments(PDO $database, int $postId): string
 {
-
     $comments = getCommentsByPostId($database, $postId);
 
     $numberOfComments = count($comments);
 
     if ($numberOfComments === 0) {
-
         $text = "discuss";
         return $text;
     } else if ($numberOfComments === 1) {
-
         $text = "$numberOfComments comment";
         return $text;
     } else {
-
         $text = "$numberOfComments comments";
         return $text;
     }
@@ -289,46 +282,4 @@ function formatDate(string $date): string
         $time_difference = "Now";
         return $time_difference;
     }
-}
-
-function SessionError(): void
-{
-    if (isset($_SESSION['error'])) : ?>
-        <div class="error success">
-            <p class="alert alert-danger alert-dismissible">
-                <?php
-                echo $_SESSION['error'];
-                unset($_SESSION['error']);
-                ?>
-            </p>
-        </div>
-    <?php endif;
-}
-
-function SessionMessage(): void
-{
-    if (isset($_SESSION['message'])) : ?>
-        <div class="error success">
-            <p class="alert alert-info">
-                <?php
-                echo $_SESSION['message'];
-                unset($_SESSION['message']);
-                ?>
-            </p>
-        </div>
-    <?php endif;
-}
-
-function SessionSuccess(): void
-{
-    if (isset($_SESSION['success'])) : ?>
-        <div class="error success mt-2">
-            <p class="alert alert-success">
-                <?php
-                echo $_SESSION['success'];
-                unset($_SESSION['success']);
-                ?>
-            </p>
-        </div>
-<?php endif;
 }

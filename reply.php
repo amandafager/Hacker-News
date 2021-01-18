@@ -1,6 +1,7 @@
 <?php require __DIR__ . '/app/autoload.php'; ?>
 <?php require __DIR__ . '/views/header.php'; ?>
 
+
 <?php if (isset($_GET['commentId'], $_GET['postId'], $_GET['postTitle'])) : ?>
     <?php $commentId = $_GET['commentId']; ?>
     <?php $postId =  $_GET['postId']; ?>
@@ -14,8 +15,7 @@
 
 <main>
 
-    <?php SessionSuccess(); ?>
-
+    <?php require __DIR__ . '/views/messages.php'; ?>
 
     <section class="comments">
 
@@ -38,7 +38,6 @@
 
             <?php if (isset($_SESSION['user'])) : ?>
                 <?php if ($comment['by_user_id'] === $_SESSION['user']['id']) : ?>
-
                     <form class="edit-comment-form" action="app/comments/update.php" method="post" data-id="<?= $comment['id']; ?>">
                         <div class="input-group mb-3">
                             <textarea type="text" name="edit-comment" class="form-control" rows="3" required><?= $comment['comment']; ?> </textarea>
@@ -88,23 +87,19 @@
         <h2>Replies</h2>
 
         <?php foreach ($replies as $reply) : ?>
-
             <article class="comment" id="<?= $reply['id'] ?>">
 
                 <div class="comment-top text-secondary">
-
                     <p>@ <?= $comment['username']; ?></p>
                     <p>by
                         <a href="profile.php?userId=<?= $reply['by_user_id']; ?>"><?= $reply['username']; ?></a>
                     </p>
                     <time><?= formatDate($reply['created_at']); ?></time>
-
                 </div>
 
                 <p class="comment-text" data-id="<?= $reply['id'] ?>"><?= $reply['comment']; ?> </p>
 
                 <form class="edit-comment-form" action="app/replies/update.php" method="post" data-id="<?= $reply['id']; ?>">
-
                     <div class="input-group mb-3">
                         <textarea type="text" name="edit-reply" class="form-control" rows="3" required><?= $reply['comment']; ?> </textarea>
                         <button class="save-edit-btn btn btn-outline-secondary" type="submit" name="edit" id="button-addon2" value="Submit">Save</button>
@@ -113,12 +108,10 @@
                     <input type="hidden" id="reply-id" name="reply-id" value="<?= $reply['id']; ?>"></input>
                     <input type="hidden" id="comment-id" name="comment-id" value="<?= $comment['id']; ?>"></input>
                     <input type="hidden" id="post-id" name="post-id" value="<?= $postId; ?>"></input>
-
                 </form>
 
                 <?php if (isset($_SESSION['user'])) : ?>
                     <?php if ($reply['by_user_id'] === $_SESSION['user']['id']) : ?>
-
                         <ul class="comment-bottom">
                             <li>
                                 <button class="edit-comment-btn" data-id="<?= $reply['id']; ?>">Edit</button>
@@ -128,7 +121,6 @@
                                 <button class="delete-reply-btn delete-btn-on-post" type="submit" value="<?= $reply['id']; ?>">Delete</button>
                             </li>
                         </ul>
-
                     <?php endif; ?>
                 <?php endif; ?>
 

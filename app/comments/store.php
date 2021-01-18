@@ -6,10 +6,7 @@ require __DIR__ . '/../autoload.php';
 
 // In this file we store/insert new comments in the database.
 if (isset($_SESSION['user'])) {
-
-
     if (isset($_POST['comment'], $_POST['post-id'])) {
-
         $postId = filter_var($_POST['post-id'], FILTER_SANITIZE_NUMBER_INT);
         $userId = $_SESSION['user']['id'];
         $comment = sanitizeText($_POST['comment']);

@@ -14,4 +14,4 @@ jobs:
         with:
           php-version: 8.0
           tools: phpcs
-      - run: phpcs --standard=PSR12 --colors -n .
+      - run: phpcs --standard=PSR12 --colors --ignore=*.js -n .

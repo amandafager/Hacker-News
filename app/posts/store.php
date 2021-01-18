@@ -7,7 +7,6 @@ require __DIR__ . '/../autoload.php';
 // In this file we store/insert new posts in the database.
 
 if (isset($_POST['submit-post'])) {
-
     $title = sanitizeString($_POST['title']);
     $url = sanitizeUrl($_POST['url']);
     $description = sanitizeText($_POST['description']);

@@ -8,7 +8,6 @@ require __DIR__ . '/../autoload.php';
 
 // Check if both email and password exists in the POST request.
 if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'], $_POST['new-password-2'])) {
-
     $name = sanitizeString($_POST['new-username']);
     $email = sanitizeEmail($_POST['new-email']);
     $passphrase1 = $_POST['new-password-1'];
@@ -65,7 +64,6 @@ if (isset($_POST['new-username'], $_POST['new-email'], $_POST['new-password-1'],
     }
 
     if (!$user) {
-
         $hash = password_hash($passphrase1, PASSWORD_DEFAULT);
         $created = strftime('%Y-%m-%d %H:%M:%S');
         $imgSrc = "profile.svg";

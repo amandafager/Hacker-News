@@ -7,7 +7,6 @@ require __DIR__ . '/../autoload.php';
 // In this file we update comments in the database.
 
 if (isset($_POST['comment-id'], $_POST['edit-comment'], $_POST['post-id'])) {
-
     $comment = sanitizeText($_POST['edit-comment']);
     $commentId = filter_var($_POST['comment-id'], FILTER_SANITIZE_NUMBER_INT);
     $postId = filter_var($_POST['post-id'], FILTER_SANITIZE_NUMBER_INT);

@@ -58,7 +58,7 @@ Create a [Hacker News](https://news.ycombinator.com/news) clone.
 
 2. #### Start a local server in the command line
 
-   `$ php -S localhost:8000/index.html`
+   `$ php -S localhost:8000/index.php`
 
 3. #### Open the index.php file in your browser
 

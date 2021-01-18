@@ -1,16 +1,15 @@
 <?php require __DIR__ . '/app/autoload.php'; ?>
 <?php require __DIR__ . '/views/header.php'; ?>
 
+
 <?php $id = $_GET['postId']; ?>
 <?php $post = getPostByPostId($database, $id); ?>
 
 <main>
 
-    <?php SessionError(); ?>
-
+    <?php require __DIR__ . '/views/messages.php'; ?>
 
     <?php if (isset($_SESSION['user'])) : ?>
-
         <section class="edit-post">
             <h1>Edit post</h1>
 

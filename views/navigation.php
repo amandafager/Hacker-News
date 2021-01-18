@@ -26,29 +26,22 @@
                     <a class="nav-link" href="/createPost.php">Submit</a>
                 </li><!-- /nav-item -->
             <?php else : ?>
-
                 <li class="nav-item">
                     <a class="nav-link" href="/login.php">Submit</a>
                 </li><!-- /nav-item -->
-
             <?php endif; ?>
 
             <?php if (!isset($_SESSION['user'])) : ?>
-
                 <li class="nav-item">
                     <a class="nav-link" href="/login.php">Login / Create Account</a>
                 </li><!-- /nav-item -->
-
             <?php else : ?>
-
                 <li class="nav-item">
                     <a class="nav-link" id="me" href="profile.php?userId=<?= $_SESSION['user']['id']; ?>"> Profile</a>
                 </li><!-- /nav-item -->
-
                 <li class="nav-item">
                     <a class="logout-link nav-link" href="#">Logout</a>
                 </li><!-- /nav-item -->
-
             <?php endif; ?>
 
         </ul><!-- /navbar-nav -->
