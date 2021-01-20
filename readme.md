@@ -67,7 +67,18 @@ Create a [Hacker News](https://news.ycombinator.com/news) clone.
 - Moa
 - Carolina
 
-## Code Review
+## Code Review by Jonathan Larsson
+
+- You could check the header-file and the different views for a bit better SEO and general semantics.
+- There is an empty class declared in comments.css at line 91.
+- I'm not sure that the amount of new lines within blocks of code are needed, in the files where you write both php and html.
+  Between blocks it's fine but within blocks maybe they're not needed? It could be just a preference of mine, but make sure it's consistent
+  throughout your project.
+- You could perhaps consider a more starkly contrasted colour-scheme from an accessibility-standpoint.
+- The second point of the installation guide in your readme doesn't work, remember that the index-file is a php-file rather than a html-file. :)
+
+These criticisms are just nitpicky and I'm honestly having trouble finding many points of improvement, overall I think you've done a great job.
+The site runs well and seems very well thought out. Good work!
 
 ### License
 
