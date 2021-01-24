@@ -64,7 +64,7 @@
                     <p><?= $number++; ?>.</p>
 
                     <?php if (isset($_SESSION['user'])) : ?>
-                        <form class="vote" action="app/posts/votes.php" method="post">
+                        <form class="vote post-form" action="app/posts/votes.php" method="post">
                             <input type="hidden" id="post-id" name="vote" value="<?= $post['id']; ?>"></input>
                             <?php if (isUpvoted($database, $_SESSION['user']['id'], $post['id'])) : ?>
                                 <button style="background-color: var(--main-orange);" class=" vote-btn" type="submit" value="Submit" data-id="<?= $post['id']; ?>"></button>

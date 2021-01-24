@@ -145,6 +145,26 @@ function isUpvoted(PDO $database, int $userId, int $postId): bool
     }
 }
 
+function isCommentUpvoted(PDO $database, int $user_id, int $comment_id): bool
+{
+    $query = 'SELECT * FROM comment_votes WHERE user_id = :user_id AND comment_id = :comment_id';
+    $statement = $database->prepare($query);
+
+    if (!$statement) {
+        die(var_dump($database->errorInfo()));
+    }
+    $statement->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $statement->bindParam(':comment_id', $comment_id, PDO::PARAM_INT);
+    $statement->execute();
+
+    $vote = $statement->fetch(PDO::FETCH_ASSOC);
+    if ($vote) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 
 function getAllCommentsByPostId(PDO $database, int $postId): array
 {
@@ -228,13 +248,32 @@ function numberOfVotes(PDO $database, int $postId): string
     $post = $statement->fetch(PDO::FETCH_ASSOC);
 
     $votes = $post['votes'];
-    if ($votes <= 1) {
+    if ($votes == 1) {
         return "$votes point";
     } else {
         return "$votes points";
     }
 }
 
+function numberOfCommentVotes(PDO $database, int $commentId): string
+{
+    $statement = $database->prepare('SELECT * FROM comments WHERE id = :commentId');
+    if (!$statement) {
+        die(var_dump($database->errorInfo()));
+    }
+    $statement->bindParam(':commentId', $commentId, PDO::PARAM_INT);
+
+    $statement->execute();
+
+    $comment = $statement->fetch(PDO::FETCH_ASSOC);
+
+    $votes = $comment['votes'];
+    if ($votes == 1) {
+        return "$votes point";
+    } else {
+        return "$votes points";
+    }
+}
 
 function numberOfComments(PDO $database, int $postId): string
 {
