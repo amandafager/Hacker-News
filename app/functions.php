@@ -322,3 +322,13 @@ function formatDate(string $date): string
         return $time_difference;
     }
 }
+
+function deleteContent(PDO $database, int $userId, string $query): void
+{
+    $statement = $database->prepare($query);
+    if (!$statement) {
+        die(var_dump($database->errorInfo()));
+    }
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $statement->execute();
+}

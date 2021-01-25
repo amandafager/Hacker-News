@@ -39,10 +39,10 @@
 
             <?php if (empty($posts)) :  ?>
                 <?php if ($userName === $_SESSION['user']['username']) : ?>
-                    <p>There is no posts.</p>
+                    <p>There are no posts.</p>
                     <a href="/createPost.php">Create a post</a>
                 <?php else : ?>
-                    <p>There is no posts.</p>
+                    <p>There are no posts.</p>
                 <?php endif; ?>
             <?php endif; ?>
 
@@ -112,7 +112,7 @@
                         </li>
 
                         <li>
-                            <button class="delete-btn delete-btn-on-post" type="submit" name="delete-post" value="<?= $post['id']; ?>">Delete</button>
+                            <button class="delete-btn-on-post" type="submit" name="delete-post" value="<?= $post['id']; ?>">Delete</button>
                         </li>
 
                     <?php endif; ?>

@@ -56,6 +56,9 @@
                 <li>
                     <a href="/createPost.php">Submit</a>
                 </li>
+                <li>
+                    <button class="delete-btn delete-account-btn" type="submit" name="delete-acc" value="<?= $_SESSION['user']['id']; ?>">Delete account</button>
+                </li>
             </ul>
         </section>
     <?php else :  ?>
