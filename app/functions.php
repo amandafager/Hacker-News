@@ -137,6 +137,18 @@ function getPostsOrderBy(PDO $database, string $orderBy): array
     return $posts;
 }
 
+function getPostsByUserUpvoted(PDO $database, int $userId): array
+{
+    $statement = $database->prepare('SELECT posts.* FROM posts INNER JOIN votes ON posts.id = votes.post_id WHERE votes.user_id = :userId ORDER BY created_at');
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+    if (!$statement) {
+        die(var_dump($database->errorInfo()));
+    }
+    $statement->execute();
+
+    $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $posts;
+}
 
 //Check if a user has voted on a post or not
 function isUpvoted(PDO $database, int $userId, int $postId): bool
@@ -261,8 +273,8 @@ function numberOfVotes(PDO $database, int $postId): string
     $statement->execute();
 
     $post = $statement->fetch(PDO::FETCH_ASSOC);
-
     $votes = $post['votes'];
+
     if ($votes == 1) {
         return "$votes point";
     } else {

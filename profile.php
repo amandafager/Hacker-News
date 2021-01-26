@@ -79,9 +79,10 @@
                     <p> <strong>Biography: </strong><?= $user['biography']; ?></p>
                 </li>
 
-                <li class="list-group-item">
+                <li class="list-group-item user-content-buttons">
                     <a href="index.php?posts&userId=<?= $user['id']; ?>&name=<?= $user['username']; ?>">Posts</a>
-                    <a href="index.php?comments&userId=<?= $user['id']; ?>&name=<?= $user['username'] ?>">Commented posts</a>
+                    <a href="index.php?comments&userId=<?= $user['id']; ?>&name=<?= $user['username'] ?>">Comments</a>
+                    <a href="index.php?upvoted&userId=<?= $user['id'] ?>&name=<?= $user['username'] ?>">Upvoted posts</a>
                 </li>
             </ul>
 

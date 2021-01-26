@@ -79,6 +79,11 @@
   color: rgb(159, 32, 18);
 }
 
+.user-content-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
 @media screen and (min-width: 500px) {
   .change-password {
     padding: 3rem;

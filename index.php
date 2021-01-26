@@ -25,6 +25,10 @@
 
     <?php endif; ?>
 
+    <?php if (isset($_GET['upvoted'])) : ?>
+        <?php $posts = getPostsByUserUpvoted($database, (int)$_GET['userId']); ?>
+        <h1>Posts upvoted by <?= $_GET['name'] ?></h1>
+    <?php endif; ?>
 
     <?php if (isset($_GET['posts'], $_GET['userId'], $_GET['name'])) : ?>
         <?php $userId = $_GET['userId']; ?> <?php $userName = $_GET['name']; ?>
