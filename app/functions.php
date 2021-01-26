@@ -72,6 +72,21 @@ function getPostsByUserId(PDO $database, int $userId): array
     return $posts;
 }
 
+function getCommentsByUserId(PDO $database, int $userId): array
+{
+    $statement = $database->prepare('SELECT * FROM comments WHERE by_user_id = :userId ORDER BY created_at DESC');
+
+    if (!$statement) {
+        die(var_dump($database->errorInfo()));
+    }
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $statement->execute();
+
+    $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    return $comments;
+}
+
 
 function getUserProfile(PDO $database, int $userId): array
 {
