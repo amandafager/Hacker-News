@@ -46,6 +46,7 @@ Create a [Hacker News](https://news.ycombinator.com/news) clone.
 - As a user I'm able to delete my account, along with every comment, reply, upvote and post that I have made.
 - As a user I'm able to upvote and remove my upvote on comments.
 - As a user I'm able to view other users posts, upvoted posts and comments.
+https://github.com/trilisen/Hacker-News-Plus
 
 ## Written in
 
