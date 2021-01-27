@@ -120,3 +120,13 @@ deleteReplyBtns.forEach((deleteReplyBtn) => {
     toggleModal();
   });
 });
+
+const deleteAccBtn = document.querySelector(".delete-account-btn");
+
+deleteAccBtn.addEventListener("click", () => {
+  modalQuestion.textContent = "Delete your account?";
+  modalForm.action = "app/users/delete.php";
+  let replyId = deleteReplyBtn.value;
+  modalInput.value = replyId;
+  toggleModal();
+});

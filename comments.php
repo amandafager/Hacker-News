@@ -15,7 +15,7 @@
             <div class="top-left">
 
                 <?php if (isset($_SESSION['user'])) : ?>
-                    <form class="vote" action="app/posts/votes.php" method="post">
+                    <form class="vote post-form" action="app/posts/votes.php" method="post">
                         <input type="hidden" id="post-id" name="vote" value="<?= $post['id']; ?>"></input>
                         <?php if (isUpvoted($database, $_SESSION['user']['id'], $post['id'])) : ?>
                             <button style="background-color: var(--main-orange);" class=" vote-btn" type="submit" value="Submit" data-id="<?= $post['id']; ?>"></button>
@@ -91,6 +91,20 @@
         <?php foreach ($comments as $comment) : ?>
             <article class="comment" id="<?= $comment['comment_id'] ?>">
                 <div class="comment-top text-secondary">
+                    <?php if (isset($_SESSION['user'])) : ?>
+                        <form class="vote comment-form" action="app/comments/votes.php" method="post">
+                            <input type="hidden" id="post-id" name="vote" value="<?= $comment['comment_id']; ?>"></input>
+                            <?php if (isCommentUpvoted($database, $_SESSION['user']['id'], $comment['comment_id'])) : ?>
+                                <button style="background-color: var(--main-orange);" class=" vote-btn" type="submit" value="Submit" data-id="<?= $comment['comment_id']; ?>"></button>
+                            <?php else : ?>
+                                <button style="background-color: grey;" class="vote-btn" type="submit" value="Submit" data-id="<?= $comment['comment_id']; ?>"></button>
+                            <?php endif; ?>
+                        </form>
+                    <?php else : ?>
+                        <form class="vote-offline" action="app/comments/votes.php" method="post">
+                            <button name="vote-offline" class="vote-btn-offline" style="background-color: grey;"></button>
+                        </form>
+                    <?php endif; ?>
                     <p>by
                         <a href="profile.php?userId=<?= $comment['by_user_id']; ?>"><?= $comment['author']; ?></a>
                     </p>
@@ -111,6 +125,9 @@
                 </form>
 
                 <ul class="comment-bottom">
+                    <li>
+                        <p class="number-of-votes text-secondary" data-id="<?= $comment['comment_id']; ?>"><?= numberOfCommentVotes($database, $comment['comment_id']) ?> </p>
+                    </li>
                     <li>
                         <a href="reply.php?commentId=<?= $comment['comment_id'] . "&postId=" . $post['id'] . "&postTitle=" . $post['title'] ?>">Reply</a>
                     </li>
@@ -137,7 +154,7 @@
                 <?php foreach ($replies as $reply) : ?>
                     <article class="comment reply" id="<?= $reply['id'] ?>">
                         <div class="comment-top text-secondary">
-                            <p>@ <?= $comment['author']; ?></p>
+                            <p>@<?= $comment['author']; ?></p>
                             <p>by
                                 <a href="profile.php?userId=<?= $reply['by_user_id']; ?>"><?= $reply['username']; ?></a>
                             </p>

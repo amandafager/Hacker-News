@@ -12,7 +12,7 @@ if (isset($_SESSION['user'])) {
         $comment = sanitizeText($_POST['comment']);
         $created = strftime('%Y-%m-%d %H:%M:%S');
 
-        $createCommentQuery = 'INSERT INTO comments (id, on_post_id, by_user_id, comment, created_at) VALUES (:id, :postId, :userId, :comment, :created)';
+        $createCommentQuery = 'INSERT INTO comments (id, on_post_id, by_user_id, comment, created_at, votes) VALUES (:id, :postId, :userId, :comment, :created, 1)';
         $statement = $database->prepare($createCommentQuery);
 
         if (!$statement) {
