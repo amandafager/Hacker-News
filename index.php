@@ -14,7 +14,6 @@
     <?php elseif (!isset($_GET['comments'])) : ?>
         <?php $orderBy = 'created_at'; ?>
         <?php $posts = getPostsOrderBy($database, $orderBy); ?>
-
     <?php endif; ?>
 
 
@@ -107,7 +106,7 @@
         <?php endforeach; ?>
     <?php endif ?>
 
-    <?php if ($posts) : ?>
+    <?php if (isset($posts)) : ?>
         <?php foreach ($posts as $post) : ?>
             <article class="post" id="<?= $post['id']; ?>">
                 <div class="top">
@@ -163,7 +162,7 @@
                             </li>
 
                             <li>
-                                <button class="delete-btn-on-post" type="submit" name="delete-post" value="<?= $post['id']; ?>">Delete</button>
+                                <button class="delete-btn-on-post delete-btn" type="submit" name="delete-post" value="<?= $post['id']; ?>">Delete</button>
                             </li>
 
                         <?php endif; ?>
