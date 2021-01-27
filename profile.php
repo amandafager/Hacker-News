@@ -54,7 +54,16 @@
                     <a href="index.php?userId=<?= $_SESSION['user']['id']; ?>&name=<?= $_SESSION['user']['username']; ?>">My posts</a>
                 </li>
                 <li>
+                    <a href="index.php?comments&userId=<?= $_SESSION['user']['id']; ?>&name=<?= $_SESSION['user']['username']; ?>">My comments</a>
+                </li>
+                <li>
+                    <a href="index.php?upvoted&userId=<?= $_SESSION['user']['id'] ?>&name=<?= $_SESSION['user']['username'] ?>">My upvoted posts</a>
+                </li>
+                <li>
                     <a href="/createPost.php">Submit</a>
+                </li>
+                <li>
+                    <button class="delete-btn delete-account-btn" type="submit" name="delete-acc" value="<?= $_SESSION['user']['id']; ?>">Delete account</button>
                 </li>
             </ul>
         </section>
@@ -76,7 +85,10 @@
                     <p> <strong>Biography: </strong><?= $user['biography']; ?></p>
                 </li>
 
-                <li class="list-group-item"><a href="index.php?userId=<?= $user['id']; ?>&name=<?= $user['username']; ?>">Posts</a>
+                <li class="list-group-item user-content-buttons">
+                    <a href="index.php?posts&userId=<?= $user['id']; ?>&name=<?= $user['username']; ?>">Posts</a>
+                    <a href="index.php?comments&userId=<?= $user['id']; ?>&name=<?= $user['username'] ?>">Comments</a>
+                    <a href="index.php?upvoted&userId=<?= $user['id'] ?>&name=<?= $user['username'] ?>">Upvoted posts</a>
                 </li>
             </ul>
 
