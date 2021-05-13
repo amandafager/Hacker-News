@@ -1,7 +1,7 @@
 </div><!-- /container -->
 <footer class=bg-dark>
 
-    <p class="p-3"><small class="text-white-50">© 2021 Copyright Hacker News</small></p>
+    <p class="p-3"><small class="text-white-50">© 2021 Copyright Fake Hacker News</small></p>
 
 </footer>
 
