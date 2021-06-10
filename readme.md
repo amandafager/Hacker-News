@@ -1,8 +1,6 @@
 # Hacker News
 
-### Description
-
-Create a [Hacker News](https://news.ycombinator.com/news) clone.
+The assignment was to create a [Hacker News](https://news.ycombinator.com/news) clone.
 
 <details><summary>Required features</summary>
 
@@ -49,7 +47,7 @@ Create a [Hacker News](https://news.ycombinator.com/news) clone.
 - As a user I'm able to view other users upvoted posts and comments.
 - https://github.com/trilisen/Hacker-News-Plus
 
-## Written in
+# Technologies
 
 - HTML
 - CSS
@@ -57,24 +55,34 @@ Create a [Hacker News](https://news.ycombinator.com/news) clone.
 - SQL
 - PHP
 
-## Installation
+# Installation
 
 1. #### Clone the repository
 
-   `https://github.com/amandafager/Hacker-News.git`
+```
+git clone https://github.com/amandafager/Hacker-News.git`
+```
+
+```
+cd path/to/project/folder/Hacker-News
+```
 
 2. #### Start a local server in the command line
 
-   `$ php -S localhost:8000/index.php`
+```
+php -S localhost:8000
+```
 
-3. #### Open the index.php file in your browser
+3. #### Open [http://localhost:8000/index.php ](http://localhost:8000/index.php) in your browser
 
-## Testers
+# Testers
 
 - Moa
 - Carolina
 
-## Code Review by Jonathan Larsson
+# Code Review
+
+### By Jonathan Larsson
 
 - You could check the header-file and the different views for a bit better SEO and general semantics.
 - There is an empty class declared in comments.css at line 91.
@@ -87,6 +95,6 @@ Create a [Hacker News](https://news.ycombinator.com/news) clone.
 These criticisms are just nitpicky and I'm honestly having trouble finding many points of improvement, overall I think you've done a great job.
 The site runs well and seems very well thought out. Good work!
 
-### License
+# License
 
 This project is licensed under the MIT License - see the LICENSE file for details

@@ -9,8 +9,6 @@
     </div>
 <?php endif; ?>
 
-
-
 <?php if (isset($_SESSION['message'])) : ?>
     <div class="error success">
         <p class="alert alert-info">
@@ -21,8 +19,6 @@
         </p>
     </div>
 <?php endif; ?>
-
-
 
 <?php if (isset($_SESSION['success'])) : ?>
     <div class="error success mt-2">

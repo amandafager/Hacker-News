@@ -10,40 +10,35 @@
         </svg>
 
     </button>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg">
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" href="/index.php?new">New</a>
-            </li><!-- /nav-item -->
+            </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="/index.php?top">Top</a>
-            </li><!-- /nav-item -->
-
+            </li>
 
             <?php if (isset($_SESSION['user'])) : ?>
                 <li class="nav-item">
                     <a class="nav-link" href="/createPost.php">Submit</a>
-                </li><!-- /nav-item -->
-            <?php else : ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="/login.php">Submit</a>
-                </li><!-- /nav-item -->
+                </li>
             <?php endif; ?>
 
             <?php if (!isset($_SESSION['user'])) : ?>
                 <li class="nav-item">
                     <a class="nav-link" href="/login.php">Login / Create Account</a>
-                </li><!-- /nav-item -->
+                </li>
             <?php else : ?>
                 <li class="nav-item">
                     <a class="nav-link" id="me" href="profile.php?userId=<?= $_SESSION['user']['id']; ?>"> Profile</a>
-                </li><!-- /nav-item -->
+                </li>
                 <li class="nav-item">
                     <a class="logout-link nav-link" href="#">Logout</a>
-                </li><!-- /nav-item -->
+                </li>
             <?php endif; ?>
 
-        </ul><!-- /navbar-nav -->
-    </nav><!-- /navbar -->
+        </ul>
+    </nav>
 </header>

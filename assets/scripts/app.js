@@ -10,6 +10,7 @@ function toggleHamburger() {
   navbar.classList.toggle("show-nav");
   open.classList.toggle("hide-open");
   close.classList.toggle("show-close");
+  document.body.classList.remove("loading");
 }
 
 const menuLinks = document.querySelectorAll(".nav-items");
@@ -21,6 +22,10 @@ menuLinks.forEach(function (menuLink) {
 //remove loading of transition
 window.addEventListener("load", () => {
   document.body.classList.remove("loading");
+});
+
+window.addEventListener("resize", () => {
+  document.body.classList.add("loading");
 });
 
 const editCommentBtns = document.querySelectorAll(".edit-comment-btn");
@@ -123,10 +128,11 @@ deleteReplyBtns.forEach((deleteReplyBtn) => {
 
 const deleteAccBtn = document.querySelector(".delete-account-btn");
 
-deleteAccBtn.addEventListener("click", () => {
-  modalQuestion.textContent = "Delete your account?";
-  modalForm.action = "app/users/delete.php";
-  let replyId = deleteReplyBtn.value;
-  modalInput.value = replyId;
-  toggleModal();
-});
+deleteAccBtn &&
+  deleteAccBtn.addEventListener("click", () => {
+    modalQuestion.textContent = "Delete your account?";
+    modalForm.action = "app/users/delete.php";
+    let replyId = deleteReplyBtn.value;
+    modalInput.value = replyId;
+    toggleModal();
+  });

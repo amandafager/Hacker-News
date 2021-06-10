@@ -9,6 +9,12 @@ header {
   position: fixed;
   z-index: 100;
 }
+@media (min-width: 1000px) {
+  header {
+    justify-content: space-between;
+    padding: 0rem 5rem 0rem 5rem;
+  }
+}
 
 .ham {
   position: absolute;
@@ -19,6 +25,14 @@ header {
   border: none;
   cursor: pointer;
   background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (min-width: 1000px) {
+  .ham {
+    display: none;
+  }
 }
 
 .ham:focus {
@@ -50,33 +64,38 @@ header {
   display: flex;
 }
 
-.navbar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  color: white;
-  transform: translateY(-100%);
-  transition: transform 0.2s ease;
-}
+@media (max-width: 1000px) {
+  .navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #f6f6f0;
+    transform: translateY(-100%);
+    transition: transform 0.2s ease;
+  }
 
-.show-nav {
-  transform: translateY(0);
-}
+  .show-nav {
+    transform: translateY(0);
+  }
 
-.navbar-nav {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
+  .navbar-nav {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
-.nav-item {
-  margin: 1rem 0 1rem 0;
+  .nav-item {
+    margin: 1rem 0 1rem 0;
+  }
+}
+.active {
+  color: blue;
 }
 
 .loading .navbar {
