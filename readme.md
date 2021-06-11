@@ -1,6 +1,6 @@
 # Hacker News
 
-The assignment was to create a [Hacker News](https://news.ycombinator.com/news) clone.
+School project in PHP. The assignment was to create clone of the social news website [Hacker News](https://news.ycombinator.com/news).
 
 <details><summary>Required features</summary>
 
